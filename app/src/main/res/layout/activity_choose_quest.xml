@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
-
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginLeft="280dp"
         app:layout_constraintStart_toStartOf="parent"

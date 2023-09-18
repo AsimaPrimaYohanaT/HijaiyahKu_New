@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#D6E8CE" /> <!-- Ganti warna latar belakang sesuai dengan kebutuhan Anda -->
+    <corners android:radius="8dp" /> <!-- Sudut sudut tombol -->
+</shape>
