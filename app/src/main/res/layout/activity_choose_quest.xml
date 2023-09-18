@@ -7,6 +7,18 @@
     android:background="@drawable/background"
     tools:context=".ChooseQuest">
 
+    <ImageView
+        android:id="@+id/logo_team_p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="280dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/asset_5_1"
         android:layout_width="280dp"
@@ -14,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:padding="18dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="90dp"
         android:background="@drawable/bg_wood"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +46,8 @@
             app:layout_constraintLeft_toLeftOf="@id/asset_5_1"
             app:layout_constraintLeft_toRightOf="@id/asset_5_1"
             />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,7 +119,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="15dp"
             android:paddingBottom="20dp"
-            android:src="@drawable/pisah"
+            android:src="@drawable/sambung"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
@@ -120,7 +134,7 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="Huruf Pisah"
+            android:text="Huruf Sambung"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
