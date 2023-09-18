@@ -47,7 +47,7 @@
         android:text="@string/ayo_kita_me"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:lineHeight="30sp"/>
+        app:lineHeight="30sp" />
 
 
     <View
