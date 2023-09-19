@@ -14,14 +14,14 @@ class ChooseQuest : AppCompatActivity() {
         val btnSambung = findViewById<LinearLayoutCompat>(R.id.btnSambung)
 
         btnPisah.setOnClickListener {
-            val intent = Intent(this, DaftarSoal::class.java)
+            val intent = Intent(this, DetailQuest::class.java)
             intent.putExtra("jenis", "pisah")
             startActivity(intent)
         }
 
 
         btnSambung.setOnClickListener {
-            val intent = Intent(this, DaftarSoal::class.java)
+            val intent = Intent(this, DetailQuest::class.java)
             intent.putExtra("jenis", "sambung")
             startActivity(intent)
         }
