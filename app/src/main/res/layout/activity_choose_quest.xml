@@ -27,7 +27,7 @@
         android:padding="18dp"
         android:layout_marginTop="90dp"
         android:background="@drawable/bg_wood"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
+        app:layout_constraintBottom_toTopOf="@+id/btn_huruf_pisah"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -62,7 +62,8 @@
         app:layout_constraintTop_toBottomOf="@+id/asset_5_1" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutCompat"
+        android:id="@+id/btn_huruf_pisah"
+        android:clickable="true"
         android:layout_width="280dp"
         android:layout_height="120dp"
         android:layout_marginTop="52dp"
@@ -72,6 +73,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/asset_5_1">
+
         <ImageView
             android:paddingLeft="20dp"
             android:paddingTop="15dp"
@@ -81,9 +83,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
-
         <TextView
-
             android:paddingTop="10dp"
             android:paddingBottom="18dp"
             android:paddingRight="20dp"
@@ -91,7 +91,7 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="Huruf Pisah"
+            android:text="@string/huruf_pisah"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -99,7 +99,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutCompat2"
+        android:id="@+id/btn_huruf_sambung"
         android:layout_width="280dp"
         android:layout_height="120dp"
 
@@ -112,7 +112,7 @@
 
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
+        app:layout_constraintTop_toBottomOf="@+id/btn_huruf_pisah"
         app:layout_constraintVertical_bias="0.0">
         <ImageView
             android:paddingLeft="20dp"
@@ -129,11 +129,11 @@
             android:paddingTop="10dp"
             android:paddingBottom="18dp"
             android:paddingRight="20dp"
-            android:textSize="25dp"
+            android:textSize="23dp"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="Huruf Sambung"
+            android:text="@string/huruf_nsambung"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">

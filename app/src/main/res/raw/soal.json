@@ -1,0 +1,22 @@
+{
+  "soal": [
+    {
+      "id": 1,
+      "soal": "soal1",
+      "jenis": 1,
+      "isComplete": true
+    },
+    {
+      "id": 2,
+      "soal": "soal2",
+      "jenis":2,
+      "isComplete": false
+    },
+    {
+      "id": 3,
+      "soal": "soal3",
+      "jenis": 1,
+      "isComplete": false
+    }
+  ]
+}

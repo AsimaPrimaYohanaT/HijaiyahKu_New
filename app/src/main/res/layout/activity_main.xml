@@ -7,6 +7,7 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
+
     <View
         android:id="@+id/asset_3_1"
         android:layout_width="wrap_content"
@@ -16,12 +17,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="38dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="395dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="463dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="-26dp"
         android:background="@drawable/asset1" />
-
 
     <View
         android:layout_width="199dp"
@@ -29,17 +29,17 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="106dp"
-        android:layout_marginTop="257dp"
+        android:layout_marginTop="280dp"
         android:background="@drawable/layer2" />
 
     <Button
-        android:id="@+id/layer1"
+        android:id="@+id/btn_mulai"
         android:layout_width="199dp"
         android:layout_height="111dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="106dp"
-        android:layout_marginTop="257dp"
+        android:layout_marginTop="280dp"
         android:background="@drawable/layer"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"

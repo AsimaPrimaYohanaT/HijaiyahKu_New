@@ -32,6 +32,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
+        android:id="@+id/btn_back"
+        android:clickable="true"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
@@ -87,11 +89,12 @@
         app:lineHeight="30sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="406dp"
-        android:layout_height="489dp"
+        android:id="@+id/rv_soal"
+        android:layout_width="387dp"
+        android:layout_height="572dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_soal"/>
+        tools:listitem="@layout/item_soal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

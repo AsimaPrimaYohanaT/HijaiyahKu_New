@@ -14,4 +14,6 @@
     <string name="jawaban_kamu_kurang_tepat">Jawaban kamu kurang tepat</string>
     <string name="yuk_dicoba_lagi">Yuk dicoba lagi</string>
     <string name="ulangi">Ulangi</string>
+    <string name="huruf_nsambung">Huruf \nSambung</string>
+    <string name="huruf_pisah">Huruf Pisah</string>
 </resources>
