@@ -27,7 +27,7 @@
         android:padding="18dp"
         android:layout_marginTop="90dp"
         android:background="@drawable/bg_wood"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
+        app:layout_constraintBottom_toTopOf="@+id/btnPisah"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/asset_5_1" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutCompat"
+        android:id="@+id/btnPisah"
         android:layout_width="280dp"
         android:layout_height="120dp"
         android:layout_marginTop="52dp"
@@ -99,7 +99,7 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutCompat2"
+        android:id="@+id/btnSambung"
         android:layout_width="280dp"
         android:layout_height="120dp"
 
@@ -112,7 +112,7 @@
 
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
+        app:layout_constraintTop_toBottomOf="@+id/btnPisah"
         app:layout_constraintVertical_bias="0.0">
         <ImageView
             android:paddingLeft="20dp"
@@ -123,21 +123,39 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
-
-        <TextView
-
-            android:paddingTop="10dp"
-            android:paddingBottom="18dp"
-            android:paddingRight="20dp"
-            android:textSize="25dp"
-            android:fontFamily="@font/poppins_bold"
+        <LinearLayout
+            android:padding="9dp"
             android:gravity="center"
-            android:textAlignment="center"
-            android:text="Huruf Sambung"
             android:layout_width="0dp"
+            android:orientation="vertical"
             android:layout_height="match_parent"
             android:layout_weight="1">
-        </TextView>
+            <TextView
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+               android:padding="0dp"
+                android:layout_margin="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Huruf"
+                android:textSize="22dp"
+                android:fontFamily="@font/poppins_bold"
+                />
+
+            <TextView
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:fontFamily="@font/poppins_bold"
+                android:padding="0dp"
+                android:text="Sambung"
+                android:textSize="22dp" />
+
+
+        </LinearLayout>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

@@ -3,6 +3,7 @@ package com.example.hijaiyahku_new
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.example.hijaiyahku_new.databinding.ActivityMainBinding
 
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnHome = findViewById<View>(R.id.btnHome)
         btnHome.setOnClickListener {
+            Log.d("tag","klik")
             val intent = Intent(this, ChooseQuest::class.java)
             startActivity(intent)
 
