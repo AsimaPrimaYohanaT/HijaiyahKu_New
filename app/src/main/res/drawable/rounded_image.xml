@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="8dp" /> <!-- Radius (sudut) yang Anda inginkan, disini diatur 8dp -->
-<!-- Warna latar belakang -->
-</shape>
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="114.61dp"
+    android:height="42.9dp"
+    android:viewportWidth="114.61"
+    android:viewportHeight="42.9"
+    >
+    <group>
+        <clip-path
+            android:pathData="M8 0H106.608C111.026 0 114.608 3.58172 114.608 8V34.9031C114.608 39.3214 111.026 42.9031 106.608 42.9031H8C3.58172 42.9031 0 39.3214 0 34.9031V8C0 3.58172 3.58172 0 8 0Z"
+            />
+        <path
+            android:pathData="M0 0V42.9031H114.608V0"
+            android:fillColor="#D6E8CE"
+            />
+    </group>
+</vector>
