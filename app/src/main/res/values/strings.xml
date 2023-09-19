@@ -3,4 +3,15 @@
     <string name="ayo_kita_me">Ayo Kita\nMerangkai!</string>
     <string name="ayo_pilih_soalnya">Ayo Pilih Soalnya!</string>
     <string name="soal">Soal</string>
+    <string name="petunjuk">Petunjuk</string>
+    <string name="rangkailah_huruf_hijaiyah_sesuai_soal">Rangkailah huruf hijaiyah sesuai soal!</string>
+    <string name="saya_mengerti">Saya Mengerti</string>
+    <string name="kamera">kamera</string>
+    <string name="galeri">Galeri</string>
+    <string name="yey_kamu_berhasil">Yey, Kamu Berhasil</string>
+    <string name="yuk_lanjut_ke_soal_berikutnya">Yuk lanjut ke soal berikutnya</string>
+    <string name="lanjutkan">Lanjutkan</string>
+    <string name="jawaban_kamu_kurang_tepat">Jawaban kamu kurang tepat</string>
+    <string name="yuk_dicoba_lagi">Yuk dicoba lagi</string>
+    <string name="ulangi">Ulangi</string>
 </resources>
