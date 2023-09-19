@@ -3,6 +3,8 @@ package com.example.hijaiyahku_new
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import com.example.hijaiyahku_new.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,9 +15,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnMulai.setOnClickListener {
+
+        binding.btnHome.setOnClickListener {
             val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
             startActivity(mulai)
         }
+
     }
 }

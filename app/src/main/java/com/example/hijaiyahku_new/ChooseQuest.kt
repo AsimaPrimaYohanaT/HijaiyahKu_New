@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hijaiyahku_new.databinding.ActivityChooseQuestBinding
-import com.example.hijaiyahku_new.databinding.ActivityMainBinding
 
 class ChooseQuest : AppCompatActivity() {
 
@@ -14,13 +13,15 @@ class ChooseQuest : AppCompatActivity() {
         binding = ActivityChooseQuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnHurufPisah.setOnClickListener {
+        binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
+            intent.putExtra("jenis", "pisah")
             startActivity(toHurufPisah)
         }
 
-        binding.btnHurufSambung.setOnClickListener {
+        binding.btnSambung.setOnClickListener {
             val toHurufSambung = Intent(this@ChooseQuest, DaftarSoal::class.java)
+            intent.putExtra("jenis", "sambung")
             startActivity(toHurufSambung)
         }
     }
