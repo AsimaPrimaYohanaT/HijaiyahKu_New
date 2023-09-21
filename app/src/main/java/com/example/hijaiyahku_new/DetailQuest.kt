@@ -13,10 +13,10 @@ class DetailQuest : AppCompatActivity() {
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer,HintFragment())
-        fragmentTransaction.commit()
+//
+//        val fragmentManager = supportFragmentManager
+//        val fragmentTransaction = fragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.fragmentContainer,HintFragment())
+//        fragmentTransaction.commit()
     }
 }
