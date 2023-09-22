@@ -1,5 +1,6 @@
 package com.example.hijaiyahku_new
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -22,7 +23,11 @@ class DetailQuest : AppCompatActivity() {
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-<<<<<<< HEAD
+
+        binding.btnBack.setOnClickListener {
+            val back = Intent(this@DetailQuest, DaftarSoal::class.java)
+            startActivity(back)
+        }
 
         val soalId = intent.getIntExtra("SOAL", 0)
 
@@ -39,12 +44,5 @@ class DetailQuest : AppCompatActivity() {
 
         val customDialog = HintFragment()
         customDialog.show(supportFragmentManager, "CustomDialog")
-=======
-//
-//        val fragmentManager = supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.fragmentContainer,HintFragment())
-//        fragmentTransaction.commit()
->>>>>>> a4d4599a4b72a4015759cafe6c9ff1ba05d70903
     }
 }
