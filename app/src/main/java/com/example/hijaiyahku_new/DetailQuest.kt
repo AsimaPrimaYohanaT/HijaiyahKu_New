@@ -22,6 +22,7 @@ class DetailQuest : AppCompatActivity() {
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+<<<<<<< HEAD
 
         val soalId = intent.getIntExtra("SOAL", 0)
 
@@ -38,5 +39,12 @@ class DetailQuest : AppCompatActivity() {
 
         val customDialog = HintFragment()
         customDialog.show(supportFragmentManager, "CustomDialog")
+=======
+//
+//        val fragmentManager = supportFragmentManager
+//        val fragmentTransaction = fragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.fragmentContainer,HintFragment())
+//        fragmentTransaction.commit()
+>>>>>>> a4d4599a4b72a4015759cafe6c9ff1ba05d70903
     }
 }

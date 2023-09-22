@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".DetailQuest">
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -43,12 +42,9 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/logo2" />
     </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-
         android:layout_width="300dp"
-
         android:layout_height="110dp"
         android:background="@drawable/bg_wood"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,13 +133,12 @@
                 android:textColor="@color/green" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="@color/green"
         android:text="Cek Jawaban"
         app:icon="@drawable/baseline_check_24"

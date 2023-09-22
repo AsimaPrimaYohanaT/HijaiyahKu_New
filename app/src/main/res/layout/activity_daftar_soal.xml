@@ -61,25 +61,26 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="355dp"
+        android:layout_width="320dp"
         android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="28dp"
         android:background="@drawable/layer2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/layer1"
-        android:layout_width="355dp"
+        android:layout_width="320dp"
         android:layout_height="91dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/layer"
         android:fontFamily="@font/poppins_bold"
         android:gravity="left|center"
+        android:textAlignment="center"
         android:lineSpacingExtra="-6sp"
         android:text="@string/ayo_pilih_soalnya"
         android:textColor="@color/black"
@@ -90,8 +91,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_soal"
-        android:layout_width="387dp"
-        android:layout_height="572dp"
+        android:layout_width="330dp"
+        android:layout_height="530dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
