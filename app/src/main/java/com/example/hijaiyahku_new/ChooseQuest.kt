@@ -15,14 +15,15 @@ class ChooseQuest : AppCompatActivity() {
 
         binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
-            intent.putExtra("jenis", "pisah")
+            toHurufPisah.putExtra("jenis", "pisah")
             startActivity(toHurufPisah)
         }
 
         binding.btnSambung.setOnClickListener {
             val toHurufSambung = Intent(this@ChooseQuest, DaftarSoal::class.java)
-            intent.putExtra("jenis", "sambung")
+            toHurufSambung.putExtra("jenis", "sambung")
             startActivity(toHurufSambung)
         }
     }
+
 }

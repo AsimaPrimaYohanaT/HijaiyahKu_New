@@ -31,9 +31,7 @@ class SoalRepository(private val soalDao: SoalDao, private val executor: Executo
         }
     }
 
-//    //TODO 4 : Use SortUtils.getSortedQuery to create sortable query and build paged list
     fun getSoal(filter: SoalSortType): LiveData<PagedList<Soal>> {
-        //throw NotImplementedError("Not yet implemented")
         val sortQuery = SortUtils.getSorteredQuery(filter)
 
         val configPage = PagedList.Config.Builder().setEnablePlaceholders(true).setPageSize(
@@ -43,16 +41,17 @@ class SoalRepository(private val soalDao: SoalDao, private val executor: Executo
     }
 
     fun insertSoal(newSoal: Soal) {
-        //throw NotImplementedError("Not yet implemented")
         executor.execute {
             soalDao.insertSoal(newSoal)
         }
     }
 
-    //TODO 5 : Complete other function inside repository
     fun getJenis(jenis: Int): LiveData<Soal> {
-        //throw NotImplementedError("Not yet implemented")
         return soalDao.getJenis(jenis)
+    }
+
+    fun getSoalById(soalId: Int): LiveData<Soal> {
+        return soalDao.getSoalById(soalId)
     }
 
 

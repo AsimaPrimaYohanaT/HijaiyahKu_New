@@ -11,6 +11,8 @@ data class Soal(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val soal: String,
+    val jawaban1: String,
+    val jawaban2: String,
     val jenis: Int,
     val isComplete: Boolean
 ): Parcelable

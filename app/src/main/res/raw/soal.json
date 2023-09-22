@@ -2,21 +2,164 @@
   "soal": [
     {
       "id": 1,
-      "soal": "soal1",
+      "soal": "اَ حْ مَ رٌ",
+      "jawaban1" : "ahmarun",
+      "jawaban2" : "ahmarun",
       "jenis": 1,
-      "isComplete": true
+      "isComplete": false
     },
     {
       "id": 2,
-      "soal": "soal2",
-      "jenis":2,
+      "soal":"اَ ل لَّ هُ",
+      "jawaban1" : "allahu",
+      "jawaban2" : "allahu",
+      "jenis": 1,
       "isComplete": false
     },
     {
       "id": 3,
-      "soal": "soal3",
+      "soal": "بَ يْ تٌ",
+      "jawaban1" : "baitun",
+      "jawaban2" : "baitun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 4,
+      "soal": "حَمَا مَحْ",
+      "jawaban1" : "hamaamah",
+      "jawaban2" : "hamaamah",
+      "jenis": 2,
+      "isComplete": false
+    },
+    {
+      "id": 5,
+      "soal": " جَ مَ لٌ",
+      "jawaban1" : "jamalun",
+      "jawaban2" : "jamalun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 6,
+      "soal": "كِيْوِ",
+      "jawaban1" : "kiiwi",
+      "jawaban2" : "kiiwi",
+      "jenis": 2,
+      "isComplete": false
+    },
+    {
+      "id": 7,
+      "soal": " كِ تَ بٌ",
+      "jawaban1" : "kitabun",
+      "jawaban2" : "kitabun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 8,
+      "soal": " كُ رْ شِ يٌ",
+      "jawaban1" : "kursiyun",
+      "jawaban2" : "kursiyun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 9,
+      "soal": " كُ تُ بٌ",
+      "jawaban1" : "kutubun",
+      "jawaban2" : "kutubun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 10,
+      "soal": " مَدْرَسَةٌ",
+      "jawaban1" : "madrasatun",
+      "jawaban2" : "madrasatun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 11,
+      "soal": " قَرَنْبِيْةٌ",
+      "jawaban1" : "qoronbiitun",
+      "jawaban2" : "qoronbiitun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 12,
+      "soal": "مَنْجَةٌ",
+      "jawaban1" : "manjatun",
+      "jawaban2" : "manjatun",
+      "jenis": 2,
+      "isComplete": false
+    },
+    {
+      "id": 14,
+      "soal": " سَ جَّ دَ ةٌٌ",
+      "jawaban1" : "sajjadatun",
+      "jawaban2" : "sajjadatun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 15,
+      "soal": " سَيَّرَةٌٌ",
+      "jawaban1" : "sayyaarotun",
+      "jawaban2" : "sayyaarotun",
+      "jenis": 2,
+      "isComplete": false
+    },
+    {
+      "id": 16,
+      "soal": " صُ وْ رَ ةٌ",
+      "jawaban1" : "shuurotun",
+      "jawaban2" : "shuurotun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 17,
+      "soal": " سِرْوَالٌ",
+      "jawaban1" : "sirwaalun",
+      "jawaban2" : "sirwaalun",
+      "jenis": 2,
+      "isComplete": false
+    },
+    {
+      "id": 18,
+      "soal": " شُرْتِيٌّ",
+      "jawaban1" : "syurtiyyun",
+      "jawaban2" : "syurtiyyun",
+      "jenis": 2,
+      "isComplete": false
+    },
+    {
+      "id": 19,
+      "soal": "وَاحِدٌ",
+      "jawaban1" : "waahidun",
+      "jawaban2" : "waahidun",
+      "jenis": 2 ,
+      "isComplete": false
+    },
+    {
+      "id": 20,
+      "soal": "وَلَدٌ",
+      "jawaban1" : "waladun",
+      "jawaban2" : "waladun",
+      "jenis": 2,
+      "isComplete": false
+    },
+    {
+      "id": 21,
+      "soal": "وَ سَ ا دَ ةٌ",
+      "jawaban1" : "wisaadatun",
+      "jawaban2" : "wisaadatun",
       "jenis": 1,
       "isComplete": false
     }
+
   ]
 }
