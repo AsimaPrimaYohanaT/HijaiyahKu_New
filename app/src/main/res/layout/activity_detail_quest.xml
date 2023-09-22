@@ -136,15 +136,16 @@
                 android:textColor="@color/green" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
+        android:id="@+id/predict"
+        android:layout_width="145dp"
+        android:layout_height="51dp"
         android:layout_marginTop="36dp"
         android:backgroundTint="@color/green"
         android:text="Cek Jawaban"
         app:icon="@drawable/baseline_check_24"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
