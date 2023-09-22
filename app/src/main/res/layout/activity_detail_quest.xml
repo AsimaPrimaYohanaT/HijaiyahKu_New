@@ -79,7 +79,7 @@
             android:layout_width="250dp"
             android:layout_height="200dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/bg_a"
+            android:src="@drawable/empty"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -111,6 +111,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/galery"
             android:layout_width="114.61dp"
             android:layout_height="42.9dp"
             android:layout_marginStart="10dp"
