@@ -16,6 +16,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
+            android:id="@+id/btn_back"
+            android:clickable="true"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"

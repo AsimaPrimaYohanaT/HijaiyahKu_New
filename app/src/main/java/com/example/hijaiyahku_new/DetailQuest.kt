@@ -1,17 +1,21 @@
 package com.example.hijaiyahku_new
 
+import android.Manifest
+import android.content.Intent
 import android.content.ContentResolver
 import android.content.Context
-import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.example.hijaiyahku_new.databinding.ActivityDetailQuestBinding
-import com.example.hijaiyahku_new.databinding.ActivityMainBinding
 import com.example.hijaiyahku_new.fragment.HintFragment
 import java.io.File
 import java.io.FileOutputStream
@@ -22,12 +26,14 @@ import java.util.Locale
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.hijaiyahku_new.data.Soal
+import com.example.hijaiyahku_new.utils.rotateFile
 
 class DetailQuest : AppCompatActivity() {
 
     private lateinit var viewModel: DetailQuestViewModel
     lateinit var binding: ActivityDetailQuestBinding
 
+    private var getFile: File? = null
     private val FILENAME_FORMAT = "dd-MMM-yyyy"
     private val MAXIMAL_SIZE = 1000000
 
@@ -38,12 +44,38 @@ class DetailQuest : AppCompatActivity() {
 
     private lateinit var selectedSoal: Soal
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (!allPermissionsGranted()) {
+                Toast.makeText(
+                    this,
+                    "Tidak mendapatkan permission.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }
+        }
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
+        binding.btnBack.setOnClickListener {
+            val back = Intent(this@DetailQuest, DaftarSoal::class.java)
+            startActivity(back)
+        }
 
         val soalId = intent.getIntExtra("SOAL", 0)
 
@@ -69,11 +101,37 @@ class DetailQuest : AppCompatActivity() {
 //        fragmentTransaction.commit()
 
 
-        binding.galery.setOnClickListener {
-            startGallery()
+        binding.apply {
+            galery.setOnClickListener { startGallery() }
+            btnKamera.setOnClickListener { startCameraX() }
         }
     }
 
+    private fun startCameraX() {
+        val intent = Intent(this, CameraActivity::class.java)
+        launcherIntentCameraX.launch(intent)
+    }
+
+    private val launcherIntentCameraX = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (it.resultCode == CAMERA_X_RESULT) {
+            val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                it.data?.getSerializableExtra("picture", File::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                it.data?.getSerializableExtra("picture")
+            } as? File
+
+            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
+
+            myFile?.let { file ->
+                rotateFile(file, isBackCamera)
+                getFile = file
+                binding.imageView2.setImageBitmap(BitmapFactory.decodeFile(file.path))
+            }
+        }
+    }
     private fun startGallery() {
         val intent = Intent()
         intent.action = Intent.ACTION_GET_CONTENT
@@ -127,5 +185,12 @@ class DetailQuest : AppCompatActivity() {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(timeStamp, ".jpg", storageDir)
 
+    }
+
+    companion object {
+        const val CAMERA_X_RESULT = 200
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        var name:String? = null
     }
 }
