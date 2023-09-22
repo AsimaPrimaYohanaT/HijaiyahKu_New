@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import android.os.Environment
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.hijaiyahku_new.databinding.ActivityDetailQuestBinding
@@ -20,8 +21,14 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+import androidx.lifecycle.ViewModelProvider
+import com.example.hijaiyahku_new.data.Soal
+
 class DetailQuest : AppCompatActivity() {
+
+    private lateinit var viewModel: DetailQuestViewModel
     lateinit var binding: ActivityDetailQuestBinding
+
     private val FILENAME_FORMAT = "dd-MMM-yyyy"
     private val MAXIMAL_SIZE = 1000000
 
@@ -29,16 +36,38 @@ class DetailQuest : AppCompatActivity() {
         FILENAME_FORMAT,
         Locale.US
     ).format(System.currentTimeMillis())
+
+    private lateinit var selectedSoal: Soal
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+
+        val soalId = intent.getIntExtra("SOAL", 0)
+
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory).get(DetailQuestViewModel::class.java)
+
+        viewModel.start(soalId)
+        viewModel.soal.observe(this) { soal ->
+            if (soal != null) {
+                selectedSoal = soal
+                binding.tvSoal.text = soal.soal
+            }
+        }
+
+        val customDialog = HintFragment()
+        customDialog.show(supportFragmentManager, "CustomDialog")
+
 //
 //        val fragmentManager = supportFragmentManager
 //        val fragmentTransaction = fragmentManager.beginTransaction()
 //        fragmentTransaction.replace(R.id.fragmentContainer,HintFragment())
 //        fragmentTransaction.commit()
+
 
         binding.galery.setOnClickListener {
             startGallery()
@@ -97,5 +126,6 @@ class DetailQuest : AppCompatActivity() {
     fun createCustomTempFile(context: Context): File {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(timeStamp, ".jpg", storageDir)
+
     }
 }

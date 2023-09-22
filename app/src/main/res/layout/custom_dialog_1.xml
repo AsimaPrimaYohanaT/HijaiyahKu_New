@@ -9,7 +9,7 @@
     android:paddingEnd="10dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:background="@drawable/layer4"
+    android:background="@drawable/layer6"
     android:orientation="vertical">
 
     <!-- Add your custom dialog content here -->

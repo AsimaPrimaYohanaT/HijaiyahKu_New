@@ -24,4 +24,7 @@ interface SoalDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg soal: Soal)
 
+    @Query("SELECT * FROM soal WHERE id = :soalId")
+    fun getSoalById(soalId: Int): LiveData<Soal>
+
 }
