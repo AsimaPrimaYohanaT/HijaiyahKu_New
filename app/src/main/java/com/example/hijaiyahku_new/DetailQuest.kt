@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import android.os.Environment
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.hijaiyahku_new.databinding.ActivityDetailQuestBinding
@@ -60,6 +59,7 @@ class DetailQuest : AppCompatActivity() {
         }
 
         val customDialog = HintFragment()
+
         customDialog.show(supportFragmentManager, "CustomDialog")
 
 //
