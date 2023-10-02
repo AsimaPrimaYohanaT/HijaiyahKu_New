@@ -24,7 +24,7 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
-import com.example.hijaiyahku_new.ml.ModelHijaiyah
+import com.example.hijaiyahku_new.ml.Modd
 import androidx.lifecycle.ViewModelProvider
 import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.fragment.ErrorFragment
@@ -117,7 +117,7 @@ class DetailQuest : AppCompatActivity() {
             predict.setOnClickListener {
 
                 if(bitmapFile != null){
-                    val model = ModelHijaiyah.newInstance(applicationContext)
+                    val model = Modd.newInstance(applicationContext)
                     val image = TensorImage.fromBitmap(bitmapFile)
 
                     val outputs = model.process(image)
