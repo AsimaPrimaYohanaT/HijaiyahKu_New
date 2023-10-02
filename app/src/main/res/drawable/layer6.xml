@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
-    android:width="347dp"
-    android:height="384dp"
-    android:viewportWidth="347"
-    android:viewportHeight="384"
-    >
-    <group>
-        <clip-path
-            android:pathData="M23 0H324C336.703 0 347 10.2975 347 23V361C347 373.703 336.703 384 324 384H23C10.2975 384 0 373.703 0 361V23C0 10.2975 10.2975 0 23 0Z"
-            />
-        <path
-            android:pathData="M0 0V384H347V0"
-            android:fillColor="#FFFFFF"
-            />
-    </group>
-</vector>
+<?xml version="1.0" encoding="utf-8"?><shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- we define background color -->
+    <solid android:color="#FFFF" />
+
+    <!-- we define border color and thick -->
+    <stroke
+        android:width="3dp"
+        android:color="#FFFF" />
+
+    <!-- add some padding for text inside -->
+    <padding
+        android:bottom="15dp"
+        android:left="15dp"
+        android:right="15dp"
+        android:top="15dp" />
+
+    <!-- we define corner radius, note that radius can be different for each corner -->
+    <corners android:radius="40dp" />
+
+</shape>

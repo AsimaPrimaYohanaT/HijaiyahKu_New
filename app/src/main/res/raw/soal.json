@@ -2,9 +2,9 @@
   "soal": [
     {
       "id": 1,
-      "soal": "اَ حْ مَ رٌ",
-      "jawaban1" : "ahmarun",
-      "jawaban2" : "ahmarun",
+      "soal": "اَ حْ مَ رُ",
+      "jawaban1" : "ahmaru",
+      "jawaban2" : "ahmaru",
       "jenis": 1,
       "isComplete": false
     },
@@ -26,7 +26,7 @@
     },
     {
       "id": 4,
-      "soal": "حَمَا مَحْ",
+      "soal": "حَمَا مَهْ",
       "jawaban1" : "hamaamah",
       "jawaban2" : "hamaamah",
       "jenis": 2,
@@ -34,17 +34,17 @@
     },
     {
       "id": 5,
-      "soal": " جَ مَ لٌ",
+      "soal": "جَ مَ لٌ",
       "jawaban1" : "jamalun",
-      "jawaban2" : "jamalun",
+      "jawaban2" : "jamalun ",
       "jenis": 1,
       "isComplete": false
     },
     {
       "id": 6,
-      "soal": "كِيْوِ",
-      "jawaban1" : "kiiwi",
-      "jawaban2" : "kiiwi",
+      "soal": "كِيْوِيْ",
+      "jawaban1" : "kiiwii",
+      "jawaban2" : "kiiwii",
       "jenis": 2,
       "isComplete": false
     },
@@ -58,15 +58,15 @@
     },
     {
       "id": 8,
-      "soal": " كُ رْ شِ يٌ",
-      "jawaban1" : "kursiyun",
-      "jawaban2" : "kursiyun",
+      "soal": "كُ رْ سِ يٌّ",
+      "jawaban1" : "kursiyyun",
+      "jawaban2" : "kursiyyun",
       "jenis": 1,
       "isComplete": false
     },
     {
       "id": 9,
-      "soal": " كُ تُ بٌ",
+      "soal": "كُ تُ بٌ",
       "jawaban1" : "kutubun",
       "jawaban2" : "kutubun",
       "jenis": 1,
@@ -74,10 +74,10 @@
     },
     {
       "id": 10,
-      "soal": " مَدْرَسَةٌ",
+      "soal": "مَدْ رَ سَةٌ",
       "jawaban1" : "madrasatun",
       "jawaban2" : "madrasatun",
-      "jenis": 1,
+      "jenis": 2,
       "isComplete": false
     },
     {
@@ -85,7 +85,7 @@
       "soal": " قَرَنْبِيْةٌ",
       "jawaban1" : "qoronbiitun",
       "jawaban2" : "qoronbiitun",
-      "jenis": 1,
+      "jenis": 2,
       "isComplete": false
     },
     {
@@ -98,15 +98,15 @@
     },
     {
       "id": 14,
-      "soal": " سَ جَّ دَ ةٌٌ",
-      "jawaban1" : "sajjadatun",
-      "jawaban2" : "sajjadatun",
+      "soal": "سَ جَّ ا دَ ةٌ",
+      "jawaban1" : "sajjaadatun",
+      "jawaban2" : "sajjaadatun",
       "jenis": 1,
       "isComplete": false
     },
     {
       "id": 15,
-      "soal": " سَيَّرَةٌٌ",
+      "soal": "سَيَّا رَةٌ",
       "jawaban1" : "sayyaarotun",
       "jawaban2" : "sayyaarotun",
       "jenis": 2,
@@ -114,7 +114,7 @@
     },
     {
       "id": 16,
-      "soal": " صُ وْ رَ ةٌ",
+      "soal": "صُ وْ رَ ةٌ",
       "jawaban1" : "shuurotun",
       "jawaban2" : "shuurotun",
       "jenis": 1,
@@ -122,7 +122,7 @@
     },
     {
       "id": 17,
-      "soal": " سِرْوَالٌ",
+      "soal": "سِرْ وَ ا لٌ",
       "jawaban1" : "sirwaalun",
       "jawaban2" : "sirwaalun",
       "jenis": 2,
@@ -130,7 +130,7 @@
     },
     {
       "id": 18,
-      "soal": " شُرْتِيٌّ",
+      "soal": "شُرْ طِيٌّ",
       "jawaban1" : "syurtiyyun",
       "jawaban2" : "syurtiyyun",
       "jenis": 2,
@@ -154,7 +154,7 @@
     },
     {
       "id": 21,
-      "soal": "وَ سَ ا دَ ةٌ",
+      "soal": "وِ سَ ا دَ ةٌ",
       "jawaban1" : "wisaadatun",
       "jawaban2" : "wisaadatun",
       "jenis": 1,
