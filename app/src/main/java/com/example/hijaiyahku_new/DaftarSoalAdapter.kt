@@ -24,11 +24,11 @@ class DaftarSoalAdapter(
     }
 
     inner class SoalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvTitle: TextView = itemView.findViewById(R.id.textView)
+        private val tvTitle: TextView = itemView.findViewById(R.id.nomor_soal)
         lateinit var getSoal: Soal
         fun bind(soal: Soal) {
             getSoal = soal
-            tvTitle.text = soal.soal
+            tvTitle.text = soal.id.toString()
             itemView.setOnClickListener {
                 onClick(soal)
             }

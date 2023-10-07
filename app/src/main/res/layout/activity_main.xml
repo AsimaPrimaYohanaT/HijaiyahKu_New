@@ -9,51 +9,41 @@
 
 
     <View
-        android:id="@+id/asset_3_1"
+        android:id="@+id/muslim_3"
         android:layout_width="wrap_content"
-        android:layout_height="370dp"
+        android:layout_height="437dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="-93dp"
+        android:layout_marginTop="392dp"
+        android:layout_marginEnd="108dp"
+        android:background="@drawable/child2" />
+
+    <View
+        android:id="@+id/asset_3_3"
+        android:layout_width="wrap_content"
+        android:layout_height="437dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="111dp"
+        android:layout_marginTop="392dp"
+        android:background="@drawable/chil3" />
+
+
+    <View
+        android:id="@+id/btn_home"
+        android:layout_width="152dp"
+        android:layout_height="155dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="38dp"
-        android:layout_marginLeft="38dp"
-        android:layout_marginTop="476dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginBottom="-26dp"
-        android:background="@drawable/asset1" />
-
-    <View
-        android:id="@+id/layer2"
-        android:layout_width="199dp"
-        android:layout_height="120dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="106dp"
-
-        android:layout_marginTop="280dp"
-        android:background="@drawable/layer2" />
-
-
-    <Button
-        android:id="@+id/btnHome"
-        android:layout_width="199dp"
-        android:layout_height="111dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="280dp"
-        android:layout_marginEnd="88dp"
-        android:background="@drawable/layer"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center"
-        android:lineSpacingExtra="-6sp"
-        android:text="@string/ayo_kita_me"
-        android:textColor="@color/black"
-        android:textSize="23sp"
-        app:lineHeight="30sp" />
-
+        android:layout_marginStart="119dp"
+        android:layout_marginLeft="119dp"
+        android:layout_marginTop="297dp"
+        android:layout_marginEnd="122dp"
+        android:background="@drawable/play" />
 
     <View
         android:id="@+id/asset_5_1"

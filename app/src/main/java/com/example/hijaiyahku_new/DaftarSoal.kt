@@ -22,7 +22,7 @@ class DaftarSoal : AppCompatActivity() {
         setContentView(binding.root)
 
         recycler = binding.rvSoal
-        recycler.layoutManager = GridLayoutManager(this, 1)
+        recycler.layoutManager = GridLayoutManager(this, 2)
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory).get(DaftarSoalViewModel::class.java)

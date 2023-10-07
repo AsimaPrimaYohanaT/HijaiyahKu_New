@@ -129,10 +129,6 @@ class DetailQuest : AppCompatActivity() {
                     Log.d("location",location.toString())
                     Log.d("location",score)
                    if (score == answer){
-
-
-
-
                        successDialog.show(supportFragmentManager,"CustomDialog")
                    }else{
 
