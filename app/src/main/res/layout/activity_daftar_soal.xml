@@ -7,16 +7,18 @@
     android:background="@drawable/background"
     tools:context=".DaftarSoal">
 
+
     <View
         android:id="@+id/logo_team_p"
-        android:layout_width="138dp"
-        android:layout_height="161dp"
+        android:layout_width="77dp"
+        android:layout_height="65dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/logo"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <View
         android:layout_width="55dp"
@@ -108,7 +110,7 @@
         android:layout_height="363.24dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/child4"
+        android:background="@drawable/child6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

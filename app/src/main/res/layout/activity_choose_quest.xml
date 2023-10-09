@@ -9,14 +9,15 @@
 
     <ImageView
         android:id="@+id/logo_team_p"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="81dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="280dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/asset_5_1"

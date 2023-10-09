@@ -7,27 +7,26 @@
     android:background="@drawable/background"
     tools:context=".MainActivity">
 
-
     <View
         android:id="@+id/muslim_3"
         android:layout_width="wrap_content"
-        android:layout_height="437dp"
+        android:layout_height="484dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="-93dp"
-        android:layout_marginTop="392dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="347dp"
         android:layout_marginEnd="108dp"
         android:background="@drawable/child2" />
 
     <View
         android:id="@+id/asset_3_3"
         android:layout_width="wrap_content"
-        android:layout_height="437dp"
+        android:layout_height="484dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="111dp"
-        android:layout_marginTop="392dp"
+        android:layout_marginTop="345dp"
         android:background="@drawable/chil3" />
 
 
@@ -56,13 +55,4 @@
         android:background="@drawable/asset2"
         />
 
-    <View
-        android:id="@+id/logo_team_p"
-        android:layout_width="138dp"
-        android:layout_height="141dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="279dp"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/logo" />
 </RelativeLayout>
