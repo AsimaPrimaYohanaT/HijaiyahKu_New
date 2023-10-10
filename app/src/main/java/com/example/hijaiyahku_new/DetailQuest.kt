@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
+import com.example.hijaiyahku_new.ml.Soal20josMD
 import com.example.hijaiyahku_new.utils.rotateFile
 import org.tensorflow.lite.schema.Model
 import org.tensorflow.lite.support.image.TensorImage
@@ -117,7 +120,7 @@ class DetailQuest : AppCompatActivity() {
             predict.setOnClickListener {
 
                 if(bitmapFile != null){
-                    val model = Modd.newInstance(applicationContext)
+                    val model = Soal20josMD.newInstance(applicationContext)
                     val image = TensorImage.fromBitmap(bitmapFile)
 
                     val outputs = model.process(image)
@@ -143,6 +146,18 @@ class DetailQuest : AppCompatActivity() {
         }
     }
 
+    fun rotateFile(file: File, orientation: Int) {
+        val degree = when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> 90f
+            ExifInterface.ORIENTATION_ROTATE_180 -> 180f
+            ExifInterface.ORIENTATION_ROTATE_270 -> 270f
+            else -> 0f
+        }
+
+        val matrix = Matrix()
+        matrix.postRotate(degree)
+    }
+
     private fun startCameraX() {
         val intent = Intent(this, CameraActivity::class.java)
         launcherIntentCameraX.launch(intent)
@@ -162,7 +177,12 @@ class DetailQuest : AppCompatActivity() {
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
 
             myFile?.let { file ->
-                rotateFile(file, isBackCamera)
+                val exif = ExifInterface(myFile.absolutePath) // path file gambar
+                val orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL
+                )
+                rotateFile(file, orientation)
                 getFile = file
                 bitmapFile = BitmapFactory.decodeFile(file.path)
                 binding.imageView2.setImageBitmap(bitmapFile)
