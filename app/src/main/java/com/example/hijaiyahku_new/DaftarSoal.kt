@@ -1,6 +1,7 @@
 package com.example.hijaiyahku_new
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,7 +21,7 @@ class DaftarSoal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDaftarSoalBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         recycler = binding.rvSoal
         recycler.layoutManager = GridLayoutManager(this, 2)
 

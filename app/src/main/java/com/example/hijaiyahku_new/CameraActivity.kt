@@ -1,9 +1,16 @@
 package com.example.hijaiyahku_new
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.provider.Settings.SettingNotFoundException
+import android.util.Log
 import android.util.Rational
+import android.view.Surface
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -52,10 +59,15 @@ class CameraActivity : AppCompatActivity() {
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile)
             .build()
         imageCapture.setCropAspectRatio(Rational(4,3))
+
+
+
+
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
+
                 override fun onError(exc: ImageCaptureException) {
                     Toast.makeText(
                         this@CameraActivity,
@@ -67,10 +79,20 @@ class CameraActivity : AppCompatActivity() {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                     val intent = Intent()
                     intent.putExtra("picture", photoFile)
+                    val orientation = applicationContext.resources.configuration.orientation
+                    if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+                       intent.putExtra("orientation","p")
+
+                    } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        intent.putExtra("orientation","l")
+                    }
+
                     intent.putExtra(
                         "isBackCamera",
                         cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
                     )
+
                     setResult(DetailQuest.CAMERA_X_RESULT, intent)
                     finish()
                 }
@@ -123,4 +145,6 @@ class CameraActivity : AppCompatActivity() {
         }
         supportActionBar?.hide()
     }
+
+
 }

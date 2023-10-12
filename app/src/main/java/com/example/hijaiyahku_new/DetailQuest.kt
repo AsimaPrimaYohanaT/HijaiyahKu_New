@@ -4,9 +4,11 @@ import android.Manifest
 import android.content.Intent
 import android.content.ContentResolver
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
@@ -83,7 +85,7 @@ class DetailQuest : AppCompatActivity() {
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         binding.btnBack.setOnClickListener {
             val back = Intent(this@DetailQuest, DaftarSoal::class.java)
             startActivity(back)
@@ -118,14 +120,14 @@ class DetailQuest : AppCompatActivity() {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
             predict.setOnClickListener {
-
                 if(bitmapFile != null){
+
+
+
                     val model = Soal20josMD.newInstance(applicationContext)
                     val image = TensorImage.fromBitmap(bitmapFile)
-
                     val outputs = model.process(image)
                     val detectionResult = outputs.detectionResultList.get(0)
-
                     val location = detectionResult.scoreAsFloat;
                     val category = detectionResult.locationAsRectF;
                     val score = detectionResult.categoryAsString;
@@ -134,18 +136,41 @@ class DetailQuest : AppCompatActivity() {
                    if (score == answer){
                        successDialog.show(supportFragmentManager,"CustomDialog")
                    }else{
-
                        errorDialog.show(supportFragmentManager,"CustomDialog")
                    }
                     model.close()
                 }
-
-
-
             }
         }
     }
+    fun rotateAndFlipBitmap(bitmap: Bitmap): Bitmap {
+        // Mengatur matriks rotasi 90 derajat
+        val matrix = Matrix()
 
+            matrix.postRotate(90f)
+
+
+
+        // Memutar gambar sekitar 90 derajat
+        val rotatedBitmap = Bitmap.createBitmap(
+            bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true
+        )
+
+        // Mengganti lebar dengan tinggi dan tinggi dengan lebar
+        val resultBitmap = Bitmap.createBitmap(
+            rotatedBitmap,
+            0,
+            0,
+            rotatedBitmap.width,
+            rotatedBitmap.height
+        )
+
+        // Bebaskan sumber daya gambar yang tidak digunakan
+        rotatedBitmap.recycle()
+        bitmap.recycle()
+
+        return resultBitmap
+    }
     fun rotateFile(file: File, orientation: Int) {
         val degree = when (orientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> 90f
@@ -175,6 +200,7 @@ class DetailQuest : AppCompatActivity() {
             } as? File
 
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
+            val orientation1 = it.data?.getStringExtra("orientation")
 
             myFile?.let { file ->
                 val exif = ExifInterface(myFile.absolutePath) // path file gambar
@@ -184,8 +210,24 @@ class DetailQuest : AppCompatActivity() {
                 )
                 rotateFile(file, orientation)
                 getFile = file
-                bitmapFile = BitmapFactory.decodeFile(file.path)
-                binding.imageView2.setImageBitmap(bitmapFile)
+                val bitmap = BitmapFactory.decodeFile(file.path)
+                val bitmapTemp = bitmap
+                if (bitmapTemp !== null) {
+
+
+                    if (orientation1 == "p") {
+                        val bitmap = rotateAndFlipBitmap(bitmapTemp)
+                        bitmapFile = bitmap
+                        binding.imageView2.setImageBitmap(bitmap)
+                    } else {
+                        binding.imageView2.setImageBitmap(bitmapFile)
+                        bitmapFile = bitmap
+                    }
+
+
+                }
+
+
             }
         }
     }

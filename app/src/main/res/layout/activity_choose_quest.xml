@@ -53,9 +53,9 @@
 
     <View
         android:id="@+id/asset_3_1"
-        android:layout_width="341dp"
-        android:layout_height="400dp"
-        android:layout_marginStart="108dp"
+        android:layout_width="311dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="130dp"
         android:layout_marginTop="320dp"
         android:background="@drawable/asset1"
         android:rotation="-15"

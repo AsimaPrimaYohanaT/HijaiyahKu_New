@@ -1,6 +1,7 @@
 package com.example.hijaiyahku_new
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hijaiyahku_new.databinding.ActivityChooseQuestBinding
@@ -12,7 +13,7 @@ class ChooseQuest : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseQuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufPisah.putExtra("jenis", "pisah")
