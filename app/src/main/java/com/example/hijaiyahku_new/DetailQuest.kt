@@ -10,6 +10,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,7 @@ import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.ml.Soal20josMD
+import com.example.hijaiyahku_new.utils.MusicPlayer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -81,6 +83,7 @@ class DetailQuest : AppCompatActivity() {
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
@@ -126,29 +129,35 @@ class DetailQuest : AppCompatActivity() {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
             predict.setOnClickListener {
-
                     if (bitmapFile != null) {
                         val model = Soal20josMD.newInstance(applicationContext)
                         val image = TensorImage.fromBitmap(bitmapFile)
                         val outputs = model.process(image)
                         val detectionResult = outputs.detectionResultList[0]
                         val score = detectionResult.categoryAsString
-//                        if (score == answer) {
-                            runBlocking {
+                        if (score == answer) {
 
+                            val player = MediaPlayer.create(applicationContext,R.raw.success)
+
+                                player.setVolume(100f, 100f);
+                                player.start()
                                 if(nextId != null){
                                     viewModel.update(nextId,true)
                                 }
 
 
-
-                            }
                             successDialog.show(supportFragmentManager, "CustomDialog")
-//                        } else {
+                        } else {
 
-//                            errorDialog.show(supportFragmentManager, "CustomDialog")
+                            val player1 = MediaPlayer.create(applicationContext,R.raw.fail)
+                                player1.setVolume(100f, 100f);
+                                player1.start()
 
-//                        }
+
+
+                            errorDialog.show(supportFragmentManager, "CustomDialog")
+
+                        }
                         model.close()
                     }
 

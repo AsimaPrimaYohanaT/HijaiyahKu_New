@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity()  {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-        PlayBackgroundSound(null)
+//        PlayBackgroundSound(null)
 
 
         binding.btnHome.setOnClickListener {

@@ -11,7 +11,6 @@ class BackgroundSoundService : Service() {
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
-
     override fun onCreate() {
         super.onCreate()
         mediaPlayer = MediaPlayer.create(this, Uri.parse("assets://bgm.mp3"))
