@@ -29,6 +29,9 @@ class ViewModelFactory private constructor(private val soalRepository: SoalRepos
             modelClass.isAssignableFrom(DetailQuestViewModel::class.java) -> {
                 DetailQuestViewModel(soalRepository) as T
             }
+            modelClass.isAssignableFrom(DetailQuestViewModel::class.java) -> {
+                DetailQuestViewModel(soalRepository) as T
+            }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
 }

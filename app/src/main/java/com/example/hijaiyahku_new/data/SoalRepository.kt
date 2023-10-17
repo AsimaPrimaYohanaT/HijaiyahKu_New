@@ -54,5 +54,9 @@ class SoalRepository(private val soalDao: SoalDao, private val executor: Executo
         return soalDao.getSoalById(soalId)
     }
 
+fun changeIsComplete(id:Int, isComplete:Boolean){
+        return soalDao.updateIsComplete(id,isComplete)
+    }
+
 
 }

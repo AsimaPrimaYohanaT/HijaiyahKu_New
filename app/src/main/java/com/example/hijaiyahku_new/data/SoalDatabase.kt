@@ -41,7 +41,7 @@ abstract class SoalDatabase : RoomDatabase() {
                                 fillWithStartingData(context, getInstance(context).soalDao())
                             }
                         }
-                    })
+                    }).allowMainThreadQueries()
                     .build()
                 INSTANCE = instance
                 instance

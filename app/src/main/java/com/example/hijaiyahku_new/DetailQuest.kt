@@ -1,6 +1,6 @@
 package com.example.hijaiyahku_new
-
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.ContentResolver
 import android.content.Context
@@ -8,7 +8,6 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
@@ -19,6 +18,7 @@ import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.example.hijaiyahku_new.databinding.ActivityDetailQuestBinding
 import com.example.hijaiyahku_new.fragment.HintFragment
@@ -28,21 +28,22 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
-import com.example.hijaiyahku_new.ml.Modd
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.ml.Soal20josMD
-import com.example.hijaiyahku_new.utils.rotateFile
-import org.tensorflow.lite.schema.Model
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.tensorflow.lite.support.image.TensorImage
-
 class DetailQuest : AppCompatActivity() {
     private val hintDialog = HintFragment()
     private val successDialog = SuccessFragment()
     private val errorDialog = ErrorFragment()
-
     private lateinit var viewModel: DetailQuestViewModel
     lateinit var binding: ActivityDetailQuestBinding
     private var bitmapFile : Bitmap? = null
@@ -50,14 +51,11 @@ class DetailQuest : AppCompatActivity() {
     private var answer: String? = null
     private val FILENAME_FORMAT = "dd-MMM-yyyy"
     private val MAXIMAL_SIZE = 1000000
-
     val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
         Locale.US
     ).format(System.currentTimeMillis())
-
     private lateinit var selectedSoal: Soal
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -79,11 +77,11 @@ class DetailQuest : AppCompatActivity() {
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
-
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         binding.btnBack.setOnClickListener {
@@ -92,6 +90,12 @@ class DetailQuest : AppCompatActivity() {
         }
 
         val soalId = intent.getIntExtra("SOAL", 0)
+        val nextSoal = intent.getIntExtra("NEXT_SOAL",0)
+
+
+
+
+
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory).get(DetailQuestViewModel::class.java)
@@ -104,53 +108,45 @@ class DetailQuest : AppCompatActivity() {
                 answer = soal.jawaban1
             }
         }
-
-
-
         hintDialog.show(supportFragmentManager, "CustomDialog")
-
-//
-//        val fragmentManager = supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.fragmentContainer,HintFragment())
-//        fragmentTransaction.commit()
-
-
         binding.apply {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
             predict.setOnClickListener {
-                if(bitmapFile != null){
+
+                    if (bitmapFile != null) {
+                        val model = Soal20josMD.newInstance(applicationContext)
+                        val image = TensorImage.fromBitmap(bitmapFile)
+                        val outputs = model.process(image)
+                        val detectionResult = outputs.detectionResultList[0]
+                        val score = detectionResult.categoryAsString
+                        if (score == answer) {
+                            runBlocking {
+
+                                if(nextSoal != 0){
+                                    viewModel.update(nextSoal,true)
+                                }
 
 
 
-                    val model = Soal20josMD.newInstance(applicationContext)
-                    val image = TensorImage.fromBitmap(bitmapFile)
-                    val outputs = model.process(image)
-                    val detectionResult = outputs.detectionResultList.get(0)
-                    val location = detectionResult.scoreAsFloat;
-                    val category = detectionResult.locationAsRectF;
-                    val score = detectionResult.categoryAsString;
-                    Log.d("location",location.toString())
-                    Log.d("location",score)
-                   if (score == answer){
-                       successDialog.show(supportFragmentManager,"CustomDialog")
-                   }else{
-                       errorDialog.show(supportFragmentManager,"CustomDialog")
-                   }
-                    model.close()
-                }
+                            }
+                            successDialog.show(supportFragmentManager, "CustomDialog")
+                        } else {
+
+                            errorDialog.show(supportFragmentManager, "CustomDialog")
+
+                        }
+                        model.close()
+                    }
+
+
             }
         }
     }
     fun rotateAndFlipBitmap(bitmap: Bitmap): Bitmap {
         // Mengatur matriks rotasi 90 derajat
         val matrix = Matrix()
-
-            matrix.postRotate(90f)
-
-
-
+        matrix.postRotate(90f)
         // Memutar gambar sekitar 90 derajat
         val rotatedBitmap = Bitmap.createBitmap(
             bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true
@@ -178,7 +174,6 @@ class DetailQuest : AppCompatActivity() {
             ExifInterface.ORIENTATION_ROTATE_270 -> 270f
             else -> 0f
         }
-
         val matrix = Matrix()
         matrix.postRotate(degree)
     }

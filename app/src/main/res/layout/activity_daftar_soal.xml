@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".DaftarSoal">
-
-
     <View
         android:id="@+id/logo_team_p"
         android:layout_width="77dp"
@@ -19,7 +17,6 @@
         android:background="@drawable/question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -32,7 +29,6 @@
         android:background="@drawable/layer3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:id="@+id/btn_back"
         android:clickable="true"
@@ -47,7 +43,6 @@
         android:background="@drawable/layer4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -60,7 +55,6 @@
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <View
         android:id="@+id/view"
         android:layout_width="320dp"
@@ -72,7 +66,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/layer1"
         android:layout_width="320dp"
@@ -91,10 +84,20 @@
         app:layout_constraintTop_toTopOf="@+id/view"
         app:lineHeight="30sp" />
 
+    <View
+        android:id="@+id/muslim_2"
+        android:layout_width="231dp"
+        android:layout_height="264dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/child6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_soal"
-        android:layout_width="343dp"
-        android:layout_height="365dp"
+        android:layout_width="351dp"
+        android:layout_height="331dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,15 +106,4 @@
         app:layout_constraintVertical_bias="0.072"
         app:spanCount="2"
         tools:listitem="@layout/item_soal" />
-
-    <View
-        android:id="@+id/muslim_2"
-        android:layout_width="250dp"
-        android:layout_height="300dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/child6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

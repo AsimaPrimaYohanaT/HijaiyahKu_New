@@ -6,7 +6,7 @@
       "jawaban1" : "ahmaru",
       "jawaban2" : "ahmaru",
       "jenis": 1,
-      "isComplete": false
+      "isComplete": true
     },
     {
       "id": 2,
@@ -30,7 +30,7 @@
       "jawaban1" : "hamaamah",
       "jawaban2" : "hamaamah",
       "jenis": 2,
-      "isComplete": false
+      "isComplete": true
     },
     {
       "id": 5,

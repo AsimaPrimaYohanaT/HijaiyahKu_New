@@ -22,5 +22,8 @@ class DetailQuestViewModel(private val soalRepository: SoalRepository): ViewMode
         }
         _soalId.value = habitId
     }
+    fun update(id:Int, isComplete:Boolean){
+        soalRepository.changeIsComplete(id,isComplete)
+    }
 
 }

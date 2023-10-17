@@ -29,7 +29,7 @@ class DaftarSoal : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory).get(DaftarSoalViewModel::class.java)
 
         val jenis = intent.getStringExtra("jenis")
-        Log.e("jenis",jenis.toString())
+
 
         if (jenis == "pisah") {
             viewModel.filter(SoalSortType.TYPE_1)
@@ -37,9 +37,14 @@ class DaftarSoal : AppCompatActivity() {
             viewModel.filter(SoalSortType.TYPE_2)
         }
 
-        val adapter = DaftarSoalAdapter { soal ->
+        val adapter = DaftarSoalAdapter(viewModel) {  soal,nextSoal ->
             val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
             detailIntent.putExtra("SOAL", soal.id)
+
+            if(nextSoal != null){
+                detailIntent.putExtra("NEXT_SOAL",nextSoal.id)
+            }
+
             startActivity(detailIntent)
         }
 

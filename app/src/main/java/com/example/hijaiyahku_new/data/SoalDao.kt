@@ -27,4 +27,6 @@ interface SoalDao {
     @Query("SELECT * FROM soal WHERE id = :soalId")
     fun getSoalById(soalId: Int): LiveData<Soal>
 
+    @Query("UPDATE soal SET isComplete = :isComplete WHERE id = :id")
+     fun updateIsComplete(id: Int, isComplete:Boolean)
 }
