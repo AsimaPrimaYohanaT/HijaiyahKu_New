@@ -37,13 +37,16 @@ class DaftarSoal : AppCompatActivity() {
             viewModel.filter(SoalSortType.TYPE_2)
         }
 
-        val adapter = DaftarSoalAdapter(viewModel) {  soal,nextSoal ->
+        val adapter = DaftarSoalAdapter(viewModel) {  soal,arrId ->
             val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
+            val bundle = Bundle()
+            bundle.putIntegerArrayList("arrId", ArrayList(arrId))
+            detailIntent.putExtras(bundle)
             detailIntent.putExtra("SOAL", soal.id)
 
-            if(nextSoal != null){
-                detailIntent.putExtra("NEXT_SOAL",nextSoal.id)
-            }
+
+
+
 
             startActivity(detailIntent)
         }
