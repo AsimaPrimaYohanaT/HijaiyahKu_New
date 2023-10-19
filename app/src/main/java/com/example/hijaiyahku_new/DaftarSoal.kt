@@ -38,17 +38,21 @@ class DaftarSoal : AppCompatActivity() {
         }
 
         val adapter = DaftarSoalAdapter(viewModel) {  soal,arrId ->
-            val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
-            val bundle = Bundle()
-            bundle.putIntegerArrayList("arrId", ArrayList(arrId))
-            detailIntent.putExtras(bundle)
-            detailIntent.putExtra("SOAL", soal.id)
+            if(soal.isComplete){
+                val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
+                val bundle = Bundle()
+                bundle.putIntegerArrayList("arrId", ArrayList(arrId))
+                detailIntent.putExtras(bundle)
+                detailIntent.putExtra("SOAL", soal.id)
+                startActivity(detailIntent)
+            }
 
 
 
 
 
-            startActivity(detailIntent)
+
+
         }
 
         viewModel.soal.observe(this) { pagedList ->
