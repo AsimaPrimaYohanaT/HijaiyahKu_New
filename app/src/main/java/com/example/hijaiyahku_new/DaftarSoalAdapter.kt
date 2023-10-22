@@ -14,7 +14,7 @@ import com.example.hijaiyahku_new.data.SoalRepository
 
 class DaftarSoalAdapter(
    private val viewModel: DaftarSoalViewModel,
-    private val onClick: (Soal,Soal?) -> Unit
+    private val onClick: (Soal,MutableList<Int>) -> Unit
 ) : PagedListAdapter<Soal, DaftarSoalAdapter.SoalViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SoalViewHolder {
@@ -24,12 +24,15 @@ class DaftarSoalAdapter(
 
     override fun onBindViewHolder(holder: SoalViewHolder, position: Int) {
         val soal = getItem(position) as Soal
-        var nextSoal : Soal? = null
-        if(position < (itemCount -1)){
-            nextSoal = getItem(position + 1) as Soal
+        val arrId:MutableList<Int> = mutableListOf<Int>()
+
+        for (i in 0..(itemCount-1)){
+            getItem(i)?.let { arrId.add(it.id) }
         }
 
-        holder.bind(soal,nextSoal)
+
+
+        holder.bind(soal,arrId)
     }
 
 
@@ -37,7 +40,7 @@ class DaftarSoalAdapter(
         private val tvTitle: TextView = itemView.findViewById(R.id.nomor_soal)
         private val lock: ImageView = itemView.findViewById<ImageView>(R.id.lock)
         lateinit var getSoal: Soal
-        fun bind(soal: Soal,nextSoal : Soal?) {
+        fun bind(soal: Soal,arrid : MutableList<Int>) {
             getSoal = soal
             val nomorSoal = position + 1
 
@@ -50,7 +53,7 @@ class DaftarSoalAdapter(
 
 
             itemView.setOnClickListener {
-                onClick(soal,nextSoal)
+                onClick(soal,arrid)
             }
 
         }

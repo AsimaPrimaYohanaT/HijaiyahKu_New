@@ -43,15 +43,22 @@ class DaftarSoal : AppCompatActivity() {
             viewModel.filter(SoalSortType.TYPE_2)
         }
 
-        val adapter = DaftarSoalAdapter(viewModel) {  soal,nextSoal ->
-            val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
-            detailIntent.putExtra("SOAL", soal.id)
-
-            if(nextSoal != null){
-                detailIntent.putExtra("NEXT_SOAL",nextSoal.id)
+        val adapter = DaftarSoalAdapter(viewModel) {  soal,arrId ->
+            if(soal.isComplete){
+                val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
+                val bundle = Bundle()
+                bundle.putIntegerArrayList("arrId", ArrayList(arrId))
+                detailIntent.putExtras(bundle)
+                detailIntent.putExtra("SOAL", soal.id)
+                startActivity(detailIntent)
             }
 
-            startActivity(detailIntent)
+
+
+
+
+
+
         }
 
         viewModel.soal.observe(this) { pagedList ->

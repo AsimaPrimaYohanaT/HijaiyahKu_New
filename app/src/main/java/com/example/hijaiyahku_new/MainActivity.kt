@@ -1,6 +1,5 @@
 package com.example.hijaiyahku_new
 
-
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -20,14 +19,22 @@ class MainActivity : AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         PlayBackgroundSound(null)
         playAnimation()
-
-
+//        PlayBackgroundSound(null)
+//        val animator = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleX", 1f, 3f)
+//        val animator1 = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleY", 1f, 3f)
+//        animator.repeatCount = ObjectAnimator.INFINITE
+//        animator.repeatMode = ObjectAnimator.REVERSE
+//        animator.duration = 1000L
+//        animator.start()
+//        animator1.repeatCount = ObjectAnimator.INFINITE
+//        animator1.repeatMode = ObjectAnimator.REVERSE
+//        animator1.duration = 1000L
+//        animator1.start()
         binding.btnHome.setOnClickListener {
             val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
             startActivity(mulai)

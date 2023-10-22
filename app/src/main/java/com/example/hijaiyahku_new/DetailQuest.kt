@@ -10,6 +10,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -33,11 +34,16 @@ import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.ml.Soal20josMD
+import com.example.hijaiyahku_new.utils.MusicPlayer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.tensorflow.lite.support.image.TensorImage
 class DetailQuest : AppCompatActivity() {
     private val hintDialog = HintFragment()
-    private val successDialog = SuccessFragment()
+    lateinit  var successDialog:SuccessFragment
     private val errorDialog = ErrorFragment()
     private lateinit var viewModel: DetailQuestViewModel
     lateinit var binding: ActivityDetailQuestBinding
@@ -75,6 +81,7 @@ class DetailQuest : AppCompatActivity() {
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
@@ -82,13 +89,29 @@ class DetailQuest : AppCompatActivity() {
             val back = Intent(this@DetailQuest, DaftarSoal::class.java)
             startActivity(back)
         }
-
         val soalId = intent.getIntExtra("SOAL", 0)
-        val nextSoal = intent.getIntExtra("NEXT_SOAL",0)
+        val arrId = intent.extras?.getIntegerArrayList("arrId")
+        var nextId : Int? = null
+        if(arrId != null){
+            for (i in 0 until arrId.size){
+                if(soalId == arrId[i] && i != arrId.size -1){
+                    nextId = arrId[i + 1]
+                }
+            }
+        }
+
+        if(nextId != null){
+            successDialog = SuccessFragment.newInstance(nextId,arrId!!)
 
         binding.info.setOnClickListener {
             hintDialog.show(supportFragmentManager, "CustomDialog")
         }
+        }else{
+            successDialog = SuccessFragment.newInstance(soalId,arrId!!)
+        }
+
+
+
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory).get(DetailQuestViewModel::class.java)
@@ -106,7 +129,6 @@ class DetailQuest : AppCompatActivity() {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
             predict.setOnClickListener {
-
                     if (bitmapFile != null) {
                         val model = Soal20josMD.newInstance(applicationContext)
                         val image = TensorImage.fromBitmap(bitmapFile)
@@ -114,13 +136,23 @@ class DetailQuest : AppCompatActivity() {
                         val detectionResult = outputs.detectionResultList[0]
                         val score = detectionResult.categoryAsString
                         if (score == answer) {
-                            runBlocking {
-                                if(nextSoal != 0){
-                                    viewModel.update(nextSoal,true)
-                                }
+                            val player = MediaPlayer.create(applicationContext,R.raw.success)
+
+                            player.setVolume(100f, 100f);
+                            player.start()
+                            if(nextId != null){
+                                viewModel.update(nextId,true)
                             }
+
+
                             successDialog.show(supportFragmentManager, "CustomDialog")
                         } else {
+
+                            val player1 = MediaPlayer.create(applicationContext,R.raw.fail)
+                                player1.setVolume(100f, 100f);
+                                player1.start()
+
+
 
                             errorDialog.show(supportFragmentManager, "CustomDialog")
 
