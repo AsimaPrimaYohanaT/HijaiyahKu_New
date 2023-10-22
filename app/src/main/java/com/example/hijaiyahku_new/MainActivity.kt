@@ -1,6 +1,8 @@
 package com.example.hijaiyahku_new
 
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity()  {
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         PlayBackgroundSound(null)
+        playAnimation()
 
 
         binding.btnHome.setOnClickListener {
@@ -30,6 +33,26 @@ class MainActivity : AppCompatActivity()  {
             startActivity(mulai)
         }
 
+    }
+
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.asset51, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 3000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+
+        val buttonHome = ObjectAnimator.ofFloat(binding.btnHome, View.ALPHA, 1f).setDuration(100)
+        val girl = ObjectAnimator.ofFloat(binding.asset33, View.ALPHA, 1f).setDuration(100)
+        val boy = ObjectAnimator.ofFloat(binding.asset51, View.ALPHA, 1f).setDuration(100)
+
+        AnimatorSet().apply {
+            playSequentially(
+                buttonHome,
+                girl,
+                boy)
+            startDelay = 500
+        }.start()
     }
     fun PlayBackgroundSound(view: View?) {
         val intent = Intent(this@MainActivity, BackgroundSoundService::class.java)

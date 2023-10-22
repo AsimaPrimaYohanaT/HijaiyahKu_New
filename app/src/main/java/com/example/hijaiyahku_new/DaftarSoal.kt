@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hijaiyahku_new.databinding.ActivityDaftarSoalBinding
+import com.example.hijaiyahku_new.fragment.HintFragment
+import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.utils.SoalSortType
 
 class DaftarSoal : AppCompatActivity() {
@@ -16,6 +18,7 @@ class DaftarSoal : AppCompatActivity() {
     private lateinit var recycler: RecyclerView
     private lateinit var viewModel: DaftarSoalViewModel
     private lateinit var binding: ActivityDaftarSoalBinding
+    private val hintDialog = HintFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,9 @@ class DaftarSoal : AppCompatActivity() {
 
         val jenis = intent.getStringExtra("jenis")
 
+        binding.info.setOnClickListener {
+            hintDialog.show(supportFragmentManager, "CustomDialog")
+        }
 
         if (jenis == "pisah") {
             viewModel.filter(SoalSortType.TYPE_1)

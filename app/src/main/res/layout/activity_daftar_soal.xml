@@ -6,17 +6,20 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".DaftarSoal">
+
     <View
-        android:id="@+id/logo_team_p"
+        android:id="@+id/info"
         android:layout_width="77dp"
         android:layout_height="65dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/question"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"/>
+
     <View
         android:layout_width="55dp"
         android:layout_height="55dp"
