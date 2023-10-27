@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="347dp"
+        android:layout_marginTop="320dp"
         android:layout_marginEnd="108dp"
         android:background="@drawable/child2" />
 
@@ -40,7 +40,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="119dp"
         android:layout_marginLeft="119dp"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="250dp"
         android:layout_marginEnd="122dp"
         android:background="@drawable/play" />
 
@@ -49,10 +49,12 @@
         android:layout_width="347dp"
         android:layout_height="156dp"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="22dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="82dp"
-        android:background="@drawable/asset2"
-        />
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/asset2" />
 
 </RelativeLayout>
