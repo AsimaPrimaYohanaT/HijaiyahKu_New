@@ -30,7 +30,6 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
@@ -52,7 +51,6 @@ class DetailQuest : AppCompatActivity() {
     private var getFile: File? = null
     private var answer: String? = null
     private val FILENAME_FORMAT = "dd-MMM-yyyy"
-    private val MAXIMAL_SIZE = 1000000
     val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
         Locale.US
@@ -105,10 +103,12 @@ class DetailQuest : AppCompatActivity() {
         if(nextId != null){
             successDialog = SuccessFragment.newInstance(nextId,arrId!!)
 
+        binding.info.setOnClickListener {
+            hintDialog.show(supportFragmentManager, "CustomDialog")
+        }
         }else{
             successDialog = SuccessFragment.newInstance(soalId,arrId!!)
         }
-
 
 
 
@@ -136,14 +136,13 @@ class DetailQuest : AppCompatActivity() {
                         val detectionResult = outputs.detectionResultList[0]
                         val score = detectionResult.categoryAsString
                         if (score == answer) {
-
                             val player = MediaPlayer.create(applicationContext,R.raw.success)
 
-                                player.setVolume(100f, 100f);
-                                player.start()
-                                if(nextId != null){
-                                    viewModel.update(nextId,true)
-                                }
+                            player.setVolume(100f, 100f);
+                            player.start()
+                            if(nextId != null){
+                                viewModel.update(nextId,true)
+                            }
 
 
                             successDialog.show(supportFragmentManager, "CustomDialog")
@@ -230,8 +229,6 @@ class DetailQuest : AppCompatActivity() {
                 val bitmap = BitmapFactory.decodeFile(file.path)
                 val bitmapTemp = bitmap
                 if (bitmapTemp !== null) {
-
-
                     if (orientation1 == "p") {
                         val bitmap = rotateAndFlipBitmap(bitmapTemp)
                         bitmapFile = bitmap
@@ -240,11 +237,7 @@ class DetailQuest : AppCompatActivity() {
                         binding.imageView2.setImageBitmap(bitmapFile)
                         bitmapFile = bitmap
                     }
-
-
                 }
-
-
             }
         }
     }

@@ -38,11 +38,13 @@
             android:layout_weight="1" />
 
         <ImageView
+            android:id="@+id/info"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
-            android:src="@drawable/question" />
+            android:src="@drawable/question"
+            android:clickable="true"/>
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -158,6 +160,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </androidx.fragment.app.FragmentContainerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

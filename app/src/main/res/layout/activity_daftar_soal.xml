@@ -6,17 +6,20 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".DaftarSoal">
+
     <View
-        android:id="@+id/logo_team_p"
+        android:id="@+id/info"
         android:layout_width="77dp"
         android:layout_height="65dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/question"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"/>
+
     <View
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -85,14 +88,16 @@
         app:lineHeight="30sp" />
 
     <View
-        android:id="@+id/muslim_2"
-        android:layout_width="231dp"
-        android:layout_height="264dp"
+        android:id="@+id/boy"
+        android:layout_width="398dp"
+        android:layout_height="456dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/child6"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="-64dp"
+        android:background="@drawable/boy_hd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_soal" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_soal"

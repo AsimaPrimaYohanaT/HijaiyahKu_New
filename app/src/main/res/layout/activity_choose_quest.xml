@@ -52,7 +52,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/asset_3_1"
+        android:id="@+id/girl"
         android:layout_width="311dp"
         android:layout_height="350dp"
         android:layout_marginStart="130dp"
@@ -159,5 +159,15 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainer"
+        android:layout_width="400dp"
+        android:background="@android:color/transparent"
+        android:layout_height="400dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </androidx.fragment.app.FragmentContainerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

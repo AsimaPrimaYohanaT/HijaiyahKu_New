@@ -1,5 +1,6 @@
 package com.example.hijaiyahku_new
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ class ChooseQuest : AppCompatActivity() {
         binding = ActivityChooseQuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        playAnimation()
         binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufPisah.putExtra("jenis", "pisah")
@@ -25,6 +27,14 @@ class ChooseQuest : AppCompatActivity() {
             toHurufSambung.putExtra("jenis", "sambung")
             startActivity(toHurufSambung)
         }
+    }
+
+    fun playAnimation(){
+        val animator = ObjectAnimator.ofFloat(findViewById(R.id.girl), "rotation", 0f, 20f, -20f)
+        animator.repeatCount = ObjectAnimator.INFINITE
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.duration = 2500L
+        animator.start()
     }
 
 }
