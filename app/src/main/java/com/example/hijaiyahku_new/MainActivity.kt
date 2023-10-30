@@ -30,22 +30,6 @@ class MainActivity : AppCompatActivity()  {
         }
 
     }
-//
-//<<<<<<< HEAD
-//    fun playAnimation(){
-//
-//        val animator = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleX", 1f, 1.1f)
-//        val animator1 = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleY", 1f, 1.1f)
-//        animator.repeatCount = ObjectAnimator.INFINITE
-//        animator.repeatMode = ObjectAnimator.REVERSE
-//        animator.duration = 1000L
-//        animator.start()
-//        animator1.repeatCount = ObjectAnimator.INFINITE
-//
-//        animator1.repeatMode = ObjectAnimator.REVERSE
-//        animator1.duration = 1000L
-//        animator1.start()
-//=======
     private fun playAnimation() {
             val animator = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleX", 1f, 1.1f)
         val animator1 = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleY", 1f, 1.1f)
@@ -58,8 +42,8 @@ class MainActivity : AppCompatActivity()  {
         animator1.repeatMode = ObjectAnimator.REVERSE
         animator1.duration = 1000L
         animator1.start()
-        ObjectAnimator.ofFloat(binding.asset51, View.TRANSLATION_X, -30f, 30f).apply {
-            duration = 3000
+        ObjectAnimator.ofFloat(binding.asset51, View.TRANSLATION_X, -40f, 40f).apply {
+            duration = 2000
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE
         }.start()
@@ -75,7 +59,7 @@ class MainActivity : AppCompatActivity()  {
                 boy)
             startDelay = 500
         }.start()
-//>>>>>>> ce5e7d30a259514508b12f08d8c1baab18f000a8
+
     }
     fun PlayBackgroundSound(view: View?) {
         val backgroundThread = Thread {

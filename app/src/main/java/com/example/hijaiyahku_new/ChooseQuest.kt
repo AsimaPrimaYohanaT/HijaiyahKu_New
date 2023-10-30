@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hijaiyahku_new.databinding.ActivityChooseQuestBinding
+import com.example.hijaiyahku_new.fragment.HintChooseQuest
 
 class ChooseQuest : AppCompatActivity() {
 
@@ -16,11 +17,16 @@ class ChooseQuest : AppCompatActivity() {
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         playAnimation()
+
+        val hintFragment : HintChooseQuest = HintChooseQuest()
+        hintFragment.show(supportFragmentManager,"HintQuest")
         binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufPisah.putExtra("jenis", "pisah")
             startActivity(toHurufPisah)
         }
+
+
 
         binding.btnSambung.setOnClickListener {
             val toHurufSambung = Intent(this@ChooseQuest, DaftarSoal::class.java)

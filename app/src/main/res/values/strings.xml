@@ -16,4 +16,6 @@
     <string name="ulangi">Ulangi</string>
     <string name="huruf_nsambung">Huruf \nSambung</string>
     <string name="huruf_pisah">Huruf Pisah</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
