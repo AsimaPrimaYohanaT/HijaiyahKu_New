@@ -21,7 +21,6 @@ class DaftarSoal : AppCompatActivity() {
     private lateinit var viewModel: DaftarSoalViewModel
     private lateinit var binding: ActivityDaftarSoalBinding
     private val hintDialog = HintFragment()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDaftarSoalBinding.inflate(layoutInflater)
@@ -41,12 +40,15 @@ class DaftarSoal : AppCompatActivity() {
             hintDialog.show(supportFragmentManager, "CustomDialog")
         }
 
+        binding.btnBack.setOnClickListener {
+            val back = Intent(this@DaftarSoal, ChooseQuest::class.java)
+            startActivity(back)
+        }
         if (jenis == "pisah") {
             viewModel.filter(SoalSortType.TYPE_1)
         } else if (jenis == "sambung") {
             viewModel.filter(SoalSortType.TYPE_2)
         }
-
         val adapter = DaftarSoalAdapter(viewModel) {  soal,arrId ->
             if(soal.isComplete){
                 val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
@@ -56,7 +58,6 @@ class DaftarSoal : AppCompatActivity() {
                 detailIntent.putExtra("SOAL", soal.id)
                 startActivity(detailIntent)
             }
-
         }
 
         viewModel.soal.observe(this) { pagedList ->

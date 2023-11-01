@@ -18,4 +18,7 @@
     <string name="huruf_pisah">Huruf Pisah</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="petunjuk_sambung">Jenis soal sambung berarti kamu akan diberikan kata dengan rangkaian huruf hijaiyah sambung, dan kamu harus merangkai kata tersebut</string>
+    <string name="petunjuk_pisah">Jenis soal pisah berarti kamu akan diberikan kata dengan rangkaian huruf hijaiyah pisah, dan kamu harus merangkai kata tersebut</string>
+    <string name="silahkan_pilih_jenis_soal_kamu_yaaa">Silahkan pilih jenis soal kamu yaaa.</string>
 </resources>
