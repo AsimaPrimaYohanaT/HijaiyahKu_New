@@ -34,13 +34,16 @@ class DaftarSoal : AppCompatActivity() {
 
         val jenis = intent.getStringExtra("jenis")
         playAnimation()
-        val daftarSoalFragment = DaftarSoalFragment()
-        daftarSoalFragment.show(supportFragmentManager,"DaftarSoalFragment")
+
         binding.info.setOnClickListener {
             hintDialog.show(supportFragmentManager, "CustomDialog")
         }
+        binding.info.setOnClickListener {
+            val daftarSoalFragment = DaftarSoalFragment()
+            daftarSoalFragment.show(supportFragmentManager,"DaftarSoalFragment")
+        }
 
-        binding.btnBack.setOnClickListener {
+        binding.back.setOnClickListener {
             val back = Intent(this@DaftarSoal, ChooseQuest::class.java)
             startActivity(back)
         }

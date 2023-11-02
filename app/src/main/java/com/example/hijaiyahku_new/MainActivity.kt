@@ -6,22 +6,36 @@ import android.animation.ValueAnimator
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hijaiyahku_new.databinding.ActivityMainBinding
+
+
 
 
 class MainActivity : AppCompatActivity()  {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var backgroundServiceMusicThread: Thread
+
+    private lateinit var intent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding  = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        backgroundServiceMusicThread = Thread {
+             intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
+            startService(intent)
+
+
+        }
         PlayBackgroundSound(null)
         playAnimation()
         binding.btnHome.setOnClickListener {
@@ -29,6 +43,17 @@ class MainActivity : AppCompatActivity()  {
             startActivity(mulai)
         }
 
+        binding.mscBtn.setOnClickListener {
+            if (binding.mscIcnActive.visibility == View.GONE) {
+                binding.mscIcnActive.visibility = View.VISIBLE
+                binding.mscIcnOff.visibility = View.GONE
+                startService(intent)
+            }else {
+                binding.mscIcnActive.visibility = View.GONE
+                binding.mscIcnOff.visibility = View.VISIBLE
+                stopService(intent)
+            }
+        }
     }
     private fun playAnimation() {
             val animator = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleX", 1f, 1.1f)
@@ -62,11 +87,9 @@ class MainActivity : AppCompatActivity()  {
 
     }
     fun PlayBackgroundSound(view: View?) {
-        val backgroundThread = Thread {
-            val intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
-            startService(intent)
-        }
-        backgroundThread.start()
+
+        backgroundServiceMusicThread.start()
+
     }
 
 }

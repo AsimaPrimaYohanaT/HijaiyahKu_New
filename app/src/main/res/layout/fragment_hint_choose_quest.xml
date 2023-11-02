@@ -38,7 +38,7 @@
                 android:gravity="center"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/circle"
+                android:background="@drawable/circle_green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -52,7 +52,7 @@
 
             <TextView
                 android:textSize="20sp"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
                 android:id="@+id/test"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 android:gravity="center"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/circle"
+                android:background="@drawable/circle_green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -87,7 +87,7 @@
 
             <TextView
                 android:textSize="20sp"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
 
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                 android:gravity="center"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/circle"
+                android:background="@drawable/circle_green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -121,7 +121,7 @@
 
             <TextView
                 android:textSize="20sp"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="20dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/petunjuk_sambung"

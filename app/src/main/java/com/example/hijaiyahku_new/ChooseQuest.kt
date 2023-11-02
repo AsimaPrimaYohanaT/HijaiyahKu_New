@@ -14,8 +14,7 @@ class ChooseQuest : AppCompatActivity() {
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         playAnimation()
-        val hintFragment : HintChooseQuest = HintChooseQuest()
-        hintFragment.show(supportFragmentManager,"HintQuest")
+
         binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufPisah.putExtra("jenis", "pisah")
@@ -25,6 +24,11 @@ class ChooseQuest : AppCompatActivity() {
             val toHurufSambung = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufSambung.putExtra("jenis", "sambung")
             startActivity(toHurufSambung)
+        }
+
+        binding.logoTeamP.setOnClickListener {
+            val hintFragment : HintChooseQuest = HintChooseQuest()
+            hintFragment.show(supportFragmentManager,"HintQuest")
         }
     }
     fun playAnimation(){
