@@ -76,12 +76,12 @@ class DaftarSoal : AppCompatActivity() {
         startActivity(backIntent)
         finish()
 
-<<<<<<< HEAD
+
     }
-    fun playAnimation(){
-=======
+
+
     private fun playAnimation(){
->>>>>>> 9dbc3ff2d921276cda3d16b06932060a06ab5b8a
+
         val animator = ObjectAnimator.ofFloat(findViewById(R.id.boy), "rotation", 0f, 30f, -5f)
         animator.repeatCount = ObjectAnimator.INFINITE
         animator.repeatMode = ObjectAnimator.REVERSE
