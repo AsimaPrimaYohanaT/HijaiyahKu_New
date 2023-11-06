@@ -69,7 +69,7 @@ class DaftarSoal : AppCompatActivity() {
         }
     }
 
-    fun playAnimation(){
+    private fun playAnimation(){
         val animator = ObjectAnimator.ofFloat(findViewById(R.id.boy), "rotation", 0f, 30f, -5f)
         animator.repeatCount = ObjectAnimator.INFINITE
         animator.repeatMode = ObjectAnimator.REVERSE

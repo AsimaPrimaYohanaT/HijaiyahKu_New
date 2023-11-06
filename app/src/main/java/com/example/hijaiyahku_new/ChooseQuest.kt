@@ -1,11 +1,14 @@
 package com.example.hijaiyahku_new
+
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hijaiyahku_new.databinding.ActivityChooseQuestBinding
+import com.example.hijaiyahku_new.fragment.DaftarSoalFragment
 import com.example.hijaiyahku_new.fragment.HintChooseQuest
+
 class ChooseQuest : AppCompatActivity() {
     private lateinit var binding: ActivityChooseQuestBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,6 +17,11 @@ class ChooseQuest : AppCompatActivity() {
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         playAnimation()
+
+        binding.btnPetunjuk.setOnClickListener {
+            val chooseQuestFragment = HintChooseQuest()
+            chooseQuestFragment.show(supportFragmentManager,"ChooseQuestFragment")
+        }
 
         binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)

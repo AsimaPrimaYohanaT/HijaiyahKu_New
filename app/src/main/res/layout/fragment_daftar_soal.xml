@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="350dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -49,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
+                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -57,8 +57,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
                 android:text="Silahkan pilih beberapa soal yang tersedia. "
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/circle_layout"
@@ -84,16 +85,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2"
+                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/white" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
+                android:textColor="@color/black"
                 android:layout_marginLeft="20dp"
                 android:text="Soal yang memiliki tanda gembok berarti soal tersebut terkunci"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/circle_layout2"
@@ -118,6 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3"
+                    android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -125,8 +128,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
                 android:text="Kamu harus menyelesaikan yang terbuka untuk membuka soal yang terkunci"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/circle_layout3"

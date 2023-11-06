@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity()  {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var backgroundServiceMusicThread: Thread
-
     private lateinit var intent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
