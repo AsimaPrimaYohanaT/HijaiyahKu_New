@@ -60,15 +60,23 @@ class DaftarSoal : AppCompatActivity() {
                 detailIntent.putExtras(bundle)
                 detailIntent.putExtra("SOAL", soal.id)
                 startActivity(detailIntent)
+                finish()
             }
         }
+
+
 
         viewModel.soal.observe(this) { pagedList ->
             adapter.submitList(pagedList)
             recycler.adapter = adapter
         }
     }
+    override fun onBackPressed() {
+        val backIntent =        Intent(this@DaftarSoal,ChooseQuest::class.java)
+        startActivity(backIntent)
+        finish()
 
+    }
     fun playAnimation(){
         val animator = ObjectAnimator.ofFloat(findViewById(R.id.boy), "rotation", 0f, 30f, -5f)
         animator.repeatCount = ObjectAnimator.INFINITE

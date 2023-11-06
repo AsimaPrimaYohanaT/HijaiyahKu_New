@@ -164,6 +164,12 @@ class DetailQuest : AppCompatActivity() {
             }
         }
     }
+    override fun onBackPressed() {
+        val backIntent =        Intent(this@DetailQuest,DaftarSoal::class.java)
+        startActivity(backIntent)
+        finish()
+
+    }
     fun rotateAndFlipBitmap(bitmap: Bitmap): Bitmap {
         // Mengatur matriks rotasi 90 derajat
         val matrix = Matrix()

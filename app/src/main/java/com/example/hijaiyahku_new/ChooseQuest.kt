@@ -19,7 +19,9 @@ class ChooseQuest : AppCompatActivity() {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufPisah.putExtra("jenis", "pisah")
             startActivity(toHurufPisah)
+            finish()
         }
+
         binding.btnSambung.setOnClickListener {
             val toHurufSambung = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufSambung.putExtra("jenis", "sambung")
@@ -30,7 +32,18 @@ class ChooseQuest : AppCompatActivity() {
             val hintFragment : HintChooseQuest = HintChooseQuest()
             hintFragment.show(supportFragmentManager,"HintQuest")
         }
+        binding.btnBack.setOnClickListener {
+           super.onBackPressed()
+        }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+
+    }
+
+
     fun playAnimation(){
         val animator = ObjectAnimator.ofFloat(findViewById(R.id.girl), "rotation", 0f, 20f, -20f)
         animator.repeatCount = ObjectAnimator.INFINITE

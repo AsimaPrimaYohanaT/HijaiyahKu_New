@@ -3,6 +3,8 @@ package com.example.hijaiyahku_new
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -30,30 +32,55 @@ class MainActivity : AppCompatActivity()  {
         binding  = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-        backgroundServiceMusicThread = Thread {
-             intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
-            startService(intent)
+
+        if (!isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            Thread {
+                intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
+                startService(intent)
 
 
+
+            }.start()
         }
-        PlayBackgroundSound(null)
+
+
+
+
+
         playAnimation()
         binding.btnHome.setOnClickListener {
             val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
             startActivity(mulai)
+
         }
 
         binding.mscBtn.setOnClickListener {
             if (binding.mscIcnActive.visibility == View.GONE) {
                 binding.mscIcnActive.visibility = View.VISIBLE
                 binding.mscIcnOff.visibility = View.GONE
-                startService(intent)
+                Thread {
+                    intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
+                    startService(intent)
+
+
+
+                }.start()
+
             }else {
                 binding.mscIcnActive.visibility = View.GONE
                 binding.mscIcnOff.visibility = View.VISIBLE
                 stopService(intent)
             }
         }
+    }
+    private fun isBackgroundServiceRunning(serviceClass: Class<*>): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
     }
     private fun playAnimation() {
             val animator = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleX", 1f, 1.1f)

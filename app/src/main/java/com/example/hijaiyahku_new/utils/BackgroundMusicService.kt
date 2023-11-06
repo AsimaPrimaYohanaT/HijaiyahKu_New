@@ -13,7 +13,7 @@ class BackgroundSoundService : Service() {
     }
     override fun onCreate() {
         super.onCreate()
-        mediaPlayer = MediaPlayer.create(this, Uri.parse("assets://bgm.mp3"))
+        mediaPlayer = MediaPlayer.create(this, Uri.parse("assets://test.mp3"))
         mediaPlayer!!.isLooping = true // Set looping
         mediaPlayer!!.setVolume(100f, 100f)
     }

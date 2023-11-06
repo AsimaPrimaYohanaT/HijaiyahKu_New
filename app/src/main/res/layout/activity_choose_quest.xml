@@ -7,6 +7,27 @@
     android:background="@drawable/background"
     tools:context=".ChooseQuest">
 
+    <FrameLayout
+        android:id="@+id/btn_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_back"
+        android:clickable="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_back" />
+
+    </FrameLayout>
+
     <ImageView
         android:id="@+id/logo_team_p"
         android:layout_width="81dp"
