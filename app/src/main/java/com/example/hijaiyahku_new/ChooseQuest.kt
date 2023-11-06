@@ -1,5 +1,4 @@
 package com.example.hijaiyahku_new
-
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -7,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hijaiyahku_new.databinding.ActivityChooseQuestBinding
 import com.example.hijaiyahku_new.fragment.HintChooseQuest
-
 class ChooseQuest : AppCompatActivity() {
-
     private lateinit var binding: ActivityChooseQuestBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,16 +15,10 @@ class ChooseQuest : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         playAnimation()
 
-        val hintFragment : HintChooseQuest = HintChooseQuest()
-        hintFragment.show(supportFragmentManager,"HintQuest")
         binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufPisah.putExtra("jenis", "pisah")
             startActivity(toHurufPisah)
-        }
-
-        binding.btnPetunjuk.setOnClickListener {
-            hintFragment.show(supportFragmentManager,"HintQuest")
         }
 
         binding.btnSambung.setOnClickListener {
@@ -36,7 +27,6 @@ class ChooseQuest : AppCompatActivity() {
             startActivity(toHurufSambung)
         }
     }
-
     fun playAnimation(){
         val animator = ObjectAnimator.ofFloat(findViewById(R.id.girl), "rotation", 0f, 20f, -20f)
         animator.repeatCount = ObjectAnimator.INFINITE
@@ -44,5 +34,4 @@ class ChooseQuest : AppCompatActivity() {
         animator.duration = 2500L
         animator.start()
     }
-
 }

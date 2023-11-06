@@ -138,7 +138,7 @@ class DetailQuest : AppCompatActivity() {
                         val detectionResult = outputs.detectionResultList[0]
                         val score = detectionResult.categoryAsString
                         if (score == answer) {
-                            val player = MediaPlayer.create(applicationContext,R.raw.success)
+                            val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
                             player.setVolume(100f, 100f);
                             player.start()
@@ -150,7 +150,7 @@ class DetailQuest : AppCompatActivity() {
                             successDialog.show(supportFragmentManager, "CustomDialog")
                         } else {
 
-                            val player1 = MediaPlayer.create(applicationContext,R.raw.fail)
+                            val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
                                 player1.setVolume(100f, 100f);
                                 player1.start()
 

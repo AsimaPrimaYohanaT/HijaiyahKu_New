@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".MainActivity">
-
     <View
         android:id="@+id/muslim_3"
         android:layout_width="wrap_content"
@@ -29,7 +28,6 @@
         android:layout_marginTop="325dp"
         android:background="@drawable/chil3" />
 
-
     <View
         android:id="@+id/btn_home"
         android:layout_width="152dp"
@@ -44,17 +42,45 @@
         android:layout_marginEnd="122dp"
         android:background="@drawable/play" />
 
+
     <View
         android:id="@+id/asset_5_1"
         android:layout_width="347dp"
         android:layout_height="156dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="60dp"
         android:layout_marginRight="25dp"
         android:background="@drawable/asset2" />
+
+
+    <LinearLayout
+        android:id="@+id/mscBtn"
+        android:padding="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="50dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:layout_alignParentEnd="true"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/mscIcnActive"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/baseline_music_note_24"
+            />
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/mscIcnOff"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/baseline_music_off_24"
+            />
+    </LinearLayout>
+-
+
 
 </RelativeLayout>

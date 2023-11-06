@@ -14,7 +14,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
         <FrameLayout
             android:id="@+id/btn_back"
             android:clickable="true"
@@ -23,20 +22,17 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:background="@drawable/bg_back">
-
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_back" />
         </FrameLayout>
-
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1" />
-
         <ImageView
             android:id="@+id/info"
             android:layout_width="60dp"
@@ -68,7 +64,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="300dp"
@@ -78,7 +73,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
-
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="250dp"
@@ -88,7 +82,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <RelativeLayout
             android:id="@+id/btn_kamera"
             android:layout_width="114.61dp"
@@ -104,8 +97,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             tools:ignore="TouchTargetSizeCheck">
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -114,7 +105,6 @@
                 android:text="@string/kamera"
                 android:textColor="@color/green" />
         </RelativeLayout>
-
         <RelativeLayout
             android:id="@+id/galery"
             android:layout_width="114.61dp"
@@ -128,7 +118,6 @@
             app:layout_constraintStart_toEndOf="@id/btn_kamera"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             tools:ignore="TouchTargetSizeCheck">
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
