@@ -56,6 +56,7 @@ class DetailQuest : AppCompatActivity() {
         Locale.US
     ).format(System.currentTimeMillis())
     private lateinit var selectedSoal: Soal
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -111,12 +112,11 @@ class DetailQuest : AppCompatActivity() {
         }
 
 
-
-
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory).get(DetailQuestViewModel::class.java)
 
         viewModel.start(soalId)
+
         viewModel.soal.observe(this) { soal ->
             if (soal != null) {
                 selectedSoal = soal
@@ -124,7 +124,9 @@ class DetailQuest : AppCompatActivity() {
                 answer = soal.jawaban1
             }
         }
-        hintDialog.show(supportFragmentManager, "CustomDialog")
+
+        //hintDialog.show(supportFragmentManager, "CustomDialog")
+
         binding.apply {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
@@ -152,15 +154,11 @@ class DetailQuest : AppCompatActivity() {
                                 player1.setVolume(100f, 100f);
                                 player1.start()
 
-
-
                             errorDialog.show(supportFragmentManager, "CustomDialog")
 
                         }
                         model.close()
                     }
-
-
             }
         }
     }
@@ -263,7 +261,6 @@ class DetailQuest : AppCompatActivity() {
         }
     }
 
-
     fun uriToBitmap(context: Context, uri: Uri): Bitmap? {
         var inputStream: InputStream? = null
         try {
@@ -297,7 +294,6 @@ class DetailQuest : AppCompatActivity() {
         return File.createTempFile(timeStamp, ".jpg", storageDir)
 
     }
-
     companion object {
         const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)

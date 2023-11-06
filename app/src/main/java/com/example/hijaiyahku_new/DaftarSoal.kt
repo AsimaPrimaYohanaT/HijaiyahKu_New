@@ -40,6 +40,10 @@ class DaftarSoal : AppCompatActivity() {
         binding.info.setOnClickListener {
             hintDialog.show(supportFragmentManager, "CustomDialog")
         }
+        binding.btnBack.setOnClickListener {
+            val intent = Intent(this@DaftarSoal, ChooseQuest::class.java)
+            startActivity(intent)
+        }
 
         if (jenis == "pisah") {
             viewModel.filter(SoalSortType.TYPE_1)

@@ -26,7 +26,9 @@ class ChooseQuest : AppCompatActivity() {
             startActivity(toHurufPisah)
         }
 
-
+        binding.btnPetunjuk.setOnClickListener {
+            hintFragment.show(supportFragmentManager,"HintQuest")
+        }
 
         binding.btnSambung.setOnClickListener {
             val toHurufSambung = Intent(this@ChooseQuest, DaftarSoal::class.java)

@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="@android:color/transparent"
     android:layout_height="wrap_content"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
+    android:background="@color/white"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
     android:orientation="vertical">
@@ -18,15 +18,32 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25sp"
+            android:textColor="@color/black"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/petunjuk" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Jenis soal pisah berarti kamu akan diberikan kata dengan rangkaian huruf hijaiyah pisah, dan kamu harus  merangkai kata tersebut "/>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Jens soal sambung berarti kamu akan diberikan kata dengan rangkaian huruf hijaiyah sambung, dan kamu harus  merangkai kata tersebut "/>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
