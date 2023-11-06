@@ -38,38 +38,34 @@ class DaftarSoal : AppCompatActivity() {
         binding.info.setOnClickListener {
             hintDialog.show(supportFragmentManager, "CustomDialog")
         }
-        binding.btnBack.setOnClickListener {
-            val intent = Intent(this@DaftarSoal, ChooseQuest::class.java)
-            startActivity(intent)
-            binding.info.setOnClickListener {
-                val daftarSoalFragment = DaftarSoalFragment()
-                daftarSoalFragment.show(supportFragmentManager, "DaftarSoalFragment")
-            }
+        binding.info.setOnClickListener {
+            val daftarSoalFragment = DaftarSoalFragment()
+            daftarSoalFragment.show(supportFragmentManager,"DaftarSoalFragment")
+        }
 
-            binding.back.setOnClickListener {
-                val back = Intent(this@DaftarSoal, ChooseQuest::class.java)
-                startActivity(back)
+        binding.back.setOnClickListener {
+            val back = Intent(this@DaftarSoal, ChooseQuest::class.java)
+            startActivity(back)
+        }
+        if (jenis == "pisah") {
+            viewModel.filter(SoalSortType.TYPE_1)
+        } else if (jenis == "sambung") {
+            viewModel.filter(SoalSortType.TYPE_2)
+        }
+        val adapter = DaftarSoalAdapter(viewModel) {  soal,arrId ->
+            if(soal.isComplete){
+                val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
+                val bundle = Bundle()
+                bundle.putIntegerArrayList("arrId", ArrayList(arrId))
+                detailIntent.putExtras(bundle)
+                detailIntent.putExtra("SOAL", soal.id)
+                startActivity(detailIntent)
             }
-            if (jenis == "pisah") {
-                viewModel.filter(SoalSortType.TYPE_1)
-            } else if (jenis == "sambung") {
-                viewModel.filter(SoalSortType.TYPE_2)
-            }
-            val adapter = DaftarSoalAdapter(viewModel) { soal, arrId ->
-                if (soal.isComplete) {
-                    val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
-                    val bundle = Bundle()
-                    bundle.putIntegerArrayList("arrId", ArrayList(arrId))
-                    detailIntent.putExtras(bundle)
-                    detailIntent.putExtra("SOAL", soal.id)
-                    startActivity(detailIntent)
-                }
-            }
+        }
 
-            viewModel.soal.observe(this) { pagedList ->
-                adapter.submitList(pagedList)
-                recycler.adapter = adapter
-            }
+        viewModel.soal.observe(this) { pagedList ->
+            adapter.submitList(pagedList)
+            recycler.adapter = adapter
         }
     }
 
