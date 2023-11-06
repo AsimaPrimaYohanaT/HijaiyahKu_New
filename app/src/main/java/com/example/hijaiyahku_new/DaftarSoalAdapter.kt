@@ -1,6 +1,5 @@
 package com.example.hijaiyahku_new
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hijaiyahku_new.data.Soal
-import com.example.hijaiyahku_new.data.SoalRepository
 
 class DaftarSoalAdapter(
    private val viewModel: DaftarSoalViewModel,
@@ -25,16 +23,11 @@ class DaftarSoalAdapter(
     override fun onBindViewHolder(holder: SoalViewHolder, position: Int) {
         val soal = getItem(position) as Soal
         val arrId:MutableList<Int> = mutableListOf<Int>()
-
         for (i in 0..(itemCount-1)){
             getItem(i)?.let { arrId.add(it.id) }
         }
-
-
-
         holder.bind(soal,arrId)
     }
-
 
     inner class SoalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvTitle: TextView = itemView.findViewById(R.id.nomor_soal)
@@ -43,21 +36,16 @@ class DaftarSoalAdapter(
         fun bind(soal: Soal,arrid : MutableList<Int>) {
             getSoal = soal
             val nomorSoal = position + 1
-
             tvTitle.text = nomorSoal.toString()
             if(soal.isComplete){
                 lock.setVisibility(View.GONE)
             }else{
                 lock.setVisibility(View.VISIBLE)
             }
-
-
             itemView.setOnClickListener {
                 onClick(soal,arrid)
             }
-
         }
-
     }
 
     companion object {
@@ -69,7 +57,6 @@ class DaftarSoalAdapter(
                 return oldItem == newItem
             }
         }
-
     }
 
 }

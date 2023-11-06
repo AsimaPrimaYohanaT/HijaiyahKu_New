@@ -29,7 +29,6 @@ class DaftarSoalViewModel(private val soalRepository: SoalRepository) : ViewMode
         soalRepository.changeIsComplete(id,isComplete)
     }
 
-
     fun insert(soal: Soal) {
         soalRepository.insertSoal(soal)
     }
