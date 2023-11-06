@@ -1,4 +1,5 @@
 package com.example.hijaiyahku_new
+
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -16,7 +17,6 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -34,19 +34,13 @@ import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.ml.Soal20josMD
-import com.example.hijaiyahku_new.utils.MusicPlayer
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.tensorflow.lite.support.image.TensorImage
 class DetailQuest : AppCompatActivity() {
     private val hintDialog = HintFragment()
-    lateinit  var successDialog:SuccessFragment
+    private lateinit  var successDialog:SuccessFragment
     private val errorDialog = ErrorFragment()
     private lateinit var viewModel: DetailQuestViewModel
-    lateinit var binding: ActivityDetailQuestBinding
+    private lateinit var binding: ActivityDetailQuestBinding
     private var bitmapFile : Bitmap? = null
     private var getFile: File? = null
     private var answer: String? = null
@@ -56,6 +50,7 @@ class DetailQuest : AppCompatActivity() {
         Locale.US
     ).format(System.currentTimeMillis())
     private lateinit var selectedSoal: Soal
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -84,7 +79,7 @@ class DetailQuest : AppCompatActivity() {
 
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         binding.btnBack.setOnClickListener {
             val back = Intent(this@DetailQuest, DaftarSoal::class.java)
             startActivity(back)
@@ -111,12 +106,11 @@ class DetailQuest : AppCompatActivity() {
         }
 
 
-
-
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory).get(DetailQuestViewModel::class.java)
 
         viewModel.start(soalId)
+
         viewModel.soal.observe(this) { soal ->
             if (soal != null) {
                 selectedSoal = soal
@@ -124,7 +118,8 @@ class DetailQuest : AppCompatActivity() {
                 answer = soal.jawaban1
             }
         }
-        hintDialog.show(supportFragmentManager, "CustomDialog")
+
+
         binding.apply {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
@@ -152,34 +147,31 @@ class DetailQuest : AppCompatActivity() {
                                 player1.setVolume(100f, 100f);
                                 player1.start()
 
-
-
                             errorDialog.show(supportFragmentManager, "CustomDialog")
 
                         }
                         model.close()
                     }
-
-
             }
         }
     }
+
     override fun onBackPressed() {
         val backIntent =        Intent(this@DetailQuest,DaftarSoal::class.java)
         startActivity(backIntent)
         finish()
 
     }
-    fun rotateAndFlipBitmap(bitmap: Bitmap): Bitmap {
-        // Mengatur matriks rotasi 90 derajat
+
+
+    private fun rotateAndFlipBitmap(bitmap: Bitmap): Bitmap {
+
         val matrix = Matrix()
         matrix.postRotate(90f)
-        // Memutar gambar sekitar 90 derajat
         val rotatedBitmap = Bitmap.createBitmap(
             bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true
         )
 
-        // Mengganti lebar dengan tinggi dan tinggi dengan lebar
         val resultBitmap = Bitmap.createBitmap(
             rotatedBitmap,
             0,
@@ -188,13 +180,12 @@ class DetailQuest : AppCompatActivity() {
             rotatedBitmap.height
         )
 
-        // Bebaskan sumber daya gambar yang tidak digunakan
         rotatedBitmap.recycle()
         bitmap.recycle()
 
         return resultBitmap
     }
-    fun rotateFile(file: File, orientation: Int) {
+    private fun rotateFile(file: File, orientation: Int) {
         val degree = when (orientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> 90f
             ExifInterface.ORIENTATION_ROTATE_180 -> 180f
@@ -269,7 +260,6 @@ class DetailQuest : AppCompatActivity() {
         }
     }
 
-
     fun uriToBitmap(context: Context, uri: Uri): Bitmap? {
         var inputStream: InputStream? = null
         try {
@@ -284,7 +274,7 @@ class DetailQuest : AppCompatActivity() {
         }
         return null
     }
-    fun uriToFile(selectedImg: Uri, context: Context): File {
+    private fun uriToFile(selectedImg: Uri, context: Context): File {
         val contentResolver: ContentResolver = context.contentResolver
         val myFile = createCustomTempFile(context)
 
@@ -298,12 +288,11 @@ class DetailQuest : AppCompatActivity() {
         return myFile
     }
 
-    fun createCustomTempFile(context: Context): File {
+    private fun createCustomTempFile(context: Context): File {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(timeStamp, ".jpg", storageDir)
 
     }
-
     companion object {
         const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)

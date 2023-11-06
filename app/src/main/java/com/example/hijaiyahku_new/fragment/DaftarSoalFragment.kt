@@ -14,7 +14,7 @@ class DaftarSoalFragment : DialogFragment() {
         // Inflate the custom dialog layout
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater
-        val dialogView = inflater.inflate(R.layout.fragment_hint_choose_quest, null)
+        val dialogView = inflater.inflate(R.layout.fragment_daftar_soal, null)
         builder.setView(dialogView)
 //        // Handle dialog button click or other interactions
 //        val closeButton = dialogView.findViewById<Button>(R.id.btnClose)

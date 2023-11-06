@@ -12,7 +12,7 @@ import com.example.hijaiyahku_new.databinding.ActivityDetailQuestBinding
 import com.example.hijaiyahku_new.databinding.ActivitySplashBinding
 
 class Splash : AppCompatActivity() {
-    lateinit var binding: ActivitySplashBinding
+    private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =  ActivitySplashBinding.inflate(layoutInflater)
@@ -21,7 +21,7 @@ class Splash : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@Splash, MainActivity::class.java))
             finish()
-        },6000)
+        },3000)
     }
 
 
