@@ -42,7 +42,8 @@ class ChooseQuest : AppCompatActivity() {
             startActivity(toTambah)
         }
         binding.btnBack.setOnClickListener {
-           super.onBackPressed()
+            val back = Intent(this@ChooseQuest, MainActivity::class.java)
+            startActivity(back)
         }
 
 
@@ -50,6 +51,9 @@ class ChooseQuest : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
+        val back = Intent(this@ChooseQuest, MainActivity::class.java)
+        startActivity(back)
+
     }
 
 

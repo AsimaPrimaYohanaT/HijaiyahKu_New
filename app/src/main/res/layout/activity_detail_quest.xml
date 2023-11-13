@@ -35,8 +35,8 @@
             android:layout_weight="1" />
         <ImageView
             android:id="@+id/info"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
             android:src="@drawable/question"
