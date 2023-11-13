@@ -35,6 +35,7 @@ import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.ml.Soal20josMD
+import com.example.hijaiyahku_new.ml.Pisah1
 import org.tensorflow.lite.support.image.TensorImage
 class DetailQuest : AppCompatActivity() {
     private val hintDialog = HintFragment()
@@ -45,6 +46,7 @@ class DetailQuest : AppCompatActivity() {
     private var bitmapFile : Bitmap? = null
     private var getFile: File? = null
     private var answer: String? = null
+    private var kindQuest: Int? = null
     private val FILENAME_FORMAT = "dd-MMM-yyyy"
     val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
@@ -125,6 +127,7 @@ class DetailQuest : AppCompatActivity() {
                 selectedSoal = soal
                 binding.tvSoal.text = soal.soal
                 answer = soal.jawaban1
+                kindQuest = soal.jenis
             }
         }
 
@@ -134,32 +137,94 @@ class DetailQuest : AppCompatActivity() {
             btnKamera.setOnClickListener { startCameraX() }
             predict.setOnClickListener {
                     if (bitmapFile != null) {
-                        val model = Soal20josMD.newInstance(applicationContext)
-                        val image = TensorImage.fromBitmap(bitmapFile)
-                        val outputs = model.process(image)
-                        val detectionResult = outputs.detectionResultList[0]
-                        val score = detectionResult.categoryAsString
-                        if (score == answer) {
-                            val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
+                        if(kindQuest == 2){
+                            val image = TensorImage.fromBitmap(bitmapFile)
+                            val model = Soal20josMD.newInstance(applicationContext)
+                            val outputs = model.process(image)
+                            val detectionResult = outputs.detectionResultList[0]
+                            val score = detectionResult.categoryAsString
+                            if (score == answer) {
+                                val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
-                            player.setVolume(200f, 200f);
-                            player.start()
-                            if(nextId != null){
-                                viewModel.update(nextId,true)
-                            }
+                                player.setVolume(200f, 200f);
+                                player.start()
+                                if(nextId != null){
+                                    viewModel.update(nextId,true)
+                                }
 
 
-                            successDialog.show(supportFragmentManager, "CustomDialog")
-                        } else {
+                                successDialog.show(supportFragmentManager, "CustomDialog")
+                            } else {
 
-                            val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
+                                val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
                                 player1.setVolume(200f, 200f);
                                 player1.start()
 
-                            errorDialog.show(supportFragmentManager, "CustomDialog")
+                                errorDialog.show(supportFragmentManager, "CustomDialog")
 
+                            }
+                            model.close()
+                        }else{
+                            val image = TensorImage.fromBitmap(bitmapFile)
+                            val model = Pisah1.newInstance(applicationContext)
+                            val outputs = model.process(image)
+                            var size = 0;
+                            for (i in 0..(outputs.detectionResultList.size - 1)) {
+                                val detectionResult = outputs.detectionResultList.get(i)
+                                if (detectionResult.scoreAsFloat > 0.2) {
+                                    if (i != 0) {
+                                        size = i
+                                    }
+                                }
+                            }
+                            var xarr1: FloatArray = Array(size) { 0f }.toFloatArray()
+                            var xarr2: FloatArray = Array(size) { 0f }.toFloatArray()
+                            var yarr1: FloatArray = Array(size) { 0f }.toFloatArray()
+                            var yarr2: FloatArray = Array(size) { 0f }.toFloatArray()
+                            var labelArr: Array<String> = Array(size) { "" }
+                            var confArr: Array<String> = Array(size) { "" }
+                            if (size != 0) {
+                                for (i in 0..(size - 1)) {
+                                    val detectionResult = outputs.detectionResultList.get(i)
+                                    val conf = detectionResult.scoreAsFloat;
+                                    val location = detectionResult.locationAsRectF;
+                                    val score = detectionResult.categoryAsString;
+                                    xarr1[i] = location.left
+                                    yarr1[i] = location.top
+                                    xarr2[i] = location.right
+                                    yarr2[i] = location.bottom
+                                    labelArr[i] = score
+                                    confArr[i] = conf.toString()
+
+                                }
+                            }
+                            labelArr.reverse()
+
+                            var string = ""
+                            for (element in labelArr) {
+                                string += element
+                            }
+                            if(answer == string){
+                                val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
+
+                                player.setVolume(200f, 200f);
+                                player.start()
+                                if(nextId != null){
+                                    viewModel.update(nextId,true)
+                                }
+
+
+                                successDialog.show(supportFragmentManager, "CustomDialog")
+                            }else{
+                                val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
+                                player1.setVolume(200f, 200f);
+                                player1.start()
+
+                                errorDialog.show(supportFragmentManager, "CustomDialog")
+                            }
                         }
-                        model.close()
+
+
                     }
             }
         }
