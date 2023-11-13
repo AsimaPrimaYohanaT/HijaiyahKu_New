@@ -17,7 +17,7 @@
         android:theme="@style/Theme.HijaiyahKu_New"
         tools:targetApi="31">
         <activity
-            android:name=".utils.TambahSoal"
+            android:name=".TambahSoal"
             android:exported="false" />
         <activity
             android:name=".Splash"

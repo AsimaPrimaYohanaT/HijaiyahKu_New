@@ -1,4 +1,4 @@
-package com.example.hijaiyahku_new.utils
+package com.example.hijaiyahku_new
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

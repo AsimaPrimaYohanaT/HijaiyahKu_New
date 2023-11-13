@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hijaiyahku_new.databinding.ActivityChooseQuestBinding
 import com.example.hijaiyahku_new.fragment.HintChooseQuest
-import com.example.hijaiyahku_new.utils.TambahSoal
 
 class ChooseQuest : AppCompatActivity() {
     private lateinit var binding: ActivityChooseQuestBinding

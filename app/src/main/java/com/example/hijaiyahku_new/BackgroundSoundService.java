@@ -22,7 +22,6 @@ public class BackgroundSoundService extends Service {
     }
     public int onStartCommand(Intent intent, int flags, int startId) {
         mediaPlayer.start();
-        Toast.makeText(getApplicationContext(), "Playing Bohemian Rashpody in the Background",    Toast.LENGTH_SHORT).show();
         return startId;
     }
     public void onStart(Intent intent, int startId) {

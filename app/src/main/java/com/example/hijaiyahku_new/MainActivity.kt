@@ -2,75 +2,87 @@ package com.example.hijaiyahku_new
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-
-import android.animation.ValueAnimator
 import android.app.ActivityManager
 import android.content.Context
-
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
+import com.example.hijaiyahku_new.data.MusicPreference
+import com.example.hijaiyahku_new.data.Status
 import com.example.hijaiyahku_new.databinding.ActivityMainBinding
 
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var backgroundServiceMusicThread: Thread
-    private lateinit var intent: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
-        if (!isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-            Thread {
-                intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
-                startService(intent)
+        mainViewModel = ViewModelProvider(
+            this,
+            MainViewModelFactory(MusicPreference.getInstance(dataStore), this)
+        )[MainViewModel::class.java]
 
-
-            }.start()
-        }
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        backgroundServiceMusicThread = Thread {
-            intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
-            startService(intent)
-
-        }
-
-
-
-
+        mainViewModel.getStatus().observe(this, { status ->
+            if (status.music) {
+                if (!isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+                    startBackgroundService()
+                    binding.mscIcnActive.visibility = View.VISIBLE
+                    binding.mscIcnOff.visibility = View.GONE
+                }
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+            }else{
+                stopBackgroundService()
+                binding.mscIcnActive.visibility = View.GONE
+                binding.mscIcnOff.visibility = View.VISIBLE
+            }
+        })
 
         playAnimation()
 
         binding.btnHome.setOnClickListener {
             val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
             startActivity(mulai)
-
         }
+
         binding.mscBtn.setOnClickListener {
             if (binding.mscIcnActive.visibility == View.GONE) {
                 binding.mscIcnActive.visibility = View.VISIBLE
                 binding.mscIcnOff.visibility = View.GONE
-                Thread {
-                    intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
-                    startService(intent)
-
-
-                }.start()
-
+                mainViewModel.saveStatus(Status(true))
+                startBackgroundService()
             } else {
                 binding.mscIcnActive.visibility = View.GONE
                 binding.mscIcnOff.visibility = View.VISIBLE
-                stopService(intent)
+                mainViewModel.saveStatus(Status(false))
+                stopBackgroundService()
             }
         }
+    }
 
+    private fun startBackgroundService() {
+        if (!isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            startService(Intent(this@MainActivity, BackgroundSoundService::class.java))
+        }
+    }
+
+    private fun stopBackgroundService() {
+        if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            stopService(Intent(this@MainActivity, BackgroundSoundService::class.java))
+        }
     }
 
     private fun isBackgroundServiceRunning(serviceClass: Class<*>): Boolean {

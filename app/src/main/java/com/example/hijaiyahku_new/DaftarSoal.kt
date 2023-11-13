@@ -8,6 +8,9 @@ import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +20,7 @@ import com.example.hijaiyahku_new.fragment.HintFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.utils.SoalSortType
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class DaftarSoal : AppCompatActivity() {
 
     private lateinit var recycler: RecyclerView
@@ -37,8 +41,6 @@ class DaftarSoal : AppCompatActivity() {
             Thread {
                 intent = Intent(this@DaftarSoal, BackgroundSoundService::class.java)
                 startService(intent)
-
-
             }.start()
         }
         val jenis = intent.getStringExtra("jenis")
