@@ -6,8 +6,8 @@ import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hijaiyahku_new.databinding.ActivityChooseQuestBinding
-import com.example.hijaiyahku_new.fragment.DaftarSoalFragment
 import com.example.hijaiyahku_new.fragment.HintChooseQuest
+import com.example.hijaiyahku_new.utils.TambahSoal
 
 class ChooseQuest : AppCompatActivity() {
     private lateinit var binding: ActivityChooseQuestBinding
@@ -37,10 +37,10 @@ class ChooseQuest : AppCompatActivity() {
         }
 
 
-//        binding.logoTeamP.setOnClickListener {
-//            val hintFragment : HintChooseQuest = HintChooseQuest()
-//            hintFragment.show(supportFragmentManager,"HintQuest")
-//        }
+        binding.fabTambah.setOnClickListener {
+            val toTambah = Intent(this@ChooseQuest, TambahSoal::class.java)
+            startActivity(toTambah)
+        }
         binding.btnBack.setOnClickListener {
            super.onBackPressed()
         }
@@ -50,8 +50,6 @@ class ChooseQuest : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-
-
     }
 
 
