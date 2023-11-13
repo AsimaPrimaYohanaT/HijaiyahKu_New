@@ -1,6 +1,8 @@
 package com.example.hijaiyahku_new
 
 import android.animation.ObjectAnimator
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +33,14 @@ class DaftarSoal : AppCompatActivity() {
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory).get(DaftarSoalViewModel::class.java)
+        if(!isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            Thread {
+                intent = Intent(this@DaftarSoal, BackgroundSoundService::class.java)
+                startService(intent)
 
+
+            }.start()
+        }
         val jenis = intent.getStringExtra("jenis")
         playAnimation()
 
@@ -79,7 +88,15 @@ class DaftarSoal : AppCompatActivity() {
 
     }
 
-
+    private fun isBackgroundServiceRunning(serviceClass: Class<*>): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
+    }
     private fun playAnimation(){
 
         val animator = ObjectAnimator.ofFloat(findViewById(R.id.boy), "rotation", 0f, 30f, -5f)

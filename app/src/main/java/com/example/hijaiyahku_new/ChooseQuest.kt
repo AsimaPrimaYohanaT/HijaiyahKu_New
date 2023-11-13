@@ -42,14 +42,16 @@ class ChooseQuest : AppCompatActivity() {
 //            hintFragment.show(supportFragmentManager,"HintQuest")
 //        }
         binding.btnBack.setOnClickListener {
-           super.onBackPressed()
+            val back = Intent(this@ChooseQuest, MainActivity::class.java)
+            startActivity(back)
         }
 
 
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        val back = Intent(this@ChooseQuest, MainActivity::class.java)
+        startActivity(back)
 
 
     }

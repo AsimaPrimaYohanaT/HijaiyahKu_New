@@ -14,7 +14,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hijaiyahku_new.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity()  {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var backgroundServiceMusicThread: Thread
@@ -34,44 +34,45 @@ class MainActivity : AppCompatActivity()  {
 
 
             }.start()
+        }
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        backgroundServiceMusicThread = Thread {
+            intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
+            startService(intent)
 
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-            backgroundServiceMusicThread = Thread {
-                intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
-                startService(intent)
-
-            }
-
-
+        }
 
 
 
-            playAnimation()
-
-            binding.btnHome.setOnClickListener {
-                val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
-                startActivity(mulai)
-
-            }
-            binding.mscBtn.setOnClickListener {
-                if (binding.mscIcnActive.visibility == View.GONE) {
-                    binding.mscIcnActive.visibility = View.VISIBLE
-                    binding.mscIcnOff.visibility = View.GONE
-                    Thread {
-                        intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
-                        startService(intent)
 
 
-                    }.start()
+        playAnimation()
 
-                } else {
-                    binding.mscIcnActive.visibility = View.GONE
-                    binding.mscIcnOff.visibility = View.VISIBLE
-                    stopService(intent)
-                }
+        binding.btnHome.setOnClickListener {
+            val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
+            startActivity(mulai)
+
+        }
+        binding.mscBtn.setOnClickListener {
+            if (binding.mscIcnActive.visibility == View.GONE) {
+                binding.mscIcnActive.visibility = View.VISIBLE
+                binding.mscIcnOff.visibility = View.GONE
+                Thread {
+                    intent = Intent(this@MainActivity, BackgroundSoundService::class.java)
+                    startService(intent)
+
+
+                }.start()
+
+            } else {
+                binding.mscIcnActive.visibility = View.GONE
+                binding.mscIcnOff.visibility = View.VISIBLE
+                stopService(intent)
             }
         }
+
     }
+
     private fun isBackgroundServiceRunning(serviceClass: Class<*>): Boolean {
         val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         for (service in manager.getRunningServices(Int.MAX_VALUE)) {
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity()  {
         }
         return false
     }
+
     private fun playAnimation() {
         val animator = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleX", 1f, 1.1f)
         val animator1 = ObjectAnimator.ofFloat(findViewById(R.id.btn_home), "scaleY", 1f, 1.1f)
@@ -105,11 +107,13 @@ class MainActivity : AppCompatActivity()  {
             playSequentially(
                 buttonHome,
                 girl,
-                boy)
+                boy
+            )
             startDelay = 500
         }.start()
 
     }
+
     private fun PlayBackgroundSound(view: View?) {
         backgroundServiceMusicThread.start()
 

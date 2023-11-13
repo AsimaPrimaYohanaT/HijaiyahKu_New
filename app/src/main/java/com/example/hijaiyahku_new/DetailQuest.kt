@@ -2,6 +2,7 @@ package com.example.hijaiyahku_new
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.content.Intent
 import android.content.ContentResolver
 import android.content.Context
@@ -84,6 +85,14 @@ class DetailQuest : AppCompatActivity() {
             val back = Intent(this@DetailQuest, DaftarSoal::class.java)
             startActivity(back)
         }
+        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            Thread {
+                intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
+                stopService(intent)
+
+
+            }.start()
+        }
         val soalId = intent.getIntExtra("SOAL", 0)
         val arrId = intent.extras?.getIntegerArrayList("arrId")
         var nextId : Int? = null
@@ -133,7 +142,7 @@ class DetailQuest : AppCompatActivity() {
                         if (score == answer) {
                             val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
-                            player.setVolume(100f, 100f);
+                            player.setVolume(200f, 200f);
                             player.start()
                             if(nextId != null){
                                 viewModel.update(nextId,true)
@@ -144,7 +153,7 @@ class DetailQuest : AppCompatActivity() {
                         } else {
 
                             val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
-                                player1.setVolume(100f, 100f);
+                                player1.setVolume(200f, 200f);
                                 player1.start()
 
                             errorDialog.show(supportFragmentManager, "CustomDialog")
@@ -292,6 +301,16 @@ class DetailQuest : AppCompatActivity() {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(timeStamp, ".jpg", storageDir)
 
+    }
+
+    private fun isBackgroundServiceRunning(serviceClass: Class<*>): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
     }
     companion object {
         const val CAMERA_X_RESULT = 200

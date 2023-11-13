@@ -22,7 +22,7 @@ class BackgroundSoundService : Service() {
         mediaPlayer!!.start()
         Toast.makeText(
             applicationContext,
-            "Playing Bohemian Rashpody in the Background",
+            "Playing Music",
             Toast.LENGTH_SHORT
         ).show()
         return startId
