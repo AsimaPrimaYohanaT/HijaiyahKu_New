@@ -36,10 +36,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="119dp"
-        android:layout_marginLeft="119dp"
+        android:layout_marginStart="110dp"
+
         android:layout_marginTop="250dp"
-        android:layout_marginEnd="122dp"
+        android:layout_marginEnd="110dp"
         android:background="@drawable/play" />
 
 

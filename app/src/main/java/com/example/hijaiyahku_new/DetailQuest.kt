@@ -10,7 +10,12 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.Matrix
+import android.graphics.Paint
 import android.media.ExifInterface
 import android.media.MediaPlayer
 import android.net.Uri
@@ -18,9 +23,11 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.hijaiyahku_new.databinding.ActivityDetailQuestBinding
 import com.example.hijaiyahku_new.fragment.HintFragment
@@ -79,9 +86,15 @@ class DetailQuest : AppCompatActivity() {
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (!allPermissionsGranted()) {
+            ActivityCompat.requestPermissions(
+                this,
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
+        }
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         binding.btnBack.setOnClickListener {
             val back = Intent(this@DetailQuest, DaftarSoal::class.java)
@@ -95,6 +108,7 @@ class DetailQuest : AppCompatActivity() {
 
             }.start()
         }
+
         val soalId = intent.getIntExtra("SOAL", 0)
         val arrId = intent.extras?.getIntegerArrayList("arrId")
         var nextId : Int? = null
@@ -165,18 +179,38 @@ class DetailQuest : AppCompatActivity() {
                             }
                             model.close()
                         }else{
-                            val image = TensorImage.fromBitmap(bitmapFile)
+
+
+                            val paint = Paint().apply {
+                                color = Color.RED
+                                style = Paint.Style.STROKE
+                                strokeWidth = 4.0f
+                                textSize = 90f
+                            }
+                            val desiredWidth = 640
+                            val desiredHeight = 640
+                            val grayscaleBitmap = convertToGrayscale(bitmapFile!!, desiredWidth, desiredHeight)
+                            val resizedBitmap = Bitmap.createScaledBitmap(grayscaleBitmap, desiredWidth, desiredHeight, true)
+                            var copyBitmap = bitmapFile!!.copy(Bitmap.Config.ARGB_8888, true);
+                            val canvas = Canvas(copyBitmap)
+
+
+                            val image = TensorImage.fromBitmap(copyBitmap)
                             val model = Pisah1.newInstance(applicationContext)
                             val outputs = model.process(image)
                             var size = 0;
                             for (i in 0..(outputs.detectionResultList.size - 1)) {
                                 val detectionResult = outputs.detectionResultList.get(i)
-                                if (detectionResult.scoreAsFloat > 0.2) {
+
+                                if (detectionResult.scoreAsFloat > 0.6f) {
+
                                     if (i != 0) {
                                         size = i
                                     }
                                 }
                             }
+                            size++
+
                             var xarr1: FloatArray = Array(size) { 0f }.toFloatArray()
                             var xarr2: FloatArray = Array(size) { 0f }.toFloatArray()
                             var yarr1: FloatArray = Array(size) { 0f }.toFloatArray()
@@ -198,12 +232,28 @@ class DetailQuest : AppCompatActivity() {
 
                                 }
                             }
-                            labelArr.reverse()
+
+                            val pairs = xarr1.zip(labelArr)
+
+                            val sortedPairs = pairs.sortedByDescending { it.first }
+                            val sortedA = sortedPairs.map { it.first }.toTypedArray()
+                            val sortedB = sortedPairs.map { it.second }.toTypedArray()
+
+                            Log.d("detect1", sortedB.contentToString())
+
+                            for (i in 0..(xarr1.size -1)) {
+                                canvas?.drawRect(xarr1.get(i), yarr1.get(i), xarr2.get(i), yarr2.get(i), paint)
+                                canvas?.drawText("${labelArr.get(i)}  ${confArr.get(i)}", xarr1.get(i) , yarr1.get(i) -  10, paint)
+                            }
+
+                            binding.imageView2.setImageBitmap(copyBitmap)
+
 
                             var string = ""
-                            for (element in labelArr) {
+                            for (element in sortedB) {
                                 string += element
                             }
+
                             if(answer == string){
                                 val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
@@ -236,8 +286,31 @@ class DetailQuest : AppCompatActivity() {
         finish()
 
     }
+    fun convertToGrayscale(inputBitmap: Bitmap, targetWidth: Int, targetHeight: Int): Bitmap {
+        val width = inputBitmap.width
+        val height = inputBitmap.height
+        val grayscaleBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(grayscaleBitmap)
+        val paint = Paint()
+        val colorMatrix = ColorMatrix()
+        colorMatrix.setSaturation(0f) // Set saturation to 0 for grayscale
+        val colorMatrixFilter = ColorMatrixColorFilter(colorMatrix)
+        paint.colorFilter = colorMatrixFilter
+        canvas.drawBitmap(inputBitmap, 0f, 0f, paint)
+        return grayscaleBitmap
+    }
+    fun getPermission() {
+        var permissionList = mutableListOf<String>()
+
+        if (checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) permissionList.add(
+            android.Manifest.permission.CAMERA
+        )
 
 
+        if (permissionList.size > 0) {
+            requestPermissions(permissionList.toTypedArray(), 101)
+        }
+    }
     private fun rotateAndFlipBitmap(bitmap: Bitmap): Bitmap {
 
         val matrix = Matrix()
