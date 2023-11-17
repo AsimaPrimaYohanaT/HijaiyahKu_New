@@ -1,5 +1,6 @@
 package com.example.hijaiyahku_new
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class DaftarSoalAdapter(
             getSoal = soal
             val nomorSoal = position + 1
             tvTitle.text = nomorSoal.toString()
+            Log.e("testttt",soal.isComplete.toString())
             if(soal.isComplete){
                 lock.setVisibility(View.GONE)
             }else{

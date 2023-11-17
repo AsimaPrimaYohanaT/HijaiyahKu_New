@@ -111,6 +111,14 @@ class DetailQuest : AppCompatActivity() {
 
         val soalId = intent.getIntExtra("SOAL", 0)
         val arrId = intent.extras?.getIntegerArrayList("arrId")
+
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory).get(DetailQuestViewModel::class.java)
+
+        if(soalId !=null && arrId != null){
+            viewModel.soalId = soalId
+            viewModel.arrId = arrId
+        }
         var nextId : Int? = null
         if(arrId != null){
             for (i in 0 until arrId.size){
@@ -120,21 +128,28 @@ class DetailQuest : AppCompatActivity() {
             }
         }
 
+        Log.e("ini soal id",viewModel.soalId.toString())
+        val savedSoalId = viewModel.soalId
+        val savedArrId = viewModel.arrId
+
+
+
         if(nextId != null){
-            successDialog = SuccessFragment.newInstance(nextId,arrId!!)
+            successDialog = SuccessFragment.newInstance(nextId,savedArrId!!)
 
-        binding.info.setOnClickListener {
-            hintDialog.show(supportFragmentManager, "CustomDialog")
-        }
+            binding.info.setOnClickListener {
+                hintDialog.show(supportFragmentManager, "CustomDialog")
+            }
         }else{
-            successDialog = SuccessFragment.newInstance(soalId,arrId!!)
+            if (savedArrId != null) {
+                successDialog = SuccessFragment.newInstance(savedSoalId, savedArrId)
+            } else {
+                // Handle kasus ketika arrId null
+                Log.e("YourActivity", "arrId is null in the else block")
+            }
         }
 
-
-        val factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory).get(DetailQuestViewModel::class.java)
-
-        viewModel.start(soalId)
+        viewModel.start(savedSoalId)
 
         viewModel.soal.observe(this) { soal ->
             if (soal != null) {
@@ -150,132 +165,132 @@ class DetailQuest : AppCompatActivity() {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
             predict.setOnClickListener {
-                    if (bitmapFile != null) {
-                        if(kindQuest == 2){
-                            val image = TensorImage.fromBitmap(bitmapFile)
-                            val model = Soal20josMD.newInstance(applicationContext)
-                            val outputs = model.process(image)
-                            val detectionResult = outputs.detectionResultList[0]
-                            val score = detectionResult.categoryAsString
-                            if (score == answer) {
-                                val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
+                if (bitmapFile != null) {
+                    if(kindQuest == 2){
+                        val image = TensorImage.fromBitmap(bitmapFile)
+                        val model = Soal20josMD.newInstance(applicationContext)
+                        val outputs = model.process(image)
+                        val detectionResult = outputs.detectionResultList[0]
+                        val score = detectionResult.categoryAsString
+                        if (score == answer) {
+                            val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
-                                player.setVolume(200f, 200f);
-                                player.start()
-                                if(nextId != null){
-                                    viewModel.update(nextId,true)
+                            player.setVolume(200f, 200f);
+                            player.start()
+                            if(nextId != null){
+                                viewModel.update(nextId,true)
+                            }
+
+
+                            successDialog.show(supportFragmentManager, "CustomDialog")
+                        } else {
+
+                            val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
+                            player1.setVolume(200f, 200f);
+                            player1.start()
+
+                            errorDialog.show(supportFragmentManager, "CustomDialog")
+
+                        }
+                        model.close()
+                    }else{
+
+
+                        val paint = Paint().apply {
+                            color = Color.RED
+                            style = Paint.Style.STROKE
+                            strokeWidth = 4.0f
+                            textSize = 90f
+                        }
+                        val desiredWidth = 640
+                        val desiredHeight = 640
+                        val grayscaleBitmap = convertToGrayscale(bitmapFile!!, desiredWidth, desiredHeight)
+                        val resizedBitmap = Bitmap.createScaledBitmap(grayscaleBitmap, desiredWidth, desiredHeight, true)
+                        var copyBitmap = bitmapFile!!.copy(Bitmap.Config.ARGB_8888, true);
+                        val canvas = Canvas(copyBitmap)
+
+
+                        val image = TensorImage.fromBitmap(copyBitmap)
+                        val model = Pisah1.newInstance(applicationContext)
+                        val outputs = model.process(image)
+                        var size = 0;
+                        for (i in 0..(outputs.detectionResultList.size - 1)) {
+                            val detectionResult = outputs.detectionResultList.get(i)
+
+                            if (detectionResult.scoreAsFloat > 0.6f) {
+
+                                if (i != 0) {
+                                    size = i
                                 }
-
-
-                                successDialog.show(supportFragmentManager, "CustomDialog")
-                            } else {
-
-                                val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
-                                player1.setVolume(200f, 200f);
-                                player1.start()
-
-                                errorDialog.show(supportFragmentManager, "CustomDialog")
-
                             }
-                            model.close()
-                        }else{
+                        }
+                        size++
 
-
-                            val paint = Paint().apply {
-                                color = Color.RED
-                                style = Paint.Style.STROKE
-                                strokeWidth = 4.0f
-                                textSize = 90f
-                            }
-                            val desiredWidth = 640
-                            val desiredHeight = 640
-                            val grayscaleBitmap = convertToGrayscale(bitmapFile!!, desiredWidth, desiredHeight)
-                            val resizedBitmap = Bitmap.createScaledBitmap(grayscaleBitmap, desiredWidth, desiredHeight, true)
-                            var copyBitmap = bitmapFile!!.copy(Bitmap.Config.ARGB_8888, true);
-                            val canvas = Canvas(copyBitmap)
-
-
-                            val image = TensorImage.fromBitmap(copyBitmap)
-                            val model = Pisah1.newInstance(applicationContext)
-                            val outputs = model.process(image)
-                            var size = 0;
-                            for (i in 0..(outputs.detectionResultList.size - 1)) {
+                        var xarr1: FloatArray = Array(size) { 0f }.toFloatArray()
+                        var xarr2: FloatArray = Array(size) { 0f }.toFloatArray()
+                        var yarr1: FloatArray = Array(size) { 0f }.toFloatArray()
+                        var yarr2: FloatArray = Array(size) { 0f }.toFloatArray()
+                        var labelArr: Array<String> = Array(size) { "" }
+                        var confArr: Array<String> = Array(size) { "" }
+                        if (size != 0) {
+                            for (i in 0..(size - 1)) {
                                 val detectionResult = outputs.detectionResultList.get(i)
+                                val conf = detectionResult.scoreAsFloat;
+                                val location = detectionResult.locationAsRectF;
+                                val score = detectionResult.categoryAsString;
+                                xarr1[i] = location.left
+                                yarr1[i] = location.top
+                                xarr2[i] = location.right
+                                yarr2[i] = location.bottom
+                                labelArr[i] = score
+                                confArr[i] = conf.toString()
 
-                                if (detectionResult.scoreAsFloat > 0.6f) {
-
-                                    if (i != 0) {
-                                        size = i
-                                    }
-                                }
-                            }
-                            size++
-
-                            var xarr1: FloatArray = Array(size) { 0f }.toFloatArray()
-                            var xarr2: FloatArray = Array(size) { 0f }.toFloatArray()
-                            var yarr1: FloatArray = Array(size) { 0f }.toFloatArray()
-                            var yarr2: FloatArray = Array(size) { 0f }.toFloatArray()
-                            var labelArr: Array<String> = Array(size) { "" }
-                            var confArr: Array<String> = Array(size) { "" }
-                            if (size != 0) {
-                                for (i in 0..(size - 1)) {
-                                    val detectionResult = outputs.detectionResultList.get(i)
-                                    val conf = detectionResult.scoreAsFloat;
-                                    val location = detectionResult.locationAsRectF;
-                                    val score = detectionResult.categoryAsString;
-                                    xarr1[i] = location.left
-                                    yarr1[i] = location.top
-                                    xarr2[i] = location.right
-                                    yarr2[i] = location.bottom
-                                    labelArr[i] = score
-                                    confArr[i] = conf.toString()
-
-                                }
-                            }
-
-                            val pairs = xarr1.zip(labelArr)
-
-                            val sortedPairs = pairs.sortedByDescending { it.first }
-                            val sortedA = sortedPairs.map { it.first }.toTypedArray()
-                            val sortedB = sortedPairs.map { it.second }.toTypedArray()
-
-                            Log.d("detect1", sortedB.contentToString())
-
-                            for (i in 0..(xarr1.size -1)) {
-                                canvas?.drawRect(xarr1.get(i), yarr1.get(i), xarr2.get(i), yarr2.get(i), paint)
-                                canvas?.drawText("${labelArr.get(i)}  ${confArr.get(i)}", xarr1.get(i) , yarr1.get(i) -  10, paint)
-                            }
-
-                            binding.imageView2.setImageBitmap(copyBitmap)
-
-
-                            var string = ""
-                            for (element in sortedB) {
-                                string += element
-                            }
-
-                            if(answer == string){
-                                val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
-
-                                player.setVolume(200f, 200f);
-                                player.start()
-                                if(nextId != null){
-                                    viewModel.update(nextId,true)
-                                }
-
-
-                                successDialog.show(supportFragmentManager, "CustomDialog")
-                            }else{
-                                val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
-                                player1.setVolume(200f, 200f);
-                                player1.start()
-
-                                errorDialog.show(supportFragmentManager, "CustomDialog")
                             }
                         }
 
+                        val pairs = xarr1.zip(labelArr)
 
+                        val sortedPairs = pairs.sortedByDescending { it.first }
+                        val sortedA = sortedPairs.map { it.first }.toTypedArray()
+                        val sortedB = sortedPairs.map { it.second }.toTypedArray()
+
+                        Log.d("detect1", sortedB.contentToString())
+
+                        for (i in 0..(xarr1.size -1)) {
+                            canvas?.drawRect(xarr1.get(i), yarr1.get(i), xarr2.get(i), yarr2.get(i), paint)
+                            canvas?.drawText("${labelArr.get(i)}  ${confArr.get(i)}", xarr1.get(i) , yarr1.get(i) -  10, paint)
+                        }
+
+                        binding.imageView2.setImageBitmap(copyBitmap)
+
+
+                        var string = ""
+                        for (element in sortedB) {
+                            string += element
+                        }
+
+                        if(answer == string){
+                            val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
+
+                            player.setVolume(200f, 200f);
+                            player.start()
+                            if(nextId != null){
+                                viewModel.update(nextId,true)
+                            }
+
+
+                            successDialog.show(supportFragmentManager, "CustomDialog")
+                        }else{
+                            val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
+                            player1.setVolume(200f, 200f);
+                            player1.start()
+
+                            errorDialog.show(supportFragmentManager, "CustomDialog")
+                        }
                     }
+
+
+                }
             }
         }
     }
@@ -401,7 +416,7 @@ class DetailQuest : AppCompatActivity() {
             selectedImg.let { uri ->
                 val myFile = uriToFile(uri, this@DetailQuest)
                 bitmapFile = uriToBitmap(applicationContext,selectedImg)
-               binding.imageView2.setImageBitmap(bitmapFile)
+                binding.imageView2.setImageBitmap(bitmapFile)
 
             }
         }
