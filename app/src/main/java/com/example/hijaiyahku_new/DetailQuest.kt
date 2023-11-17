@@ -3,9 +3,9 @@ package com.example.hijaiyahku_new
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.ActivityManager
-import android.content.Intent
 import android.content.ContentResolver
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -20,30 +20,31 @@ import android.media.ExifInterface
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.databinding.ActivityDetailQuestBinding
+import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.HintFragment
+import com.example.hijaiyahku_new.fragment.SuccessFragment
+import com.example.hijaiyahku_new.ml.ModelPisah
+import com.example.hijaiyahku_new.ml.Pisah1
+import org.tensorflow.lite.support.image.TensorImage
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
-import androidx.lifecycle.ViewModelProvider
-import com.example.hijaiyahku_new.data.Soal
-import com.example.hijaiyahku_new.fragment.ErrorFragment
-import com.example.hijaiyahku_new.fragment.SuccessFragment
-import com.example.hijaiyahku_new.ml.Soal20josMD
-import com.example.hijaiyahku_new.ml.Pisah1
-import org.tensorflow.lite.support.image.TensorImage
+
 class DetailQuest : AppCompatActivity() {
     private val hintDialog = HintFragment()
     private lateinit  var successDialog:SuccessFragment
@@ -95,6 +96,9 @@ class DetailQuest : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+
+
+
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         binding.btnBack.setOnClickListener {
             val back = Intent(this@DetailQuest, DaftarSoal::class.java)
@@ -153,7 +157,7 @@ class DetailQuest : AppCompatActivity() {
                     if (bitmapFile != null) {
                         if(kindQuest == 2){
                             val image = TensorImage.fromBitmap(bitmapFile)
-                            val model = Soal20josMD.newInstance(applicationContext)
+                            val model = ModelPisah.newInstance(applicationContext)
                             val outputs = model.process(image)
                             val detectionResult = outputs.detectionResultList[0]
                             val score = detectionResult.categoryAsString
@@ -343,11 +347,13 @@ class DetailQuest : AppCompatActivity() {
         matrix.postRotate(degree)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun startCameraX() {
         val intent = Intent(this, CameraActivity::class.java)
         launcherIntentCameraX.launch(intent)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private val launcherIntentCameraX = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -372,18 +378,57 @@ class DetailQuest : AppCompatActivity() {
                 getFile = file
                 val bitmap = BitmapFactory.decodeFile(file.path)
                 val bitmapTemp = bitmap
+                val ei = ExifInterface(file)
+
+
+                var rotatedBitmap: Bitmap? = null
+                rotatedBitmap =
+                    when (orientation) {
+                        ExifInterface.ORIENTATION_ROTATE_90 -> rotateImage(bitmap, 90f)
+                        ExifInterface.ORIENTATION_ROTATE_180 -> rotateImage(bitmap, 180f)
+                        ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(bitmap, 270f)
+                        ExifInterface.ORIENTATION_NORMAL -> bitmap
+                        else -> bitmap
+                    }
+
+                Log.d("rotasi",orientation.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_90.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_180.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_270.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_NORMAL.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_UNDEFINED.toString())
+
+
                 if (bitmapTemp !== null) {
                     if (orientation1 == "p") {
-                        val bitmap = rotateAndFlipBitmap(bitmapTemp)
-                        bitmapFile = bitmap
-                        binding.imageView2.setImageBitmap(bitmap)
+                        var bitmapp : Bitmap? = null
+                        if(ExifInterface.ORIENTATION_ROTATE_90 == orientation){
+                          bitmapp = rotateAndFlipBitmap(bitmapTemp)
+                        }else{
+                          bitmapp = bitmap
+                        }
+
+                        bitmapFile = bitmapp
+                        binding.imageView2.setImageBitmap(bitmapp)
+
+
                     } else {
-                        binding.imageView2.setImageBitmap(bitmapFile)
+
                         bitmapFile = bitmap
+                        binding.imageView2.setImageBitmap(bitmapFile)
+
                     }
                 }
             }
         }
+    }
+    fun rotateImage(source: Bitmap, angle: Float): Bitmap? {
+        val matrix = Matrix()
+        matrix.postRotate(angle)
+        return Bitmap.createBitmap(
+            source, 0, 0, source.width, source.height,
+            matrix, true
+        )
     }
     private fun startGallery() {
         val intent = Intent()

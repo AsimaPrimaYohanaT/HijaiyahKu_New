@@ -94,7 +94,7 @@ class CameraActivity : AppCompatActivity() {
                     )
 
                     setResult(DetailQuest.CAMERA_X_RESULT, intent)
-                    finish()
+                    onBackPressed()
                 }
             }
         )
