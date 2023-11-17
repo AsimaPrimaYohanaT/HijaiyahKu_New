@@ -9,12 +9,16 @@ import com.example.hijaiyahku_new.data.SoalRepository
 
 class DetailQuestViewModel(private val soalRepository: SoalRepository): ViewModel() {
 
+
     private val _soalId = MutableLiveData<Int>()
 
     private val _soal = _soalId.switchMap { id ->
         soalRepository.getSoalById(id)
     }
     val soal: LiveData<Soal> = _soal
+
+    var soalId: Int = 0
+    var arrId: ArrayList<Int>? = null
 
     fun start(habitId: Int) {
         if (habitId == _soalId.value) {
