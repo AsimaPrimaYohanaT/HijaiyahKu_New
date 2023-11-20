@@ -9,18 +9,10 @@
       "isComplete": true
     },
     {
-      "id": 2,
-      "soal":"اَ ل لَّ هُ",
-      "jawaban1" : "allahu",
-      "jawaban2" : "allahu",
-      "jenis": 1,
-      "isComplete": false
-    },
-    {
       "id": 3,
       "soal": "بَ يْ تٌ",
-      "jawaban1" : "baitun",
-      "jawaban2" : "baitun",
+      "jawaban1" : "baytun",
+      "jawaban2" : "baytun",
       "jenis": 1,
       "isComplete": false
     },
@@ -40,14 +32,7 @@
       "jenis": 1,
       "isComplete": false
     },
-    {
-      "id": 8,
-      "soal": "كُ رْ سِ يٌّ",
-      "jawaban1" : "kursiyyun",
-      "jawaban2" : "kursiyyun",
-      "jenis": 1,
-      "isComplete": false
-    },
+
     {
       "id": 9,
       "soal": "كُ تُ بٌ",
@@ -57,29 +42,14 @@
       "isComplete": false
     },
     {
-      "id": 14,
-      "soal": "سَ جَّ ا دَ ةٌ",
-      "jawaban1" : "sajjaadatun",
-      "jawaban2" : "sajjaadatun",
-      "jenis": 1,
-      "isComplete": false
-    },
-    {
       "id": 16,
       "soal": "صُ وْ رَ ةٌ",
-      "jawaban1" : "shuurotun",
-      "jawaban2" : "shuurotun",
+      "jawaban1" : "shuwrotmtun",
+      "jawaban2" : "shuwrotmtun",
       "jenis": 1,
       "isComplete": false
     },
-    {
-      "id": 21,
-      "soal": "وِ سَ ا دَ ةٌ",
-      "jawaban1" : "wisaadatun",
-      "jawaban2" : "wisaadatun",
-      "jenis": 1,
-      "isComplete": false
-    },
+
     {
       "id": 22,
       "soal": "بِلاَطٌ",

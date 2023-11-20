@@ -29,12 +29,14 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
 import androidx.lifecycle.ViewModelProvider
 import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.databinding.ActivityDetailQuestBinding
 import com.example.hijaiyahku_new.fragment.ErrorFragment
 import com.example.hijaiyahku_new.fragment.HintFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
+import com.example.hijaiyahku_new.ml.ModelSambung
 import com.example.hijaiyahku_new.ml.ModelPisah
 import com.example.hijaiyahku_new.ml.Pisah1
 import org.tensorflow.lite.support.image.TensorImage
@@ -89,6 +91,7 @@ class DetailQuest : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =  ActivityDetailQuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 this,
@@ -124,7 +127,9 @@ class DetailQuest : AppCompatActivity() {
             viewModel.arrId = arrId
         }
         var nextId : Int? = null
+        Log.d("cekkk",arrId.toString())
         if(arrId != null){
+            Log.d("cekkk","masuk sini")
             for (i in 0 until arrId.size){
                 if(soalId == arrId[i] && i != arrId.size -1){
                     nextId = arrId[i + 1]
@@ -132,10 +137,10 @@ class DetailQuest : AppCompatActivity() {
             }
         }
 
-        Log.e("ini soal id",viewModel.soalId.toString())
+        Log.d("cekkk",soalId.toString())
+       Log.d("cekkk",nextId.toString())
         val savedSoalId = viewModel.soalId
         val savedArrId = viewModel.arrId
-
 
 
         if(nextId != null){
@@ -146,7 +151,7 @@ class DetailQuest : AppCompatActivity() {
             }
         }else{
             if (savedArrId != null) {
-                successDialog = SuccessFragment.newInstance(savedSoalId, savedArrId)
+                successDialog = SuccessFragment.newInstance(null, savedArrId)
             } else {
                 // Handle kasus ketika arrId null
                 Log.e("YourActivity", "arrId is null in the else block")
@@ -172,8 +177,13 @@ class DetailQuest : AppCompatActivity() {
 
                     if (bitmapFile != null) {
                         if(kindQuest == 2){
-                            val image = TensorImage.fromBitmap(bitmapFile)
-                            val model = ModelPisah.newInstance(applicationContext)
+                            val desiredWidth = 640
+                            val desiredHeight = 640
+                            val grayscaleBitmap = convertToGrayscale(bitmapFile!!, desiredWidth, desiredHeight)
+                            val resizedBitmap = Bitmap.createScaledBitmap(grayscaleBitmap, desiredWidth, desiredHeight, true)
+                            var copyBitmap = resizedBitmap!!.copy(Bitmap.Config.ARGB_8888, true);
+                            val image = TensorImage.fromBitmap(copyBitmap)
+                            val model = ModelSambung.newInstance(applicationContext)
                             val outputs = model.process(image)
                             val detectionResult = outputs.detectionResultList[0]
                             val score = detectionResult.categoryAsString
@@ -212,18 +222,20 @@ class DetailQuest : AppCompatActivity() {
                         val desiredHeight = 640
                         val grayscaleBitmap = convertToGrayscale(bitmapFile!!, desiredWidth, desiredHeight)
                         val resizedBitmap = Bitmap.createScaledBitmap(grayscaleBitmap, desiredWidth, desiredHeight, true)
-                        var copyBitmap = bitmapFile!!.copy(Bitmap.Config.ARGB_8888, true);
+                        var copyBitmap = resizedBitmap!!.copy(Bitmap.Config.ARGB_8888, true);
                         val canvas = Canvas(copyBitmap)
-
+                            Log.d("lol","mulai")
 
                         val image = TensorImage.fromBitmap(copyBitmap)
-                        val model = Pisah1.newInstance(applicationContext)
+                        val model = ModelPisah.newInstance(applicationContext)
                         val outputs = model.process(image)
                         var size = 0;
                         for (i in 0..(outputs.detectionResultList.size - 1)) {
                             val detectionResult = outputs.detectionResultList.get(i)
+                            Log.d("lol",outputs.detectionResultList[i].categoryAsString.toString())
+                            Log.d("lol",outputs.detectionResultList[i].scoreAsFloat.toString())
 
-                            if (detectionResult.scoreAsFloat > 0.6f) {
+                            if (detectionResult.scoreAsFloat > 0.5f) {
 
                                 if (i != 0) {
                                     size = i
@@ -264,7 +276,7 @@ class DetailQuest : AppCompatActivity() {
 
                         for (i in 0..(xarr1.size -1)) {
                             canvas?.drawRect(xarr1.get(i), yarr1.get(i), xarr2.get(i), yarr2.get(i), paint)
-                            canvas?.drawText("${labelArr.get(i)}  ${confArr.get(i)}", xarr1.get(i) , yarr1.get(i) -  10, paint)
+                            canvas?.drawText("${labelArr.get(i)} ", xarr1.get(i) , yarr1.get(i) -  10, paint)
                         }
 
                         binding.imageView2.setImageBitmap(copyBitmap)
@@ -274,7 +286,8 @@ class DetailQuest : AppCompatActivity() {
                         for (element in sortedB) {
                             string += element
                         }
-
+                            Log.d("cekk",string)
+                            Log.d("cekk",answer!!)
                         if(answer == string){
                             val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
@@ -285,7 +298,7 @@ class DetailQuest : AppCompatActivity() {
                             }
 
 
-                            successDialog.show(supportFragmentManager, "CustomDialog")
+                            successDialog.show(supportFragmentManager, "FCustomDialog")
                         }else{
                             val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
                             player1.setVolume(200f, 200f);
@@ -395,18 +408,9 @@ class DetailQuest : AppCompatActivity() {
                 getFile = file
                 val bitmap = BitmapFactory.decodeFile(file.path)
                 val bitmapTemp = bitmap
-                val ei = ExifInterface(file)
 
 
-                var rotatedBitmap: Bitmap? = null
-                rotatedBitmap =
-                    when (orientation) {
-                        ExifInterface.ORIENTATION_ROTATE_90 -> rotateImage(bitmap, 90f)
-                        ExifInterface.ORIENTATION_ROTATE_180 -> rotateImage(bitmap, 180f)
-                        ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(bitmap, 270f)
-                        ExifInterface.ORIENTATION_NORMAL -> bitmap
-                        else -> bitmap
-                    }
+
 
                 Log.d("rotasi",orientation.toString())
                 Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_90.toString())
@@ -455,19 +459,40 @@ class DetailQuest : AppCompatActivity() {
         launcherIntentGallery.launch(chooser)
     }
 
-    private val launcherIntentGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val selectedImg = result.data?.data as Uri
-            selectedImg.let { uri ->
-                val myFile = uriToFile(uri, this@DetailQuest)
-                bitmapFile = uriToBitmap(applicationContext,selectedImg)
-                binding.imageView2.setImageBitmap(bitmapFile)
+        private val launcherIntentGallery = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val selectedImg = result.data?.data as Uri
+                selectedImg.let { uri ->
 
+                    val myFile = uriToFile(uri, this@DetailQuest)
+                    val exif = ExifInterface(myFile.absolutePath) // path file gambar
+                    val orientation = exif.getAttributeInt(
+                        ExifInterface.TAG_ORIENTATION,
+                        ExifInterface.ORIENTATION_NORMAL
+                    )
+                    var bitmapFile2 :Bitmap? = null
+                    if(orientation ==  ExifInterface.ORIENTATION_ROTATE_90){
+                        bitmapFile2 = BitmapFactory.decodeFile(myFile.path)
+                        val bitmapTemp = bitmapFile2
+                        bitmapFile = rotateAndFlipBitmap(bitmapTemp)
+
+                        // Pastikan untuk menggunakan objek yang dikembalikan oleh rotateAndFlipBitmap
+                        binding.imageView2.setImageBitmap(bitmapFile)
+                    }else{
+                        bitmapFile2 =BitmapFactory.decodeFile(myFile.path)
+                        bitmapFile =BitmapFactory.decodeFile(myFile.path)
+                        binding.imageView2.setImageBitmap(bitmapFile2)
+                    }
+
+
+
+                }
             }
         }
-    }
+
+
 
     fun uriToBitmap(context: Context, uri: Uri): Bitmap? {
         var inputStream: InputStream? = null
@@ -483,6 +508,8 @@ class DetailQuest : AppCompatActivity() {
         }
         return null
     }
+
+
     private fun uriToFile(selectedImg: Uri, context: Context): File {
         val contentResolver: ContentResolver = context.contentResolver
         val myFile = createCustomTempFile(context)
