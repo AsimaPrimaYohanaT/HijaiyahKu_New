@@ -61,12 +61,7 @@ class DaftarSoal : AppCompatActivity() {
 
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory).get(DaftarSoalViewModel::class.java)
-        if(!isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-            Thread {
-                intent = Intent(this@DaftarSoal, BackgroundSoundService::class.java)
-                startService(intent)
-            }.start()
-        }
+
         val jenis = intent.getStringExtra("jenis")
         playAnimation()
 
