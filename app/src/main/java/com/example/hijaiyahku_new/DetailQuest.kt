@@ -108,14 +108,14 @@ class DetailQuest : AppCompatActivity() {
             val back = Intent(this@DetailQuest, DaftarSoal::class.java)
             startActivity(back)
         }
-        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-            Thread {
-                intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
-                stopService(intent)
-
-
-            }.start()
-        }
+//        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+//            Thread {
+//                intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
+//                stopService(intent)
+//
+//
+//            }.start()
+//        }
 
         val soalId = intent.getIntExtra("SOAL", 0)
         jenis = intent.getStringExtra("jenis").toString()
@@ -189,9 +189,11 @@ class DetailQuest : AppCompatActivity() {
                             val outputs = model.process(image)
                             val detectionResult = outputs.detectionResultList[0]
                             val score = detectionResult.categoryAsString
+
+                            Log.d("sina",score)
+                            Log.d("sina",answer!!)
                             if (score == answer) {
                                 val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
-
 
                             player.setVolume(200f, 200f);
                             player.start()
@@ -202,13 +204,25 @@ class DetailQuest : AppCompatActivity() {
 
                             successDialog.show(supportFragmentManager, "CustomDialog")
                         } else {
+                                if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+                                    Thread {
+                                        intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
+                                        stopService(intent)
 
+
+                                    }.start()
+                                }
                             val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
                             player1.setVolume(200f, 200f);
                             player1.start()
 
                             errorDialog.show(supportFragmentManager, "CustomDialog")
+                                Thread {
+                                    intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
+                                    startService(intent)
 
+
+                                }.start()
                         }
                         model.close()
                     }else{
@@ -291,6 +305,14 @@ class DetailQuest : AppCompatActivity() {
                             Log.d("cekk",string)
                             Log.d("cekk",answer!!)
                         if(answer == string){
+                            if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+                                Thread {
+                                    intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
+                                    stopService(intent)
+
+
+                                }.start()
+                            }
                             val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
                             player.setVolume(200f, 200f);
@@ -301,12 +323,32 @@ class DetailQuest : AppCompatActivity() {
 
 
                             successDialog.show(supportFragmentManager, "FCustomDialog")
+                            Thread {
+                                intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
+                                startService(intent)
+
+
+                            }.start()
                         }else{
+                            if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+                                Thread {
+                                    intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
+                                    stopService(intent)
+
+
+                                }.start()
+                            }
                             val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
                             player1.setVolume(200f, 200f);
                             player1.start()
 
                             errorDialog.show(supportFragmentManager, "CustomDialog")
+                            Thread {
+                                intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
+                                stopService(intent)
+
+
+                            }.start()
                         }
                     }
 

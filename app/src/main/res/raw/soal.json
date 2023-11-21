@@ -53,8 +53,8 @@
     {
       "id": 22,
       "soal": "بِلاَطٌ",
-      "jawaban1" : "bilaathun",
-      "jawaban2" : "bilaathun",
+      "jawaban1" : "bilathun",
+      "jawaban2" : "bilathun",
       "jenis": 2,
       "isComplete": true
     },
@@ -207,6 +207,118 @@
       "jawaban1" : "farosul bahri",
       "jawaban2" : "farosul bahri",
       "jenis": 2,
+      "isComplete": false
+    },
+    {
+      "id": 42,
+      "soal": "تُ صً",
+      "jawaban1" : "tushon",
+      "jawaban2" : "tushon",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 43,
+      "soal": "ثُ نٌ",
+      "jawaban1": "tsunun",
+      "jawaban2": "tsunun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 44,
+      "soal": "بَ تٍ",
+      "jawaban1": "batin",
+      "jawaban2": "batin",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 45,
+      "soal": "شِ فَ",
+      "jawaban1": "syifa",
+      "jawaban2": "syifa",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 47,
+      "soal": "مَ رٌ",
+      "jawaban1": "marun",
+      "jawaban2": "marun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 48,
+      "soal": "بُ نٌ",
+      "jawaban1": "bunun",
+      "jawaban2": "bunun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 49,
+      "soal": "رِ بَ",
+      "jawaban1": "riba",
+      "jawaban2": "riba",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 50,
+      "soal": "تُ بَ",
+      "jawaban1": "tuba",
+      "jawaban2": "tuba",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 51,
+      "soal": "نُ رٌ",
+      "jawaban1": "nurun",
+      "jawaban2": "nurun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 52,
+      "soal": "بَ تُ",
+      "jawaban1": "batu",
+      "jawaban2": "batu",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 53,
+      "soal": "رَ حْ مَ",
+      "jawaban1": "rahma",
+      "jawaban2": "rahma",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 54,
+      "soal": "بَ بَ يَ",
+      "jawaban1": "babaya",
+      "jawaban2": "babaya",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 55,
+      "soal": "تَ مْ رٌ",
+      "jawaban1": "tamrun",
+      "jawaban2": "tamrun",
+      "jenis": 1,
+      "isComplete": false
+    },
+    {
+      "id": 56,
+      "soal": "ءِ نَ بٌ",
+      "jawaban1": "inabun",
+      "jawaban2": "inabun",
+      "jenis": 1,
       "isComplete": false
     }
   ]

@@ -1,6 +1,8 @@
 package com.example.hijaiyahku_new
 
 import android.animation.ObjectAnimator
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +12,31 @@ import com.example.hijaiyahku_new.fragment.HintChooseQuest
 
 class ChooseQuest : AppCompatActivity() {
     private lateinit var binding: ActivityChooseQuestBinding
+
+
+    override fun onPause() {
+        super.onPause()
+        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            Thread {
+                intent = Intent(this@ChooseQuest, BackgroundSoundService::class.java)
+                stopService(intent)
+
+
+            }.start()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            Thread {
+                intent = Intent(this@ChooseQuest, BackgroundSoundService::class.java)
+                startService(intent)
+
+
+            }.start()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseQuestBinding.inflate(layoutInflater)
@@ -35,10 +62,10 @@ class ChooseQuest : AppCompatActivity() {
         }
 
 
-        binding.fabTambah.setOnClickListener {
-            val toTambah = Intent(this@ChooseQuest, TambahSoal::class.java)
-            startActivity(toTambah)
-        }
+//        binding.fabTambah.setOnClickListener {
+//            val toTambah = Intent(this@ChooseQuest, TambahSoal::class.java)
+//            startActivity(toTambah)
+//        }
         binding.btnBack.setOnClickListener {
             val back = Intent(this@ChooseQuest, MainActivity::class.java)
             startActivity(back)
@@ -53,7 +80,15 @@ class ChooseQuest : AppCompatActivity() {
         startActivity(back)
 
     }
-
+    private fun isBackgroundServiceRunning(serviceClass: Class<*>): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
+    }
 
     fun playAnimation(){
         val animator = ObjectAnimator.ofFloat(findViewById(R.id.girl), "rotation", 0f, 20f, -20f)
