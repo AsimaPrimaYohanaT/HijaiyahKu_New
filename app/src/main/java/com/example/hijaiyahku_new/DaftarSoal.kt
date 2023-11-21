@@ -93,6 +93,7 @@ class DaftarSoal : AppCompatActivity() {
                 val bundle = Bundle()
                 bundle.putIntegerArrayList("arrId", ArrayList(arrId))
                 detailIntent.putExtras(bundle)
+                detailIntent.putExtra("jenis",jenis)
                 detailIntent.putExtra("SOAL", soal.id)
                 startActivity(detailIntent)
                 finish()
