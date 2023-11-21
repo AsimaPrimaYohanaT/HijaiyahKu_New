@@ -30,6 +30,7 @@ class DaftarSoalAdapter(
         holder.bind(soal,arrId)
     }
 
+
     inner class SoalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvTitle: TextView = itemView.findViewById(R.id.nomor_soal)
         private val lock: ImageView = itemView.findViewById<ImageView>(R.id.lock)
@@ -38,7 +39,7 @@ class DaftarSoalAdapter(
             getSoal = soal
             val nomorSoal = position + 1
             tvTitle.text = nomorSoal.toString()
-            Log.e("testttt",soal.isComplete.toString())
+
             if(soal.isComplete){
                 lock.setVisibility(View.GONE)
             }else{
