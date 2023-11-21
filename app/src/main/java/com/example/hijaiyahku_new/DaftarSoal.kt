@@ -27,6 +27,30 @@ class DaftarSoal : AppCompatActivity() {
     private lateinit var viewModel: DaftarSoalViewModel
     private lateinit var binding: ActivityDaftarSoalBinding
     private val hintDialog = HintFragment()
+
+    override fun onPause() {
+        super.onPause()
+        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            Thread {
+                intent = Intent(this@DaftarSoal, BackgroundSoundService::class.java)
+                stopService(intent)
+
+
+            }.start()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            Thread {
+                intent = Intent(this@DaftarSoal, BackgroundSoundService::class.java)
+                startService(intent)
+
+
+            }.start()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDaftarSoalBinding.inflate(layoutInflater)

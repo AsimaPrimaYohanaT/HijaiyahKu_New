@@ -25,6 +25,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var backgroundServiceMusicThread: Thread
 
+    override fun onPause() {
+        super.onPause()
+        if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            stopService(Intent(this@MainActivity, BackgroundSoundService::class.java))
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -50,14 +58,11 @@ class MainActivity : AppCompatActivity() {
                 binding.mscIcnOff.visibility = View.VISIBLE
             }
         })
-
         playAnimation()
-
         binding.btnHome.setOnClickListener {
             val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
             startActivity(mulai)
         }
-
         binding.mscBtn.setOnClickListener {
             if (binding.mscIcnActive.visibility == View.GONE) {
                 binding.mscIcnActive.visibility = View.VISIBLE
@@ -72,7 +77,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun startBackgroundService() {
         if (!isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
             startService(Intent(this@MainActivity, BackgroundSoundService::class.java))

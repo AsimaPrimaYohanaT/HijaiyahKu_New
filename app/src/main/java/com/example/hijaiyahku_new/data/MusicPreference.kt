@@ -10,7 +10,7 @@ class MusicPreference private constructor(private val dataStore: DataStore<Prefe
     fun getStatus(): Flow<Status>{
         return dataStore.data.map{ preferences ->
             Status(
-                preferences[STATUS]?: false
+                preferences[STATUS]?: true
             )
         }
     }
