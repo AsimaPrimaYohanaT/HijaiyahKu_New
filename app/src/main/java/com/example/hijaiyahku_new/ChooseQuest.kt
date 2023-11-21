@@ -26,7 +26,6 @@ class ChooseQuest : AppCompatActivity() {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
             toHurufPisah.putExtra("jenis", "pisah")
             startActivity(toHurufPisah)
-            finish()
         }
 
         binding.btnSambung.setOnClickListener {

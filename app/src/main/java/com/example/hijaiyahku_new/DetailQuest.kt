@@ -55,6 +55,7 @@ class DetailQuest : AppCompatActivity() {
     private var answer: String? = null
     private var kindQuest: Int? = null
     private val FILENAME_FORMAT = "dd-MMM-yyyy"
+    private var jenis =""
     val timeStamp: String = SimpleDateFormat(
         FILENAME_FORMAT,
         Locale.US
@@ -110,6 +111,7 @@ class DetailQuest : AppCompatActivity() {
         }
 
         val soalId = intent.getIntExtra("SOAL", 0)
+        jenis = intent.getStringExtra("jenis").toString()
         val arrId = intent.extras?.getIntegerArrayList("arrId")
 
         val factory = ViewModelFactory.getInstance(this)
@@ -296,11 +298,18 @@ class DetailQuest : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val backIntent =        Intent(this@DetailQuest,DaftarSoal::class.java)
-        startActivity(backIntent)
-        finish()
+        val back = Intent(this@DetailQuest, DaftarSoal::class.java)
+        back.putExtra("jenis",jenis)
+        startActivity(back)
 
     }
+
+//    override fun onBackPressed() {
+//        val backIntent =        Intent(this@DetailQuest,DaftarSoal::class.java)
+//        startActivity(backIntent)
+//        finish()
+//
+//    }
     fun convertToGrayscale(inputBitmap: Bitmap, targetWidth: Int, targetHeight: Int): Bitmap {
         val width = inputBitmap.width
         val height = inputBitmap.height
