@@ -74,6 +74,7 @@ class DaftarSoal : AppCompatActivity() {
 
         binding.back.setOnClickListener {
             val back = Intent(this@DaftarSoal, ChooseQuest::class.java)
+            back.putExtra("jenis",jenis)
             startActivity(back)
         }
         if (jenis == "pisah") {
