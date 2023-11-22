@@ -117,8 +117,8 @@
     {
       "id": 30,
       "soal": "سِكِّيْنٌ",
-      "jawaban1" : "sikkinun",
-      "jawaban2" : "sikkinun",
+      "jawaban1" : "sikkiinun",
+      "jawaban2" : "sikkiinun",
       "jenis": 2,
       "isComplete": false
     },
@@ -165,16 +165,16 @@
     {
       "id": 36,
       "soal": "مِلْعَقَةٌ",
-      "jawaban1" : "mil'aqotun",
-      "jawaban2" : "mil'aqotun",
+      "jawaban1" : "milaqotun",
+      "jawaban2" : "milaqotun",
       "jenis": 2,
       "isComplete": false
     },
     {
       "id": 37,
       "soal": "مَدْرَسَةٌ",
-      "jawaban1" : "madrasatun",
-      "jawaban2" : "madrasatun",
+      "jawaban1" : "madrosatun",
+      "jawaban2" : "madrosatun",
       "jenis": 2,
       "isComplete": false
     },

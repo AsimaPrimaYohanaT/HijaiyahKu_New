@@ -25,12 +25,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var backgroundServiceMusicThread: Thread
 
-    override fun onPause() {
-        super.onPause()
-        if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-            stopService(Intent(this@MainActivity, BackgroundSoundService::class.java))
-        }
-    }
+//    override fun onStop() {
+//        super.onStop()
+//        if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+//            stopService(Intent(this@MainActivity, BackgroundSoundService::class.java))
+//        }
+//    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

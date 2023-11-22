@@ -35,7 +35,7 @@ class CameraActivity : AppCompatActivity() {
 
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         binding.captureImage.setOnClickListener { takePhoto() }
         binding.switchCamera.setOnClickListener {
             cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA

@@ -14,29 +14,29 @@ class ChooseQuest : AppCompatActivity() {
     private lateinit var binding: ActivityChooseQuestBinding
 
 
-    override fun onPause() {
-        super.onPause()
-        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-            Thread {
-                intent = Intent(this@ChooseQuest, BackgroundSoundService::class.java)
-                stopService(intent)
-
-
-            }.start()
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-            Thread {
-                intent = Intent(this@ChooseQuest, BackgroundSoundService::class.java)
-                startService(intent)
-
-
-            }.start()
-        }
-    }
+//    override fun onPause() {
+//        super.onPause()
+//        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+//            Thread {
+//                intent = Intent(this@ChooseQuest, BackgroundSoundService::class.java)
+//                stopService(intent)
+//
+//
+//            }.start()
+//        }
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+//            Thread {
+//                intent = Intent(this@ChooseQuest, BackgroundSoundService::class.java)
+//                startService(intent)
+//
+//
+//            }.start()
+//        }
+//    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseQuestBinding.inflate(layoutInflater)
