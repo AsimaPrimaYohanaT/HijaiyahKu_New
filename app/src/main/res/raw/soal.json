@@ -219,17 +219,17 @@
     },
     {
       "id": 43,
-      "soal": "ثُ نٌ",
-      "jawaban1": "tsunun",
-      "jawaban2": "tsunun",
+      "soal": "تُ نٌ",
+      "jawaban1": "tunun",
+      "jawaban2": "tunun",
       "jenis": 1,
       "isComplete": false
     },
     {
       "id": 44,
-      "soal": "بَ تٍ",
-      "jawaban1": "batin",
-      "jawaban2": "batin",
+      "soal": "بَ يُ",
+      "jawaban1": "bayu",
+      "jawaban2": "bayu",
       "jenis": 1,
       "isComplete": false
     },
@@ -259,9 +259,9 @@
     },
     {
       "id": 49,
-      "soal": "رِ بَ",
-      "jawaban1": "riba",
-      "jawaban2": "riba",
+      "soal": "رِ يَ",
+      "jawaban1": "riya",
+      "jawaban2": "riya",
       "jenis": 1,
       "isComplete": false
     },
@@ -292,8 +292,8 @@
     {
       "id": 53,
       "soal": "رَ حْ مَ",
-      "jawaban1": "rahma",
-      "jawaban2": "rahma",
+      "jawaban1": "rohma",
+      "jawaban2": "rohma",
       "jenis": 1,
       "isComplete": false
     },
@@ -316,8 +316,8 @@
     {
       "id": 56,
       "soal": "ءِ نَ بٌ",
-      "jawaban1": "inabun",
-      "jawaban2": "inabun",
+      "jawaban1": "Inabun",
+      "jawaban2": "Inabun",
       "jenis": 1,
       "isComplete": false
     }
