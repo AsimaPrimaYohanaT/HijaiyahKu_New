@@ -83,7 +83,7 @@ class DaftarSoal : AppCompatActivity() {
             viewModel.filter(SoalSortType.TYPE_2)
         }
         val adapter = DaftarSoalAdapter(viewModel) {  soal,arrId ->
-//            if(soal.isComplete){
+            if(soal.isComplete){
                 val detailIntent = Intent(this@DaftarSoal, DetailQuest::class.java)
                 val bundle = Bundle()
                 bundle.putIntegerArrayList("arrId", ArrayList(arrId))
@@ -92,7 +92,7 @@ class DaftarSoal : AppCompatActivity() {
                 detailIntent.putExtra("SOAL", soal.id)
                 startActivity(detailIntent)
                 finish()
-//            }
+            }
         }
 
 
