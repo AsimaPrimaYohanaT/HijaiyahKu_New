@@ -38,7 +38,6 @@ import com.example.hijaiyahku_new.fragment.HintFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.ml.ModelSambung
 import com.example.hijaiyahku_new.ml.ModelPisah
-import com.example.hijaiyahku_new.ml.Pisah1
 import org.tensorflow.lite.support.image.TensorImage
 import java.io.File
 import java.io.FileOutputStream
@@ -176,7 +175,6 @@ class DetailQuest : AppCompatActivity() {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
             predict.setOnClickListener {
-
                     if (bitmapFile != null) {
                         if(kindQuest == 2){
                             val desiredWidth = 640
@@ -200,16 +198,12 @@ class DetailQuest : AppCompatActivity() {
                             if(nextId != null){
                                 viewModel.update(nextId,true)
                             }
-
-
                             successDialog.show(supportFragmentManager, "CustomDialog")
                         } else {
                                 if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
                                     Thread {
                                         intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
                                         stopService(intent)
-
-
                                     }.start()
                                 }
                             val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
@@ -326,8 +320,6 @@ class DetailQuest : AppCompatActivity() {
                             Thread {
                                 intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
                                 startService(intent)
-
-
                             }.start()
                         }else{
                             if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
@@ -346,8 +338,6 @@ class DetailQuest : AppCompatActivity() {
                             Thread {
                                 intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
                                 stopService(intent)
-
-
                             }.start()
                         }
                     }

@@ -24,13 +24,4 @@ class Splash : AppCompatActivity() {
         },3000)
     }
 
-
-//    private fun playAnimation() {
-//        ObjectAnimator.ofFloat(binding.imageView5, View.TRANSLATION_X, -30f, 30f).apply {
-//            duration = 3000
-//            repeatCount = ObjectAnimator.INFINITE
-//            repeatMode = ObjectAnimator.REVERSE
-//        }.start()
-//
-//    }
 }

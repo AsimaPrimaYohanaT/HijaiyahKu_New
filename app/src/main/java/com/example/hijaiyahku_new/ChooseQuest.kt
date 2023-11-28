@@ -13,30 +13,6 @@ import com.example.hijaiyahku_new.fragment.HintChooseQuest
 class ChooseQuest : AppCompatActivity() {
     private lateinit var binding: ActivityChooseQuestBinding
 
-
-//    override fun onPause() {
-//        super.onPause()
-//        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-//            Thread {
-//                intent = Intent(this@ChooseQuest, BackgroundSoundService::class.java)
-//                stopService(intent)
-//
-//
-//            }.start()
-//        }
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-//            Thread {
-//                intent = Intent(this@ChooseQuest, BackgroundSoundService::class.java)
-//                startService(intent)
-//
-//
-//            }.start()
-//        }
-//    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChooseQuestBinding.inflate(layoutInflater)
@@ -61,11 +37,6 @@ class ChooseQuest : AppCompatActivity() {
             startActivity(toHurufSambung)
         }
 
-
-//        binding.fabTambah.setOnClickListener {
-//            val toTambah = Intent(this@ChooseQuest, TambahSoal::class.java)
-//            startActivity(toTambah)
-//        }
         binding.btnBack.setOnClickListener {
             val back = Intent(this@ChooseQuest, MainActivity::class.java)
             startActivity(back)

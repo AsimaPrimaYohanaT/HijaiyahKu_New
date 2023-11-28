@@ -25,11 +25,5 @@ class DaftarSoalViewModel(private val soalRepository: SoalRepository) : ViewMode
         _filter.value = filterType
     }
 
-    fun update(id:Int, isComplete:Boolean){
-        soalRepository.changeIsComplete(id,isComplete)
-    }
 
-    fun insert(soal: Soal) {
-        soalRepository.insertSoal(soal)
-    }
 }

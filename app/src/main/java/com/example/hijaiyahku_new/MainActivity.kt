@@ -23,15 +23,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
-    private lateinit var backgroundServiceMusicThread: Thread
 
-//    override fun onStop() {
-//        super.onStop()
-//        if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-//            stopService(Intent(this@MainActivity, BackgroundSoundService::class.java))
-//        }
-//    }
+    override fun onDestroy() {
+        super.onDestroy()
+        stopBackgroundService()
+    }
 
+
+    override fun onBackPressed() {
+        finishAffinity()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,9 +131,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun PlayBackgroundSound(view: View?) {
-        backgroundServiceMusicThread.start()
-
-    }
 
 }
