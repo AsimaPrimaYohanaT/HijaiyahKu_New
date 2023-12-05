@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hijaiyahku_new.data.Soal
 
 class DaftarSoalAdapter(
-   private val viewModel: DaftarSoalViewModel,
+    private val viewModel: DaftarSoalViewModel,
     private val onClick: (Soal,MutableList<Int>) -> Unit
 ) : PagedListAdapter<Soal, DaftarSoalAdapter.SoalViewHolder>(DIFF_CALLBACK) {
 

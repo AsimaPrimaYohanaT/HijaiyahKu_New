@@ -3,9 +3,11 @@ package com.example.hijaiyahku_new
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import com.example.hijaiyahku_new.data.Soal
 import com.example.hijaiyahku_new.data.SoalRepository
+import com.example.hijaiyahku_new.data.Status
 
 class DetailQuestViewModel(private val soalRepository: SoalRepository): ViewModel() {
 

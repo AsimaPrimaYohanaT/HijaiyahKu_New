@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+    private var music = false
 
     override fun onDestroy() {
         super.onDestroy()
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                     startBackgroundService()
                     binding.mscIcnActive.visibility = View.VISIBLE
                     binding.mscIcnOff.visibility = View.GONE
+                    music= true
                 }
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
             }else{
@@ -62,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         playAnimation()
         binding.btnHome.setOnClickListener {
             val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
+            mulai.putExtra("music",music)
             startActivity(mulai)
         }
         binding.mscBtn.setOnClickListener {

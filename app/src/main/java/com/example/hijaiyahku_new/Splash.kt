@@ -17,7 +17,6 @@ class Splash : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =  ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        playAnimation()
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@Splash, MainActivity::class.java))
             finish()

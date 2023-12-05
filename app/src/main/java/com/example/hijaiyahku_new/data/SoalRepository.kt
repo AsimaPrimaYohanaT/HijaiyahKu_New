@@ -40,21 +40,11 @@ class SoalRepository(private val soalDao: SoalDao, private val executor: Executo
         return LivePagedListBuilder(soalDao.getSoal(sortQuery),configPage).build()
     }
 
-    fun insertSoal(newSoal: Soal) {
-        executor.execute {
-            soalDao.insertSoal(newSoal)
-        }
-    }
-
-    fun getJenis(jenis: Int): LiveData<Soal> {
-        return soalDao.getJenis(jenis)
-    }
-
     fun getSoalById(soalId: Int): LiveData<Soal> {
         return soalDao.getSoalById(soalId)
     }
 
-fun changeIsComplete(id:Int, isComplete:Boolean){
+    fun changeIsComplete(id:Int, isComplete:Boolean){
         return soalDao.updateIsComplete(id,isComplete)
     }
 

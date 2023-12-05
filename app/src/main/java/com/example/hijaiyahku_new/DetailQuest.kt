@@ -16,6 +16,7 @@ import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.Matrix
 import android.graphics.Paint
+import android.media.AudioManager
 import android.media.ExifInterface
 import android.media.MediaPlayer
 import android.net.Uri
@@ -100,21 +101,17 @@ class DetailQuest : AppCompatActivity() {
             )
         }
 
-
-
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         binding.btnBack.setOnClickListener {
             val back = Intent(this@DetailQuest, DaftarSoal::class.java)
             startActivity(back)
         }
-//        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-//            Thread {
-//                intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
-//                stopService(intent)
-//
-//
-//            }.start()
-//        }
+        if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            val backgroundService = Intent(this, BackgroundSoundService::class.java)
+            backgroundService.putExtra("action", "setVolume")
+            backgroundService.putExtra("volume", 0.1f) // Set the desired volume (0.0 to 1.0)
+            startService(backgroundService)
+        }
 
         val soalId = intent.getIntExtra("SOAL", 0)
         jenis = intent.getStringExtra("jenis").toString()
@@ -138,12 +135,8 @@ class DetailQuest : AppCompatActivity() {
             }
         }
 
-        Log.d("cekkk",soalId.toString())
-       Log.d("cekkk",nextId.toString())
         val savedSoalId = viewModel.soalId
         val savedArrId = viewModel.arrId
-
-
         if(nextId != null){
             successDialog = SuccessFragment.newInstance(nextId,savedArrId!!)
 
@@ -187,9 +180,6 @@ class DetailQuest : AppCompatActivity() {
                             val outputs = model.process(image)
                             val detectionResult = outputs.detectionResultList[0]
                             val score = detectionResult.categoryAsString
-
-                            Log.d("sina",score)
-                            Log.d("sina",answer!!)
                             if (score == answer) {
                                 val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
@@ -200,28 +190,13 @@ class DetailQuest : AppCompatActivity() {
                             }
                             successDialog.show(supportFragmentManager, "CustomDialog")
                         } else {
-                                if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-                                    Thread {
-                                        intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
-                                        stopService(intent)
-                                    }.start()
-                                }
                             val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
                             player1.setVolume(200f, 200f);
                             player1.start()
-
                             errorDialog.show(supportFragmentManager, "CustomDialog")
-                                Thread {
-                                    intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
-                                    startService(intent)
-
-
-                                }.start()
                         }
                         model.close()
                     }else{
-
-
                         val paint = Paint().apply {
                             color = Color.RED
                             style = Paint.Style.STROKE
@@ -299,14 +274,6 @@ class DetailQuest : AppCompatActivity() {
                             Log.d("cekk",string)
                             Log.d("cekk",answer!!)
                         if(answer == string){
-                            if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-                                Thread {
-                                    intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
-                                    stopService(intent)
-
-
-                                }.start()
-                            }
                             val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
                             player.setVolume(200f, 200f);
@@ -315,34 +282,15 @@ class DetailQuest : AppCompatActivity() {
                                 viewModel.update(nextId,true)
                             }
 
-
                             successDialog.show(supportFragmentManager, "FCustomDialog")
-                            Thread {
-                                intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
-                                startService(intent)
-                            }.start()
                         }else{
-                            if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-                                Thread {
-                                    intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
-                                    stopService(intent)
-
-
-                                }.start()
-                            }
                             val player1 = MediaPlayer.create(applicationContext,R.raw.gagal)
                             player1.setVolume(200f, 200f);
                             player1.start()
 
                             errorDialog.show(supportFragmentManager, "CustomDialog")
-                            Thread {
-                                intent = Intent(this@DetailQuest, BackgroundSoundService::class.java)
-                                stopService(intent)
-                            }.start()
                         }
                     }
-
-
                 }
             }
         }
@@ -355,12 +303,6 @@ class DetailQuest : AppCompatActivity() {
 
     }
 
-//    override fun onBackPressed() {
-//        val backIntent =        Intent(this@DetailQuest,DaftarSoal::class.java)
-//        startActivity(backIntent)
-//        finish()
-//
-//    }
     fun convertToGrayscale(inputBitmap: Bitmap, targetWidth: Int, targetHeight: Int): Bitmap {
         val width = inputBitmap.width
         val height = inputBitmap.height
@@ -374,18 +316,7 @@ class DetailQuest : AppCompatActivity() {
         canvas.drawBitmap(inputBitmap, 0f, 0f, paint)
         return grayscaleBitmap
     }
-    fun getPermission() {
-        var permissionList = mutableListOf<String>()
 
-        if (checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) permissionList.add(
-            android.Manifest.permission.CAMERA
-        )
-
-
-        if (permissionList.size > 0) {
-            requestPermissions(permissionList.toTypedArray(), 101)
-        }
-    }
     private fun rotateAndFlipBitmap(bitmap: Bitmap): Bitmap {
 
         val matrix = Matrix()

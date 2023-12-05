@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.hijaiyahku_new.databinding.ActivityChooseQuestBinding
 import com.example.hijaiyahku_new.fragment.HintChooseQuest
 
@@ -20,6 +21,8 @@ class ChooseQuest : AppCompatActivity() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         playAnimation()
 
+        val music = intent.getBooleanExtra("music",false)
+        Log.e("MUSIC",music.toString())
         binding.btnPetunjuk.setOnClickListener {
             val chooseQuestFragment = HintChooseQuest()
             chooseQuestFragment.show(supportFragmentManager,"ChooseQuestFragment")
@@ -27,12 +30,14 @@ class ChooseQuest : AppCompatActivity() {
 
         binding.btnPisah.setOnClickListener {
             val toHurufPisah = Intent(this@ChooseQuest, DaftarSoal::class.java)
+            toHurufPisah.putExtra("music",music)
             toHurufPisah.putExtra("jenis", "pisah")
             startActivity(toHurufPisah)
         }
 
         binding.btnSambung.setOnClickListener {
             val toHurufSambung = Intent(this@ChooseQuest, DaftarSoal::class.java)
+            toHurufSambung.putExtra("music",music)
             toHurufSambung.putExtra("jenis", "sambung")
             startActivity(toHurufSambung)
         }
@@ -50,15 +55,6 @@ class ChooseQuest : AppCompatActivity() {
         val back = Intent(this@ChooseQuest, MainActivity::class.java)
         startActivity(back)
 
-    }
-    private fun isBackgroundServiceRunning(serviceClass: Class<*>): Boolean {
-        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == service.service.className) {
-                return true
-            }
-        }
-        return false
     }
 
     fun playAnimation(){
