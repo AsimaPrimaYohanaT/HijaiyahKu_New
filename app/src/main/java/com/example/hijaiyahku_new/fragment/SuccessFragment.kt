@@ -7,12 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.hijaiyahku_new.DaftarSoal
 import com.example.hijaiyahku_new.DetailQuest
-import com.example.hijaiyahku_new.DetailQuestViewModel
 import com.example.hijaiyahku_new.R
-import com.example.hijaiyahku_new.ViewModelFactory
 
 class SuccessFragment: DialogFragment(){
 
@@ -43,21 +40,20 @@ class SuccessFragment: DialogFragment(){
         // Handle dialog button click or other interactions
         val closeButton = dialogView.findViewById<Button>(R.id.btnClose)
         closeButton.setOnClickListener {
-if(id == 0){
-    val daftarSoalIntent = Intent(context,DaftarSoal::class.java)
-    startActivity(daftarSoalIntent)
-}else{
-    val detailIntent = Intent(context, DetailQuest::class.java)
-    detailIntent.putExtra("SOAL", id)
-    val bundle = Bundle()
-    bundle.putIntegerArrayList("arrId", arrId?.let { it1 -> ArrayList(it1) })
-    Log.d("oke",id.toString())
-    detailIntent.putExtras(bundle)
-    startActivity(detailIntent)
+            if(id == 0){
+                val daftarSoalIntent = Intent(context,DaftarSoal::class.java)
+                startActivity(daftarSoalIntent)
+            }else{
+                val detailIntent = Intent(context, DetailQuest::class.java)
+                detailIntent.putExtra("SOAL", id)
+                val bundle = Bundle()
+                bundle.putIntegerArrayList("arrId", arrId?.let { it1 -> ArrayList(it1) })
+                Log.d("oke",id.toString())
+                detailIntent.putExtras(bundle)
+                startActivity(detailIntent)
 
-}
-
-            dismiss() // Close the dialog
+            }
+            dismiss()
         }
 
         return builder.create()

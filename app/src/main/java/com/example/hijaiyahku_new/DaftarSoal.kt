@@ -19,37 +19,13 @@ import com.example.hijaiyahku_new.fragment.DaftarSoalFragment
 import com.example.hijaiyahku_new.fragment.HintFragment
 import com.example.hijaiyahku_new.fragment.SuccessFragment
 import com.example.hijaiyahku_new.utils.SoalSortType
-
-private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class DaftarSoal : AppCompatActivity() {
 
     private lateinit var recycler: RecyclerView
     private lateinit var viewModel: DaftarSoalViewModel
     private lateinit var binding: ActivityDaftarSoalBinding
     private val hintDialog = HintFragment()
-//    override fun onPause() {
-//        super.onPause()
-//        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-//            Thread {
-//                intent = Intent(this@DaftarSoal, BackgroundSoundService::class.java)
-//                stopService(intent)
-//
-//
-//            }.start()
-//        }
-//    }
-//
-//    override fun onStart() {
-//        super.onStart()
-//        if(isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-//            Thread {
-//                intent = Intent(this@DaftarSoal, BackgroundSoundService::class.java)
-//                startService(intent)
-//
-//
-//            }.start()
-//        }
-//    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDaftarSoalBinding.inflate(layoutInflater)
@@ -63,6 +39,13 @@ class DaftarSoal : AppCompatActivity() {
 
         val jenis = intent.getStringExtra("jenis")
         playAnimation()
+
+        if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
+            val backgroundService = Intent(this, BackgroundSoundService::class.java)
+            backgroundService.putExtra("action", "setVolume")
+            backgroundService.putExtra("volume", 0.5f)
+            startService(backgroundService)
+        }
 
         binding.info.setOnClickListener {
             hintDialog.show(supportFragmentManager, "CustomDialog")
@@ -94,8 +77,6 @@ class DaftarSoal : AppCompatActivity() {
                 finish()
             }
         }
-
-
 
         viewModel.soal.observe(this) { pagedList ->
             adapter.submitList(pagedList)

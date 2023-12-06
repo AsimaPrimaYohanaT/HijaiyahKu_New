@@ -3,6 +3,7 @@ package com.example.hijaiyahku_new
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.hijaiyahku_new.data.MusicPreference
 import com.example.hijaiyahku_new.data.SoalRepository
 
 class ViewModelFactory private constructor(private val soalRepository: SoalRepository):

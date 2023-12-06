@@ -23,15 +23,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
-    private lateinit var backgroundServiceMusicThread: Thread
+    private var music = false
 
-//    override fun onStop() {
-//        super.onStop()
-//        if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
-//            stopService(Intent(this@MainActivity, BackgroundSoundService::class.java))
-//        }
-//    }
+    override fun onDestroy() {
+        super.onDestroy()
+        stopBackgroundService()
+    }
 
+
+    override fun onBackPressed() {
+        finishAffinity()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                     startBackgroundService()
                     binding.mscIcnActive.visibility = View.VISIBLE
                     binding.mscIcnOff.visibility = View.GONE
+                    music= true
                 }
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
             }else{
@@ -61,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         playAnimation()
         binding.btnHome.setOnClickListener {
             val mulai = Intent(this@MainActivity, ChooseQuest::class.java)
+            mulai.putExtra("music",music)
             startActivity(mulai)
         }
         binding.mscBtn.setOnClickListener {
@@ -130,9 +134,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun PlayBackgroundSound(view: View?) {
-        backgroundServiceMusicThread.start()
-
-    }
 
 }
