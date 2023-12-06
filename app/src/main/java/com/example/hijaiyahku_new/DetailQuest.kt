@@ -138,14 +138,14 @@ class DetailQuest : AppCompatActivity() {
         val savedSoalId = viewModel.soalId
         val savedArrId = viewModel.arrId
         if(nextId != null){
-            successDialog = SuccessFragment.newInstance(nextId,savedArrId!!)
+            successDialog = SuccessFragment.newInstance(nextId,savedArrId!!,jenis)
 
             binding.info.setOnClickListener {
                 hintDialog.show(supportFragmentManager, "CustomDialog")
             }
         }else{
             if (savedArrId != null) {
-                successDialog = SuccessFragment.newInstance(null, savedArrId)
+                successDialog = SuccessFragment.newInstance(null, savedArrId,jenis)
             } else {
                 // Handle kasus ketika arrId null
                 Log.e("YourActivity", "arrId is null in the else block")
