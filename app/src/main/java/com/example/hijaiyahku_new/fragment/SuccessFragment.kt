@@ -50,7 +50,7 @@ class SuccessFragment: DialogFragment(){
                 detailIntent.putExtra("jenis",jenis)
                 val bundle = Bundle()
                 bundle.putIntegerArrayList("arrId", arrId?.let { it1 -> ArrayList(it1) })
-                Log.d("oke",id.toString())
+
                 detailIntent.putExtras(bundle)
                 startActivity(detailIntent)
 

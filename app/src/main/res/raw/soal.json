@@ -2,28 +2,30 @@
   "soal": [
     {
       "id": 1,
-      "soal": "اَ حْ مَ رُ",
-      "jawaban1" : "ahmaru",
-      "jawaban2" : "ahmaru",
+      "soal": "بَ يْ تٌ",
+      "jawaban1" : "baytun",
+      "jawaban2" : "baytun",
       "jenis": 1,
       "isComplete": true
     },
     {
       "id": 3,
-      "soal": "بَ يْ تٌ",
-      "jawaban1" : "baytun",
-      "jawaban2" : "baytun",
-      "jenis": 1,
-      "isComplete": false
-    },
-    {
-      "id": 5,
       "soal": "جَ مَ لٌ",
       "jawaban1" : "jamalun",
       "jawaban2" : "jamalun ",
       "jenis": 1,
       "isComplete": false
     },
+    {
+      "id": 5,
+      "soal": "اَ حْ مَ رُ",
+      "jawaban1" : "ahmaru",
+      "jawaban2" : "ahmaru",
+      "jenis": 1,
+      "isComplete": false
+    },
+
+
     {
       "id": 7,
       "soal": " كِ تَ بٌ",
@@ -43,9 +45,9 @@
     },
     {
       "id": 16,
-      "soal": "صُ وْ رَ ةٌ",
-      "jawaban1" : "shuwrotmtun",
-      "jawaban2" : "shuwrotmtun",
+      "soal": "تِ نَ بٌ",
+      "jawaban1" : "tinabun",
+      "jawaban2" : "tinabun",
       "jenis": 1,
       "isComplete": false
     },
