@@ -382,16 +382,6 @@ class DetailQuest : AppCompatActivity() {
                 val bitmapTemp = bitmap
 
 
-
-
-                Log.d("rotasi",orientation.toString())
-                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_90.toString())
-                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_180.toString())
-                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_270.toString())
-                Log.d("rotasi", ExifInterface.ORIENTATION_NORMAL.toString())
-                Log.d("rotasi", ExifInterface.ORIENTATION_UNDEFINED.toString())
-
-
                 if (bitmapTemp !== null) {
                     if (orientation1 == "p") {
                         var bitmapp : Bitmap? = null
