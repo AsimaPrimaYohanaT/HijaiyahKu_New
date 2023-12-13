@@ -167,20 +167,20 @@ class DetailQuest : AppCompatActivity() {
             galery.setOnClickListener { startGallery() }
             btnKamera.setOnClickListener { startCameraX() }
             predict.setOnClickListener {
-                    if (bitmapFile != null) {
-                        if(kindQuest == 2){
-                            val desiredWidth = 640
-                            val desiredHeight = 640
-                            val grayscaleBitmap = convertToGrayscale(bitmapFile!!, desiredWidth, desiredHeight)
-                            val resizedBitmap = Bitmap.createScaledBitmap(grayscaleBitmap, desiredWidth, desiredHeight, true)
-                            var copyBitmap = resizedBitmap!!.copy(Bitmap.Config.ARGB_8888, true);
-                            val image = TensorImage.fromBitmap(copyBitmap)
-                            val model = ModelSambung.newInstance(applicationContext)
-                            val outputs = model.process(image)
-                            val detectionResult = outputs.detectionResultList[0]
-                            val score = detectionResult.categoryAsString
-                            if (score == answer) {
-                                val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
+                if (bitmapFile != null) {
+                    if(kindQuest == 2){
+                        val desiredWidth = 640
+                        val desiredHeight = 640
+                        val grayscaleBitmap = convertToGrayscale(bitmapFile!!, desiredWidth, desiredHeight)
+                        val resizedBitmap = Bitmap.createScaledBitmap(grayscaleBitmap, desiredWidth, desiredHeight, true)
+                        var copyBitmap = resizedBitmap!!.copy(Bitmap.Config.ARGB_8888, true);
+                        val image = TensorImage.fromBitmap(copyBitmap)
+                        val model = ModelSambung.newInstance(applicationContext)
+                        val outputs = model.process(image)
+                        val detectionResult = outputs.detectionResultList[0]
+                        val score = detectionResult.categoryAsString
+                        if (score == answer) {
+                            val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
                             player.setVolume(200f, 200f);
                             player.start()
@@ -208,7 +208,7 @@ class DetailQuest : AppCompatActivity() {
                         val resizedBitmap = Bitmap.createScaledBitmap(grayscaleBitmap, desiredWidth, desiredHeight, true)
                         var copyBitmap = resizedBitmap!!.copy(Bitmap.Config.ARGB_8888, true);
                         val canvas = Canvas(copyBitmap)
-                            Log.d("lol","mulai")
+                        Log.d("lol","mulai")
 
                         val image = TensorImage.fromBitmap(copyBitmap)
                         val model = ModelPisah.newInstance(applicationContext)
@@ -270,8 +270,8 @@ class DetailQuest : AppCompatActivity() {
                         for (element in sortedB) {
                             string += element
                         }
-                            Log.d("cekk",string)
-                            Log.d("cekk",answer!!)
+                        Log.d("cekk",string)
+                        Log.d("cekk",answer!!)
                         if(answer == string){
                             val player = MediaPlayer.create(applicationContext,R.raw.berhasil)
 
@@ -381,13 +381,23 @@ class DetailQuest : AppCompatActivity() {
                 val bitmapTemp = bitmap
 
 
+
+
+                Log.d("rotasi",orientation.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_90.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_180.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_ROTATE_270.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_NORMAL.toString())
+                Log.d("rotasi", ExifInterface.ORIENTATION_UNDEFINED.toString())
+
+
                 if (bitmapTemp !== null) {
                     if (orientation1 == "p") {
                         var bitmapp : Bitmap? = null
                         if(ExifInterface.ORIENTATION_ROTATE_90 == orientation){
-                          bitmapp = rotateAndFlipBitmap(bitmapTemp)
+                            bitmapp = rotateAndFlipBitmap(bitmapTemp)
                         }else{
-                          bitmapp = bitmap
+                            bitmapp = bitmap
                         }
 
                         bitmapFile = bitmapp
@@ -420,38 +430,38 @@ class DetailQuest : AppCompatActivity() {
         launcherIntentGallery.launch(chooser)
     }
 
-        private val launcherIntentGallery = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val selectedImg = result.data?.data as Uri
-                selectedImg.let { uri ->
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg = result.data?.data as Uri
+            selectedImg.let { uri ->
 
-                    val myFile = uriToFile(uri, this@DetailQuest)
-                    val exif = ExifInterface(myFile.absolutePath) // path file gambar
-                    val orientation = exif.getAttributeInt(
-                        ExifInterface.TAG_ORIENTATION,
-                        ExifInterface.ORIENTATION_NORMAL
-                    )
-                    var bitmapFile2 :Bitmap? = null
-                    if(orientation ==  ExifInterface.ORIENTATION_ROTATE_90){
-                        bitmapFile2 = BitmapFactory.decodeFile(myFile.path)
-                        val bitmapTemp = bitmapFile2
-                        bitmapFile = rotateAndFlipBitmap(bitmapTemp)
+                val myFile = uriToFile(uri, this@DetailQuest)
+                val exif = ExifInterface(myFile.absolutePath) // path file gambar
+                val orientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL
+                )
+                var bitmapFile2 :Bitmap? = null
+                if(orientation ==  ExifInterface.ORIENTATION_ROTATE_90){
+                    bitmapFile2 = BitmapFactory.decodeFile(myFile.path)
+                    val bitmapTemp = bitmapFile2
+                    bitmapFile = rotateAndFlipBitmap(bitmapTemp)
 
-                        // Pastikan untuk menggunakan objek yang dikembalikan oleh rotateAndFlipBitmap
-                        binding.imageView2.setImageBitmap(bitmapFile)
-                    }else{
-                        bitmapFile2 =BitmapFactory.decodeFile(myFile.path)
-                        bitmapFile =BitmapFactory.decodeFile(myFile.path)
-                        binding.imageView2.setImageBitmap(bitmapFile2)
-                    }
-
-
-
+                    // Pastikan untuk menggunakan objek yang dikembalikan oleh rotateAndFlipBitmap
+                    binding.imageView2.setImageBitmap(bitmapFile)
+                }else{
+                    bitmapFile2 =BitmapFactory.decodeFile(myFile.path)
+                    bitmapFile =BitmapFactory.decodeFile(myFile.path)
+                    binding.imageView2.setImageBitmap(bitmapFile2)
                 }
+
+
+
             }
         }
+    }
 
 
 
