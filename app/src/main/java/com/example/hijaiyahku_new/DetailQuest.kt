@@ -103,8 +103,7 @@ class DetailQuest : AppCompatActivity() {
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         binding.btnBack.setOnClickListener {
-            val back = Intent(this@DetailQuest, DaftarSoal::class.java)
-            startActivity(back)
+            super.onBackPressed()
         }
         if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
             val backgroundService = Intent(this, BackgroundSoundService::class.java)

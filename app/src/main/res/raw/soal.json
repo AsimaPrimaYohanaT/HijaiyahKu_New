@@ -110,7 +110,7 @@
     },
     {
       "id": 29,
-      "soal": "قَمَيسُ",
+      "soal": "قَمِيْسٌ",
       "jawaban1" : "komiisun",
       "jawaban2" : "komiisun",
       "jenis": 2,
@@ -317,9 +317,9 @@
     },
     {
       "id": 56,
-      "soal": "ءِ نَ بٌ",
-      "jawaban1": "Inabun",
-      "jawaban2": "Inabun",
+      "soal": "كِ نَ بٌ",
+      "jawaban1": "kinabun",
+      "jawaban2": "kinabun",
       "jenis": 1,
       "isComplete": false
     }
