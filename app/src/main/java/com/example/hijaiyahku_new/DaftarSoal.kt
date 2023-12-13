@@ -74,7 +74,6 @@ class DaftarSoal : AppCompatActivity() {
                 detailIntent.putExtra("jenis",jenis)
                 detailIntent.putExtra("SOAL", soal.id)
                 startActivity(detailIntent)
-                finish()
             }
         }
 

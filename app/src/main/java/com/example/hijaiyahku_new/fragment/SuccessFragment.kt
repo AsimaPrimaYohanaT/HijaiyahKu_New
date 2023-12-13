@@ -14,7 +14,7 @@ import com.example.hijaiyahku_new.R
 class SuccessFragment: DialogFragment(){
 
     companion object {
-        fun newInstance(id:Int?,arrId: ArrayList<Int>): SuccessFragment {
+        fun newInstance(id:Int?,arrId: ArrayList<Int>, jenis:String): SuccessFragment {
             val fragment = SuccessFragment()
             val bundle = Bundle()
             bundle.putIntegerArrayList("arrId", arrId)
@@ -23,7 +23,7 @@ class SuccessFragment: DialogFragment(){
             }else{
                 bundle.putInt("id",id)
             }
-
+            bundle.putString("jenis",jenis)
             fragment.arguments = bundle
             return fragment
         }
@@ -31,6 +31,7 @@ class SuccessFragment: DialogFragment(){
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val arrId = arguments?.getIntegerArrayList("arrId")
         val id = arguments?.getInt("id")
+        val jenis = arguments?.getString("jenis")
         // Inflate the custom dialog layout
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater
@@ -46,11 +47,13 @@ class SuccessFragment: DialogFragment(){
             }else{
                 val detailIntent = Intent(context, DetailQuest::class.java)
                 detailIntent.putExtra("SOAL", id)
+                detailIntent.putExtra("jenis",jenis)
                 val bundle = Bundle()
                 bundle.putIntegerArrayList("arrId", arrId?.let { it1 -> ArrayList(it1) })
-                Log.d("oke",id.toString())
+
                 detailIntent.putExtras(bundle)
                 startActivity(detailIntent)
+
 
             }
             dismiss()

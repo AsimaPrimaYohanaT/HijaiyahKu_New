@@ -103,8 +103,7 @@ class DetailQuest : AppCompatActivity() {
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         binding.btnBack.setOnClickListener {
-            val back = Intent(this@DetailQuest, DaftarSoal::class.java)
-            startActivity(back)
+            super.onBackPressed()
         }
         if (isBackgroundServiceRunning(BackgroundSoundService::class.java)) {
             val backgroundService = Intent(this, BackgroundSoundService::class.java)
@@ -138,14 +137,14 @@ class DetailQuest : AppCompatActivity() {
         val savedSoalId = viewModel.soalId
         val savedArrId = viewModel.arrId
         if(nextId != null){
-            successDialog = SuccessFragment.newInstance(nextId,savedArrId!!)
+            successDialog = SuccessFragment.newInstance(nextId,savedArrId!!,jenis)
 
             binding.info.setOnClickListener {
                 hintDialog.show(supportFragmentManager, "CustomDialog")
             }
         }else{
             if (savedArrId != null) {
-                successDialog = SuccessFragment.newInstance(null, savedArrId)
+                successDialog = SuccessFragment.newInstance(null, savedArrId,jenis)
             } else {
                 // Handle kasus ketika arrId null
                 Log.e("YourActivity", "arrId is null in the else block")
