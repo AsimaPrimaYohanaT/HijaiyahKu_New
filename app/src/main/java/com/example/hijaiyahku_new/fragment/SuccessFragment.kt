@@ -54,6 +54,7 @@ class SuccessFragment: DialogFragment(){
                 detailIntent.putExtras(bundle)
                 startActivity(detailIntent)
 
+
             }
             dismiss()
         }

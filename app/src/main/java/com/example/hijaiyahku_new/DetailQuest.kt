@@ -263,7 +263,7 @@ class DetailQuest : AppCompatActivity() {
                             canvas?.drawText("${labelArr.get(i)} ", xarr1.get(i) , yarr1.get(i) -  10, paint)
                         }
 
-//                        binding.imageView2.setImageBitmap(copyBitmap)
+                        binding.imageView2.setImageBitmap(copyBitmap)
 
 
                         var string = ""
