@@ -61,6 +61,7 @@ abstract class SoalDatabase : RoomDatabase() {
                                 item.getString("jawaban1"),
                                 item.getString("jawaban2"),
                                 item.getInt("jenis"),
+                                item.getString("arti"),
                                 item.getBoolean("isComplete")
                             )
                         )

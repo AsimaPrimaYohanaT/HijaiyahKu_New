@@ -14,5 +14,6 @@ data class Soal(
     val jawaban1: String,
     val jawaban2: String,
     val jenis: Int,
+    val arti:String,
     val isComplete: Boolean
 ): Parcelable

@@ -6,6 +6,7 @@
       "jawaban1" : "baytun",
       "jawaban2" : "baytun",
       "jenis": 1,
+      "arti": "Rumah",
       "isComplete": true
     },
     {
@@ -14,6 +15,7 @@
       "jawaban1" : "jamalun",
       "jawaban2" : "jamalun ",
       "jenis": 1,
+      "arti": "Unta",
       "isComplete": false
     },
     {
@@ -22,6 +24,7 @@
       "jawaban1" : "ahmaru",
       "jawaban2" : "ahmaru",
       "jenis": 1,
+      "arti": "Merah",
       "isComplete": false
     },
 
@@ -32,6 +35,7 @@
       "jawaban1" : "kitabun",
       "jawaban2" : "kitabun",
       "jenis": 1,
+      "arti": "Buku",
       "isComplete": false
     },
 
@@ -41,6 +45,7 @@
       "jawaban1" : "kutubun",
       "jawaban2" : "kutubun",
       "jenis": 1,
+      "arti": "Buku-Buku",
       "isComplete": false
     },
     {
@@ -49,6 +54,7 @@
       "jawaban1" : "tinabun",
       "jawaban2" : "tinabun",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     },
 
@@ -58,6 +64,7 @@
       "jawaban1" : "bilathun",
       "jawaban2" : "bilathun",
       "jenis": 2,
+      "arti": "Lantai",
       "isComplete": true
     },
     {
@@ -66,6 +73,7 @@
       "jawaban1" : "qomarun",
       "jawaban2" : "qomarun",
       "jenis": 2,
+      "arti": "Bulan",
       "isComplete": false
     },
     {
@@ -74,6 +82,7 @@
       "jawaban1" : "syamsun",
       "jawaban2" : "syamsun",
       "jenis": 2,
+      "arti": "Matahari",
       "isComplete": false
     },
     {
@@ -82,6 +91,7 @@
       "jawaban1" : "khiyarun",
       "jawaban2" : "khiyarun",
       "jenis": 2,
+      "arti": "Kebaikan",
       "isComplete": false
     },
     {
@@ -90,6 +100,7 @@
       "jawaban1" : "shohnun",
       "jawaban2" : "shohnun",
       "jenis": 2,
+      "arti": "Piring",
       "isComplete": false
     },
     {
@@ -98,6 +109,7 @@
       "jawaban1" : "kiiwii",
       "jawaban2" : "kiiwii",
       "jenis": 2,
+      "arti": "Kiwi",
       "isComplete": false
     },
     {
@@ -106,6 +118,7 @@
       "jawaban1" : "zaujatun",
       "jawaban2" : "zaujatun",
       "jenis": 2,
+      "arti": "Istri",
       "isComplete": false
     },
     {
@@ -114,6 +127,7 @@
       "jawaban1" : "qomiisun",
       "jawaban2" : "qomiisun",
       "jenis": 2,
+      "arti": "Kemeja",
       "isComplete": false
     },
     {
@@ -122,6 +136,7 @@
       "jawaban1" : "sikkiinun",
       "jawaban2" : "sikkiinun",
       "jenis": 2,
+      "arti": "Pisau",
       "isComplete": false
     },
     {
@@ -130,6 +145,7 @@
       "jawaban1" : "lihyatun",
       "jawaban2" : "lihyatun",
       "jenis": 2,
+      "arti": "Janggut",
       "isComplete": false
     },
     {
@@ -138,6 +154,7 @@
       "jawaban1" : "syaukatun",
       "jawaban2" : "syaukatun",
       "jenis": 2,
+      "arti": "Garpu",
       "isComplete": false
     },
     {
@@ -146,6 +163,7 @@
       "jawaban1" : "sukardaanun",
       "jawaban2" : "sukardaanun",
       "jenis": 2,
+      "arti": "Lemari Kecil",
       "isComplete": false
     },
     {
@@ -154,6 +172,7 @@
       "jawaban1" : "mazbalatun",
       "jawaban2" : "mazbalatun",
       "jenis": 2,
+      "arti": "Tong Sampah",
       "isComplete": false
     },
     {
@@ -162,6 +181,7 @@
       "jawaban1" : "waalidaani",
       "jawaban2" : "waalidaani",
       "jenis": 2,
+      "arti": "Orang Tua",
       "isComplete": false
     },
     {
@@ -170,6 +190,7 @@
       "jawaban1" : "milaqotun",
       "jawaban2" : "milaqotun",
       "jenis": 2,
+      "arti": "Sendok",
       "isComplete": false
     },
     {
@@ -178,6 +199,7 @@
       "jawaban1" : "madrosatun",
       "jawaban2" : "madrosatun",
       "jenis": 2,
+      "arti": "Kepala",
       "isComplete": false
     },
     {
@@ -186,6 +208,7 @@
       "jawaban1" : "dawwaarusyamsi",
       "jawaban2" : "dawwaarusyamsi",
       "jenis": 2,
+      "arti": "Bunga Matahari",
       "isComplete": false
     },
     {
@@ -194,14 +217,16 @@
       "jawaban1" : "baqorul wahsyi",
       "jawaban2" : "baqorul wahsyi",
       "jenis": 2,
+      "arti": "banteng",
       "isComplete": false
     },
     {
       "id": 40,
       "soal": "الْفَوَ اكِهُ",
-      "jawaban1" : "alfawaakihu",
-      "jawaban2" : "alfawaakihu",
+      "jawaban1" : "alfawakihu",
+      "jawaban2" : "alfawakihu",
       "jenis": 2,
+      "arti": "Buah-Buahan",
       "isComplete": false
     }, {
       "id": 41,
@@ -209,6 +234,7 @@
       "jawaban1" : "farosul bahri",
       "jawaban2" : "farosul bahri",
       "jenis": 2,
+      "arti": "Kuda Laut",
       "isComplete": false
     },
     {
@@ -217,6 +243,7 @@
       "jawaban1" : "tushon",
       "jawaban2" : "tushon",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     },
     {
@@ -225,6 +252,7 @@
       "jawaban1": "tunun",
       "jawaban2": "tunun",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     },
     {
@@ -233,6 +261,7 @@
       "jawaban1": "bayu",
       "jawaban2": "bayu",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     },
     {
@@ -241,6 +270,7 @@
       "jawaban1": "syifa",
       "jawaban2": "syifa",
       "jenis": 1,
+      "arti": "Obat",
       "isComplete": false
     },
     {
@@ -249,6 +279,7 @@
       "jawaban1": "marun",
       "jawaban2": "marun",
       "jenis": 1,
+      "arti": "Merah Tua",
       "isComplete": false
     },
     {
@@ -257,6 +288,7 @@
       "jawaban1": "bunun",
       "jawaban2": "bunun",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     },
     {
@@ -265,6 +297,7 @@
       "jawaban1": "riya",
       "jawaban2": "riya",
       "jenis": 1,
+      "arti": "Melihat",
       "isComplete": false
     },
     {
@@ -273,6 +306,7 @@
       "jawaban1": "tuba",
       "jawaban2": "tuba",
       "jenis": 1,
+      "arti": "Berkah",
       "isComplete": false
     },
     {
@@ -281,6 +315,7 @@
       "jawaban1": "nurun",
       "jawaban2": "nurun",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     },
     {
@@ -289,6 +324,7 @@
       "jawaban1": "batu",
       "jawaban2": "batu",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     },
     {
@@ -297,6 +333,7 @@
       "jawaban1": "rohma",
       "jawaban2": "rohma",
       "jenis": 1,
+      "arti": "Pengasih",
       "isComplete": false
     },
     {
@@ -305,6 +342,7 @@
       "jawaban1": "babaya",
       "jawaban2": "babaya",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     },
     {
@@ -313,6 +351,7 @@
       "jawaban1": "tamrun",
       "jawaban2": "tamrun",
       "jenis": 1,
+      "arti": "Kurma",
       "isComplete": false
     },
     {
@@ -321,6 +360,7 @@
       "jawaban1": "kinabun",
       "jawaban2": "kinabun",
       "jenis": 1,
+      "arti": "-",
       "isComplete": false
     }
   ]

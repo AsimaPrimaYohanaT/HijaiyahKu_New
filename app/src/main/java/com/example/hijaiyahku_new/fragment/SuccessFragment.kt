@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import com.example.hijaiyahku_new.DaftarSoal
 import com.example.hijaiyahku_new.DetailQuest
@@ -14,7 +15,7 @@ import com.example.hijaiyahku_new.R
 class SuccessFragment: DialogFragment(){
 
     companion object {
-        fun newInstance(id:Int?,arrId: ArrayList<Int>, jenis:String): SuccessFragment {
+        fun newInstance(id:Int?,arrId: ArrayList<Int>, jenis:String, arti:String): SuccessFragment {
             val fragment = SuccessFragment()
             val bundle = Bundle()
             bundle.putIntegerArrayList("arrId", arrId)
@@ -24,6 +25,7 @@ class SuccessFragment: DialogFragment(){
                 bundle.putInt("id",id)
             }
             bundle.putString("jenis",jenis)
+            bundle.putString("arti",arti)
             fragment.arguments = bundle
             return fragment
         }
@@ -32,12 +34,17 @@ class SuccessFragment: DialogFragment(){
         val arrId = arguments?.getIntegerArrayList("arrId")
         val id = arguments?.getInt("id")
         val jenis = arguments?.getString("jenis")
+        val arti = arguments?.getString("arti")
+
         // Inflate the custom dialog layout
         val builder = AlertDialog.Builder(requireActivity())
         val inflater = requireActivity().layoutInflater
         val dialogView = inflater.inflate(R.layout.custom_dialog_2, null)
         builder.setView(dialogView)
 
+        val artiTextView = dialogView.findViewById<TextView>(R.id.arti)
+        artiTextView.text = arti
+        Log.e("ARTI",arti.toString())
         // Handle dialog button click or other interactions
         val closeButton = dialogView.findViewById<Button>(R.id.btnClose)
         closeButton.setOnClickListener {

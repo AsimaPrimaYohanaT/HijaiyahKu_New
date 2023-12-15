@@ -57,6 +57,7 @@ class DetailQuest : AppCompatActivity() {
     private var getFile: File? = null
     private var answer: String? = null
     private var kindQuest: Int? = null
+    private var arti: String?=""
     private val FILENAME_FORMAT = "dd-MMM-yyyy"
     private var jenis =""
     val timeStamp: String = SimpleDateFormat(
@@ -138,20 +139,6 @@ class DetailQuest : AppCompatActivity() {
 
         val savedSoalId = viewModel.soalId
         val savedArrId = viewModel.arrId
-        if(nextId != null){
-            successDialog = SuccessFragment.newInstance(nextId,savedArrId!!,jenis)
-
-            binding.info.setOnClickListener {
-                hintDialog.show(supportFragmentManager, "CustomDialog")
-            }
-        }else{
-            if (savedArrId != null) {
-                successDialog = SuccessFragment.newInstance(null, savedArrId,jenis)
-            } else {
-                // Handle kasus ketika arrId null
-                Log.e("YourActivity", "arrId is null in the else block")
-            }
-        }
 
         viewModel.start(savedSoalId)
 
@@ -161,9 +148,28 @@ class DetailQuest : AppCompatActivity() {
                 binding.tvSoal.text = soal.soal
                 answer = soal.jawaban1
                 kindQuest = soal.jenis
+                arti = soal.soal
+            }
+
+            if(nextId != null){
+                successDialog = SuccessFragment.newInstance(nextId,savedArrId!!,jenis,soal.arti!!)
+
+                binding.info.setOnClickListener {
+                    hintDialog.show(supportFragmentManager, "CustomDialog")
+                }
+            }else{
+                if (savedArrId != null) {
+                    successDialog = SuccessFragment.newInstance(null, savedArrId,jenis,soal.arti!!)
+                } else {
+                    // Handle kasus ketika arrId null
+                    Log.e("YourActivity", "arrId is null in the else block")
+                }
             }
         }
 
+
+
+        Log.e("ARTI",answer.toString())
 
         binding.apply {
             galery.setOnClickListener { startGallery() }
